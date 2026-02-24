@@ -37,20 +37,24 @@ export default function HomePage() {
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button 
-                size="lg" 
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg glow-blue animate-glow-pulse"
-              >
-                Start Your Project
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-[#27272A] text-white hover:bg-[#1A1A1A] px-8 py-6 text-lg"
-              >
-                View Our Work
-              </Button>
+              <Link href="/pricing">
+                <Button 
+                  size="lg" 
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg glow-blue animate-glow-pulse"
+                >
+                  Start Your Project
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </Link>
+              <Link href="/services">
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="border-[#27272A] text-white hover:bg-[#1A1A1A] px-8 py-6 text-lg"
+                >
+                  View Services
+                </Button>
+              </Link>
             </div>
           </motion.div>
 
@@ -235,20 +239,24 @@ export default function HomePage() {
             Let's turn your idea into reality. Start with a free consultation.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button 
-              size="lg" 
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg glow-blue"
-            >
-              Start Your Project
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="border-[#27272A] text-white hover:bg-[#1A1A1A] px-8 py-6 text-lg"
-            >
-              Schedule a Call
-            </Button>
+            <Link href="/pricing">
+              <Button 
+                size="lg" 
+                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg glow-blue"
+              >
+                Start Your Project
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+            </Link>
+            <Link href="/contact">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-[#27272A] text-white hover:bg-[#1A1A1A] px-8 py-6 text-lg"
+              >
+                Schedule a Call
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

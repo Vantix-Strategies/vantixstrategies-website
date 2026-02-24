@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
+  { href: "/pricing", label: "Pricing" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
@@ -41,11 +42,13 @@ export function Navbar() {
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300" />
                 </Link>
               ))}
-              <Button 
-                className="bg-blue-600 hover:bg-blue-700 text-white glow-blue"
-              >
-                Start Your Project
-              </Button>
+              <Link href="/pricing">
+                <Button 
+                  className="bg-blue-600 hover:bg-blue-700 text-white glow-blue"
+                >
+                  Start Your Project
+                </Button>
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
