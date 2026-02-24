@@ -1,157 +1,128 @@
-import type { Metadata } from "next";
-import { Award, Users, Rocket, Target } from "lucide-react";
-
-export const metadata: Metadata = {
-  title: "About Us | Software Consulting Company",
-  description: "Learn about our mission to help startups and small businesses succeed through innovative software solutions.",
-};
+import { Zap, Target, Heart, Rocket, Users } from "lucide-react";
 
 const values = [
   {
+    icon: Rocket,
+    title: "Speed First",
+    description: "We believe in rapid iteration and getting to market quickly. Perfect is the enemy of shipped.",
+  },
+  {
     icon: Target,
     title: "Results-Driven",
-    description: "We focus on delivering measurable outcomes that drive business growth.",
+    description: "We measure success by your business outcomes, not just lines of code delivered.",
+  },
+  {
+    icon: Heart,
+    title: "True Partnership",
+    description: "We're not just vendors—we're invested in your success and act as an extension of your team.",
   },
   {
     icon: Users,
-    title: "Client Partnership",
-    description: "We work closely with you as partners, not just service providers.",
+    title: "Startup Empathy",
+    description: "We've been there. We understand the constraints, pressures, and excitement of building something new.",
   },
   {
-    icon: Rocket,
-    title: "Innovation First",
-    description: "We stay ahead of technology trends to bring you cutting-edge solutions.",
+    icon: Zap,
+    title: "Technical Excellence",
+    description: "Fast doesn't mean sloppy. We maintain high code quality and engineering best practices.",
   },
-  {
-    icon: Award,
-    title: "Quality Excellence",
-    description: "We maintain the highest standards in code quality and user experience.",
-  },
-];
-
-const stats = [
-  { value: "50+", label: "Projects Delivered" },
-  { value: "30+", label: "Happy Clients" },
-  { value: "5+", label: "Years Experience" },
-  { value: "100%", label: "Client Satisfaction" },
 ];
 
 export default function AboutPage() {
   return (
-    <>
+    <div className="pt-16">
       {/* Hero */}
-      <section className="py-20 lg:py-32">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-6">
-              About Us
+      <section className="py-24 bg-[#0A0A0A]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+              Built for <span className="text-gradient">Startups</span>
             </h1>
-            <p className="text-lg text-muted-foreground">
-              We are a team of passionate technologists dedicated to helping 
-              businesses transform their ideas into reality.
+            <p className="text-xl text-[#A1A1AA] mb-6">
+              We're a team of senior developers, designers, and AI specialists who've worked at top tech companies 
+              and startups. Now we help early-stage companies move fast without breaking things.
+            </p>
+            <p className="text-[#A1A1AA]">
+              Our mission is simple: democratize access to elite technical talent. You shouldn't need enterprise 
+              budgets to build enterprise-grade products.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Mission */}
-      <section className="py-20 bg-muted/50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
-              <p className="text-muted-foreground mb-4">
-                To empower startups and small businesses with world-class software solutions 
-                that drive growth, efficiency, and innovation.
-              </p>
-              <p className="text-muted-foreground mb-4">
-                We believe that every business deserves access to cutting-edge technology, 
-                regardless of size. Our mission is to bridge the gap between ambitious ideas 
-                and technical execution.
-              </p>
-              <p className="text-muted-foreground">
-                By combining technical expertise with a deep understanding of business needs, 
-                we deliver solutions that not only work beautifully but also drive real results.
-              </p>
-            </div>
-            <div className="bg-background rounded-lg p-8 border border-border/40">
-              <h3 className="text-xl font-semibold mb-6">By the Numbers</h3>
-              <div className="grid grid-cols-2 gap-6">
-                {stats.map((stat) => (
-                  <div key={stat.label} className="text-center">
-                    <div className="text-3xl font-bold text-primary mb-1">
-                      {stat.value}
-                    </div>
-                    <div className="text-sm text-muted-foreground">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Values */}
-      <section className="py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Our Values</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              The principles that guide everything we do
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {values.map((value) => (
-              <div
-                key={value.title}
-                className="text-center p-6 rounded-lg bg-muted/50"
-              >
-                <value.icon className="h-10 w-10 text-primary mx-auto mb-4" />
-                <h3 className="font-semibold mb-2">{value.title}</h3>
-                <p className="text-sm text-muted-foreground">{value.description}</p>
+      {/* Stats */}
+      <section className="py-16 bg-[#141414]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { value: "50+", label: "Projects Delivered" },
+              { value: "30+", label: "Happy Clients" },
+              { value: "5+", label: "Years Experience" },
+              { value: "100%", label: "Remote Team" },
+            ].map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className="text-4xl md:text-5xl font-bold text-gradient mb-2">{stat.value}</div>
+                <div className="text-[#A1A1AA]">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Team Section */}
-      {/*
-        TODO: Add team member cards with:
-        - Photos
-        - Names
-        - Roles
-        - Brief bios
-      */}
-      <section className="py-20 bg-muted/50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Meet Our Team</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              The talented people behind our success
+      {/* Values */}
+      <section className="py-24 bg-[#0A0A0A]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Our <span className="text-gradient">Values</span>
+            </h2>
+            <p className="text-[#A1A1AA] max-w-2xl mx-auto">
+              The principles that guide how we work and the partnerships we build.
             </p>
           </div>
-          {/* Team member cards go here */}
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {values.map((value, index) => (
+              <div
+                key={index}
+                className="p-6 rounded-xl bg-[#141414] border border-[#27272A] hover:border-blue-500/30 transition-all"
+              >
+                <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center mb-4">
+                  <value.icon className="w-6 h-6 text-blue-500" />
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-2">{value.title}</h3>
+                <p className="text-[#A1A1AA] text-sm">{value.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-4">Want to Work With Us?</h2>
-            <p className="text-muted-foreground mb-8">
-              We are always looking for new challenges and exciting projects.
+      {/* Story */}
+      <section className="py-24 bg-[#141414]">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-white mb-8 text-center">
+            Our <span className="text-gradient">Story</span>
+          </h2>
+          <div className="prose prose-invert prose-lg max-w-none">
+            <p className="text-[#A1A1AA]">
+              After years working at top tech companies and startups, we noticed a pattern. 
+              Early-stage companies needed elite technical talent, but couldn't afford big agency prices 
+              or wait months for delivery.
             </p>
-            <a
-              href="/contact"
-              className="inline-flex items-center justify-center rounded-md bg-primary px-8 py-3 text-base font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90"
-            >
-              Start a Conversation
-            </a>
+            <p className="text-[#A1A1AA]">
+              We started DevStudio to fill that gap. A lean team of senior developers who can move as fast 
+              as a startup needs, without sacrificing code quality. No bloated processes, no junior developers 
+              learning on your dime—just experienced engineers who ship.
+            </p>
+            <p className="text-[#A1A1AA]">
+              Today, we've helped 50+ startups launch products, raise funding, and scale their technical 
+              infrastructure. From AI-powered apps to cloud platforms, we bring enterprise expertise with 
+              startup agility.
+            </p>
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

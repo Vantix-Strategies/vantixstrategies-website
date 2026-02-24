@@ -1,16 +1,15 @@
 import Link from "next/link";
-import { Code2, Mail, Phone, MapPin } from "lucide-react";
+import { Zap, Github, Twitter, Linkedin } from "lucide-react";
 
 const footerLinks = {
   services: [
-    { label: "AI Development", href: "/services" },
+    { label: "AI Solutions", href: "/services" },
     { label: "Web Development", href: "/services" },
     { label: "Mobile Apps", href: "/services" },
-    { label: "Cloud Solutions", href: "/services" },
+    { label: "Cloud Services", href: "/services" },
   ],
   company: [
-    { label: "About Us", href: "/about" },
-    { label: "Services", href: "/services" },
+    { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
   ],
   legal: [
@@ -19,41 +18,51 @@ const footerLinks = {
   ],
 };
 
+const socialLinks = [
+  { icon: Github, href: "#", label: "GitHub" },
+  { icon: Twitter, href: "#", label: "Twitter" },
+  { icon: Linkedin, href: "#", label: "LinkedIn" },
+];
+
 export function Footer() {
   return (
-    <footer className="border-t border-border/40 bg-muted/50">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <footer className="bg-[#0A0A0A] border-t border-[#27272A]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
-          <div className="space-y-4">
-            <Link href="/" className="flex items-center space-x-2">
-              <Code2 className="h-6 w-6 text-primary" />
-              <span className="text-xl font-bold">Consulting</span>
+          <div className="col-span-2">
+            <Link href="/" className="flex items-center space-x-2 mb-4">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                <Zap className="w-5 h-5 text-white" />
+              </div>
+              <span className="text-xl font-bold text-white">DevStudio</span>
             </Link>
-            <p className="text-sm text-muted-foreground">
-              Helping startups and small businesses build scalable software solutions.
+            <p className="text-[#A1A1AA] mb-4 max-w-sm">
+              Launch faster. Build smarter. Expert AI, web, mobile, and cloud development for startups.
             </p>
-            <div className="space-y-2">
-              <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                <Mail className="h-4 w-4" />
-                <span>hello@consulting.com</span>
-              </div>
-              <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                <Phone className="h-4 w-4" />
-                <span>+1 (555) 123-4567</span>
-              </div>
+            <div className="flex space-x-4">
+              {socialLinks.map((social, index) => (
+                <a
+                  key={index}
+                  href={social.href}
+                  className="w-10 h-10 rounded-lg bg-[#141414] border border-[#27272A] flex items-center justify-center text-[#A1A1AA] hover:text-white hover:border-blue-500/50 transition-all"
+                  aria-label={social.label}
+                >
+                  <social.icon className="w-5 h-5" />
+                </a>
+              ))}
             </div>
           </div>
 
           {/* Services */}
           <div>
-            <h3 className="font-semibold mb-4">Services</h3>
+            <h3 className="text-white font-semibold mb-4">Services</h3>
             <ul className="space-y-2">
-              {footerLinks.services.map((link) => (
-                <li key={link.label}>
+              {footerLinks.services.map((link, index) => (
+                <li key={index}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    className="text-[#A1A1AA] hover:text-white transition-colors text-sm"
                   >
                     {link.label}
                   </Link>
@@ -64,30 +73,13 @@ export function Footer() {
 
           {/* Company */}
           <div>
-            <h3 className="font-semibold mb-4">Company</h3>
+            <h3 className="text-white font-semibold mb-4">Company</h3>
             <ul className="space-y-2">
-              {footerLinks.company.map((link) => (
-                <li key={link.label}>
+              {footerLinks.company.map((link, index) => (
+                <li key={index}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Legal */}
-          <div>
-            <h3 className="font-semibold mb-4">Legal</h3>
-            <ul className="space-y-2">
-              {footerLinks.legal.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    className="text-[#A1A1AA] hover:text-white transition-colors text-sm"
                   >
                     {link.label}
                   </Link>
@@ -97,10 +89,22 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-border/40">
-          <p className="text-center text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Consulting. All rights reserved.
+        {/* Bottom */}
+        <div className="pt-8 border-t border-[#27272A] flex flex-col md:flex-row items-center justify-between">
+          <p className="text-[#71717A] text-sm mb-4 md:mb-0">
+            © {new Date().getFullYear()} DevStudio. All rights reserved.
           </p>
+          <div className="flex space-x-6">
+            {footerLinks.legal.map((link, index) => (
+              <Link
+                key={index}
+                href={link.href}
+                className="text-[#71717A] hover:text-white transition-colors text-sm"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </footer>
