@@ -1,17 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Enable static export for deployment
-  output: 'export',
-  distDir: 'dist',
-  
-  // Image optimization settings
+  // Image optimization settings - Vercel handles this automatically
   images: {
-    unoptimized: true, // Required for static export
+    remotePatterns: [],
   },
   
   // Trailing slashes for cleaner URLs
-  trailingSlash: true,
+  trailingSlash: false,
 };
 
 export default nextConfig;
