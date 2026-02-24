@@ -15,9 +15,15 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AI Development Studio | Launch Faster. Build Smarter.",
-  description: "From idea to production in weeks, not months. Expert AI, web, mobile, and cloud development for startups that can't afford to wait.",
-  keywords: ["AI development", "startup development", "web development", "mobile apps", "cloud services", "quick turnaround"],
+  title: "DevStudio | AI & Software Development for Startups",
+  description: "From idea to production in weeks, not months. Expert AI, web, mobile, and cloud development for startups and small businesses that need to move fast.",
+  keywords: ["AI development", "startup development", "web development", "mobile apps", "cloud services", "MVP development", "quick turnaround"],
+  authors: [{ name: "DevStudio" }],
+  openGraph: {
+    title: "DevStudio | AI & Software Development for Startups",
+    description: "Launch faster. Build smarter. Expert development for ambitious teams.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({

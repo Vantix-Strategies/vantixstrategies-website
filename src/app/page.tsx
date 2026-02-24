@@ -26,14 +26,14 @@ export default function HomePage() {
             </span>
             
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-              Launch Faster.
+              Build Your MVP in
               <br />
-              <span className="text-gradient">Build Smarter.</span>
+              <span className="text-gradient">Weeks, Not Months</span>
             </h1>
             
             <p className="text-xl text-[#A1A1AA] max-w-2xl mx-auto mb-10">
-              From idea to production in weeks, not months. Expert development for startups 
-              that can't afford to wait.
+              Full-stack development team specializing in AI integration, web apps, mobile, and cloud. 
+              We help startups and small businesses ship products 3x faster at a fraction of agency costs.
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -57,10 +57,10 @@ export default function HomePage() {
           {/* Stats */}
           <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { value: "2-4", label: "Weeks Average Delivery" },
-              { value: "50+", label: "Projects Shipped" },
-              { value: "95%", label: "Client Satisfaction" },
-              { value: "24/7", label: "Support Available" },
+              { value: "2-4", label: "Weeks to MVP" },
+              { value: "40%", label: "Lower Cost vs Agencies" },
+              { value: "100%", label: "Senior Developers" },
+              { value: "24/7", label: "Slack Support" },
             ].map((stat, index) => (
               <div key={index} className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.value}</div>

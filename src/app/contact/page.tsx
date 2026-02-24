@@ -13,7 +13,8 @@ export default function ContactPage() {
             Let's <span className="text-gradient">Talk</span>
           </h1>
           <p className="text-xl text-[#A1A1AA] max-w-2xl mx-auto">
-            Ready to build something great? Tell us about your project and we'll get back to you within 24 hours.
+            Ready to turn your idea into reality? Book a free 30-minute consultation 
+            and get a detailed project estimate within 24 hours.
           </p>
         </div>
       </section>
@@ -24,10 +25,10 @@ export default function ContactPage() {
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Info */}
             <div>
-              <h2 className="text-2xl font-bold text-white mb-6">Get in Touch</h2>
+              <h2 className="text-2xl font-bold text-white mb-6">Let's Talk</h2>
               <p className="text-[#A1A1AA] mb-8">
-                Whether you have a detailed project brief or just an idea, we'd love to hear from you. 
-                Let's discuss how we can help bring your vision to life.
+                Whether you have a detailed spec or just a napkin sketch, we'd love to hear about it. 
+                Most projects get a detailed estimate within 24 hours.
               </p>
 
               <div className="space-y-6 mb-8">

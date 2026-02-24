@@ -36,15 +36,16 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Built for <span className="text-gradient">Startups</span>
+              Built by <span className="text-gradient">Founders</span>, for Founders
             </h1>
             <p className="text-xl text-[#A1A1AA] mb-6">
-              We're a team of senior developers, designers, and AI specialists who've worked at top tech companies 
-              and startups. Now we help early-stage companies move fast without breaking things.
+              We're a team of ex-startup founders and senior engineers who got tired of watching 
+              early-stage companies get overcharged by agencies or wait months for simple MVPs.
             </p>
             <p className="text-[#A1A1AA]">
-              Our mission is simple: democratize access to elite technical talent. You shouldn't need enterprise 
-              budgets to build enterprise-grade products.
+              Our mission is simple: give startups access to elite technical talent without the 
+              enterprise overhead. We ship fast, communicate constantly, and actually understand 
+              what it's like to build on a budget.
             </p>
           </div>
         </div>
