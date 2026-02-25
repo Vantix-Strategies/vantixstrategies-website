@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -42,6 +43,7 @@ export function Navbar() {
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300" />
                 </Link>
               ))}
+              <ThemeToggle />
               <Link href="/pricing">
                 <Button 
                   className="bg-blue-600 hover:bg-blue-700 text-white glow-blue"
