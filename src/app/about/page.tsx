@@ -1,127 +1,140 @@
-import { Zap, Target, Heart, Rocket, Users } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
-const values = [
+const principles = [
   {
-    icon: Rocket,
-    title: "Speed First",
-    description: "We believe in rapid iteration and getting to market quickly. Perfect is the enemy of shipped.",
+    label: "Code, not decks.",
+    body: "Every engagement ends with production-ready systems checked into your repositories, not a PDF filed away. Our deliverables are measured in uptime and adoption, not page count.",
   },
   {
-    icon: Target,
-    title: "Results-Driven",
-    description: "We measure success by your business outcomes, not just lines of code delivered.",
+    label: "Embedded, not external.",
+    body: "We join your Slack, attend your standups, and operate inside your security perimeter. Insights and institutional knowledge stay with you — always.",
   },
   {
-    icon: Heart,
-    title: "True Partnership",
-    description: "We're not just vendors—we're invested in your success and act as an extension of your team.",
+    label: "You own the IP.",
+    body: "Everything we build is yours. No licensing, no lock-in, no dependency on Vantix beyond what you choose. Our goal is to make ourselves redundant by making you self-sufficient.",
   },
   {
-    icon: Users,
-    title: "Startup Empathy",
-    description: "We've been there. We understand the constraints, pressures, and excitement of building something new.",
-  },
-  {
-    icon: Zap,
-    title: "Technical Excellence",
-    description: "Fast doesn't mean sloppy. We maintain high code quality and engineering best practices.",
+    label: "Rigor at speed.",
+    body: "Startup velocity with enterprise-grade engineering standards. We move fast because we have strong opinions on architecture, testing, and documentation — not despite them.",
   },
 ];
 
 export default function AboutPage() {
   return (
-    <div className="pt-16">
+    <div className="pt-14">
       {/* Hero */}
-      <section className="py-24 bg-[#0A0A0A]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Built by <span className="text-gradient">Founders</span>, for Founders
+      <section className="border-b border-zinc-800 py-24 bg-[#09090b]">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-start">
+          <div>
+            <span className="text-xs tracking-[0.2em] uppercase text-zinc-600">About</span>
+            <h1
+              className="text-4xl md:text-5xl text-white mt-3 mb-8"
+              style={{ fontWeight: 300, letterSpacing: "0.05em" }}
+            >
+              The Rosetta Stone Between
+              <br />
+              AI Potential and Enterprise Reality.
             </h1>
-            <p className="text-xl text-[#A1A1AA] mb-6">
-              We're a team of ex-startup founders and senior engineers who got tired of watching 
-              early-stage companies get overcharged by agencies or wait months for simple MVPs.
+            <p className="text-zinc-400 font-light leading-relaxed mb-6">
+              Vantix Strategies is an AI Forward Deployed Engineering consultancy headquartered in Minneapolis, MN. We serve Fortune 500 enterprises and high-growth companies that need more than a strategy — they need engineers who embed inside the business and ship.
             </p>
-            <p className="text-[#A1A1AA]">
-              Our mission is simple: give startups access to elite technical talent without the 
-              enterprise overhead. We ship fast, communicate constantly, and actually understand 
-              what it's like to build on a budget.
+            <p className="text-zinc-400 font-light leading-relaxed">
+              The FDE model was pioneered at the frontier of enterprise software. We bring that operating model to AI implementation, data infrastructure, and post-acquisition integration — domains where the gap between vision and production reality is widest, and the cost of that gap is highest.
             </p>
           </div>
-        </div>
-      </section>
 
-      {/* Stats */}
-      <section className="py-16 bg-[#141414]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="border border-zinc-800 divide-y divide-zinc-800">
             {[
-              { value: "50+", label: "Projects Delivered" },
-              { value: "30+", label: "Happy Clients" },
-              { value: "5+", label: "Years Experience" },
-              { value: "100%", label: "Remote Team" },
-            ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-gradient mb-2">{stat.value}</div>
-                <div className="text-[#A1A1AA]">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Values */}
-      <section className="py-24 bg-[#0A0A0A]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Our <span className="text-gradient">Values</span>
-            </h2>
-            <p className="text-[#A1A1AA] max-w-2xl mx-auto">
-              The principles that guide how we work and the partnerships we build.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {values.map((value, index) => (
-              <div
-                key={index}
-                className="p-6 rounded-xl bg-[#141414] border border-[#27272A] hover:border-blue-500/30 transition-all"
-              >
-                <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center mb-4">
-                  <value.icon className="w-6 h-6 text-blue-500" />
+              { metric: "95%", label: "Enterprise AI projects fail to reach production" },
+              { metric: "Weeks", label: "Average time from kickoff to first production deployment" },
+              { metric: "0", label: "Client IP retained by Vantix" },
+              { metric: "100%", label: "Senior engineers — no junior staffing model" },
+            ].map((item, i) => (
+              <div key={i} className="px-8 py-6">
+                <div className="text-2xl text-white mb-1" style={{ fontWeight: 300 }}>
+                  {item.metric}
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-2">{value.title}</h3>
-                <p className="text-[#A1A1AA] text-sm">{value.description}</p>
+                <div className="text-xs text-zinc-500">{item.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Story */}
-      <section className="py-24 bg-[#141414]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-white mb-8 text-center">
-            Our <span className="text-gradient">Story</span>
-          </h2>
-          <div className="prose prose-invert prose-lg max-w-none">
-            <p className="text-[#A1A1AA]">
-              After years working at top tech companies and startups, we noticed a pattern. 
-              Early-stage companies needed elite technical talent, but couldn't afford big agency prices 
-              or wait months for delivery.
+      {/* Principles */}
+      <section className="py-24 bg-[#18181b] border-b border-zinc-800">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="mb-12">
+            <span className="text-xs tracking-[0.2em] uppercase text-zinc-600">Operating Principles</span>
+            <h2
+              className="text-3xl text-white mt-3"
+              style={{ fontWeight: 300, letterSpacing: "0.05em" }}
+            >
+              How We Work
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-px border border-zinc-800 bg-zinc-800">
+            {principles.map((p, i) => (
+              <div key={i} className="bg-[#18181b] p-8">
+                <h3
+                  className="text-base text-white mb-3"
+                  style={{ fontWeight: 300, letterSpacing: "0.04em" }}
+                >
+                  {p.label}
+                </h3>
+                <p className="text-sm text-zinc-400 font-light leading-relaxed">{p.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Minneapolis context */}
+      <section className="py-24 bg-[#09090b]">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-12 gap-10">
+          <div className="lg:col-span-5">
+            <span className="text-xs tracking-[0.2em] uppercase text-zinc-600 block mb-3">Location</span>
+            <h2
+              className="text-3xl text-white mb-6"
+              style={{ fontWeight: 300, letterSpacing: "0.05em" }}
+            >
+              Built for Minneapolis.
+              <br />
+              Deployed Anywhere.
+            </h2>
+          </div>
+          <div className="lg:col-span-7">
+            <p className="text-zinc-400 font-light leading-relaxed mb-4">
+              Minneapolis is home to a dense concentration of Fortune 500 headquarters — companies that have massive amounts of proprietary data, complex operational footprints, and growing pressure to deploy AI at scale. They are strategic buyers who need partners that can operate inside their environments with rigor.
             </p>
-            <p className="text-[#A1A1AA]">
-              We started DevStudio to fill that gap. A lean team of senior developers who can move as fast 
-              as a startup needs, without sacrificing code quality. No bloated processes, no junior developers 
-              learning on your dime—just experienced engineers who ship.
-            </p>
-            <p className="text-[#A1A1AA]">
-              Today, we've helped 50+ startups launch products, raise funding, and scale their technical 
-              infrastructure. From AI-powered apps to cloud platforms, we bring enterprise expertise with 
-              startup agility.
+            <p className="text-zinc-400 font-light leading-relaxed">
+              We combine the speed of a startup with the operational standards required by enterprise compliance, security, and IT governance. That combination is rare — and it&apos;s what Vantix was built to deliver.
             </p>
           </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="border-t border-zinc-800 py-24 bg-[#18181b]">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+          <h2
+            className="text-3xl text-white mb-5"
+            style={{ fontWeight: 300, letterSpacing: "0.05em" }}
+          >
+            Work with us.
+          </h2>
+          <p className="text-zinc-400 font-light mb-10">
+            We keep a small portfolio of active engagements to ensure depth of focus. Reach out to discuss availability.
+          </p>
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 text-sm tracking-[0.1em] uppercase bg-white text-zinc-900 px-8 py-3.5 hover:bg-zinc-200 transition-colors font-medium"
+          >
+            Start a Conversation
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </section>
     </div>
