@@ -1,171 +1,83 @@
-import { Mail, MapPin, Phone, Clock, Send } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { Mail, MapPin, ArrowRight } from "lucide-react";
+import { ContactForm } from "./ContactForm";
 
 export default function ContactPage() {
   return (
-    <div className="pt-16">
+    <div className="pt-14">
       {/* Hero */}
-      <section className="py-24 bg-[#0A0A0A]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            Let's <span className="text-gradient">Talk</span>
+      <section className="border-b border-zinc-800 py-24 bg-[#09090b]">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <span className="text-xs tracking-[0.2em] uppercase text-zinc-600">Contact</span>
+          <h1
+            className="text-4xl md:text-6xl text-white mt-3 mb-6 max-w-2xl"
+            style={{ fontWeight: 300, letterSpacing: "0.05em" }}
+          >
+            Start a Conversation.
           </h1>
-          <p className="text-xl text-[#A1A1AA] max-w-2xl mx-auto">
-            Ready to turn your idea into reality? Book a free 30-minute consultation 
-            and get a detailed project estimate within 24 hours.
+          <p className="text-zinc-400 font-light max-w-lg leading-relaxed">
+            We keep a small active portfolio to ensure depth of focus. Describe your initiative and we&apos;ll respond within one business day.
           </p>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="py-24 bg-[#141414]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Contact Info */}
-            <div>
-              <h2 className="text-2xl font-bold text-white mb-6">Let's Talk</h2>
-              <p className="text-[#A1A1AA] mb-8">
-                Whether you have a detailed spec or just a napkin sketch, we'd love to hear about it. 
-                Most projects get a detailed estimate within 24 hours.
-              </p>
-
-              <div className="space-y-6 mb-8">
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center">
-                    <Mail className="w-5 h-5 text-blue-500" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-[#71717A]">Email</p>
-                    <p className="text-white">hello@devstudio.com</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center">
-                    <Phone className="w-5 h-5 text-blue-500" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-[#71717A]">Phone</p>
-                    <p className="text-white">+1 (555) 123-4567</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center">
-                    <MapPin className="w-5 h-5 text-blue-500" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-[#71717A]">Location</p>
-                    <p className="text-white">San Francisco, CA (Remote Worldwide)</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center">
-                    <Clock className="w-5 h-5 text-blue-500" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-[#71717A]">Response Time</p>
-                    <p className="text-white">Within 24 hours</p>
-                  </div>
+      {/* Contact content */}
+      <section className="py-20 bg-[#09090b]">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-12 gap-12">
+          {/* Left sidebar */}
+          <div className="lg:col-span-4">
+            <div className="border border-zinc-800 divide-y divide-zinc-800 mb-8">
+              <div className="px-6 py-5 flex items-start gap-3">
+                <Mail className="w-4 h-4 text-zinc-500 mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="text-xs tracking-widest uppercase text-zinc-600 mb-1">Email</p>
+                  <a
+                    href="mailto:hello@vantixstrategies.com"
+                    className="text-sm text-zinc-300 hover:text-white transition-colors"
+                  >
+                    hello@vantixstrategies.com
+                  </a>
                 </div>
               </div>
-
-              {/* FAQ */}
-              <div className="p-6 rounded-xl bg-[#0A0A0A] border border-[#27272A]">
-                <h3 className="text-white font-semibold mb-4">Frequently Asked</h3>
-                <div className="space-y-4">
-                  <div>
-                    <p className="text-white text-sm font-medium mb-1">What's your typical project timeline?</p>
-                    <p className="text-[#A1A1AA] text-sm">Most MVPs ship in 2-4 weeks. Complex projects may take 6-10 weeks.</p>
-                  </div>
-                  <div>
-                    <p className="text-white text-sm font-medium mb-1">Do you work with startups only?</p>
-                    <p className="text-[#A1A1AA] text-sm">We specialize in startups and small businesses, but work with any company needing fast, quality development.</p>
-                  </div>
-                  <div>
-                    <p className="text-white text-sm font-medium mb-1">What's your pricing model?</p>
-                    <p className="text-[#A1A1AA] text-sm">We offer fixed-price projects based on scope. Typical projects range from $10K-$50K.</p>
-                  </div>
+              <div className="px-6 py-5 flex items-start gap-3">
+                <MapPin className="w-4 h-4 text-zinc-500 mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="text-xs tracking-widest uppercase text-zinc-600 mb-1">Headquarters</p>
+                  <p className="text-sm text-zinc-300">Minneapolis, MN</p>
+                  <p className="text-xs text-zinc-600 mt-0.5">Deployed anywhere.</p>
                 </div>
+              </div>
+              <div className="px-6 py-5">
+                <p className="text-xs tracking-widest uppercase text-zinc-600 mb-1">Response Time</p>
+                <p className="text-sm text-zinc-300">Within 1 business day</p>
               </div>
             </div>
 
-            {/* Contact Form */}
-            <div className="p-8 rounded-2xl bg-[#0A0A0A] border border-[#27272A]">
-              <h2 className="text-2xl font-bold text-white mb-6">Start Your Project</h2>
-              <form className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium text-white mb-2">Name</label>
-                    <Input
-                      type="text"
-                      placeholder="Your name"
-                      className="bg-[#141414] border-[#27272A] text-white placeholder:text-[#71717A]"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-white mb-2">Email</label>
-                    <Input
-                      type="email"
-                      placeholder="you@company.com"
-                      className="bg-[#141414] border-[#27272A] text-white placeholder:text-[#71717A]"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-white mb-2">Company</label>
-                  <Input
-                    type="text"
-                    placeholder="Your company name"
-                    className="bg-[#141414] border-[#27272A] text-white placeholder:text-[#71717A]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-white mb-2">Project Type</label>
-                  <select className="w-full h-10 px-3 rounded-md bg-[#141414] border border-[#27272A] text-white">
-                    <option value="">Select a service...</option>
-                    <option value="ai">AI Solutions</option>
-                    <option value="web">Web Development</option>
-                    <option value="mobile">Mobile Apps</option>
-                    <option value="cloud">Cloud Services</option>
-                    <option value="fullstack">Full-Stack Package</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-white mb-2">Budget Range</label>
-                  <select className="w-full h-10 px-3 rounded-md bg-[#141414] border border-[#27272A] text-white">
-                    <option value="">Select budget...</option>
-                    <option value="10-25k">$10,000 - $25,000</option>
-                    <option value="25-50k">$25,000 - $50,000</option>
-                    <option value="50-100k">$50,000 - $100,000</option>
-                    <option value="100k+">$100,000+</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-white mb-2">Project Details</label>
-                  <Textarea
-                    placeholder="Tell us about your project, goals, and timeline..."
-                    rows={5}
-                    className="bg-[#141414] border-[#27272A] text-white placeholder:text-[#71717A]"
-                  />
-                </div>
-
-                <Button 
-                  type="submit" 
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6"
-                >
-                  Send Message
-                  <Send className="ml-2 w-4 h-4" />
-                </Button>
-              </form>
+            <div className="border border-zinc-800 p-6">
+              <h3
+                className="text-sm text-white mb-4"
+                style={{ fontWeight: 300, letterSpacing: "0.06em" }}
+              >
+                What to include
+              </h3>
+              <ul className="space-y-2">
+                {[
+                  "Your core initiative or problem statement",
+                  "Relevant data / tech context",
+                  "Rough timeline expectations",
+                  "Internal team composition",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-2 text-xs text-zinc-500">
+                    <ArrowRight className="w-3 h-3 mt-0.5 flex-shrink-0 text-zinc-700" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
+          </div>
+
+          {/* Form */}
+          <div className="lg:col-span-8">
+            <ContactForm />
           </div>
         </div>
       </section>

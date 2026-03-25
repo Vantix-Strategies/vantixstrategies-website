@@ -2,260 +2,300 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, Zap, Clock, DollarSign, Users, Brain, Globe, Smartphone, Cloud } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
+
+const TECH_BADGES = [
+  "Python", "TypeScript", "LangChain", "LlamaIndex",
+  "VectorDB", "Snowflake", "dbt", "Airflow",
+  "AWS", "Azure", "Terraform", "CI/CD",
+  "FastAPI", "Docker", "Kubernetes", "PostgreSQL",
+];
+
+const FDE_COMPARISON = [
+  { dimension: "Delivery Format", vantix: "Production Code", traditional: "Strategy Decks" },
+  { dimension: "Engagement Model", vantix: "Embedded in Your Org", traditional: "Advisory / External" },
+  { dimension: "Output", vantix: "Handoff-Ready Systems", traditional: "Roadmaps & Recommendations" },
+  { dimension: "Ownership", vantix: "Client Owns All IP", traditional: "Vendor Retains Leverage" },
+  { dimension: "Timeline", vantix: "Weeks to Production", traditional: "Months to POC" },
+  { dimension: "Risk", vantix: "Low — We Ship or Iterate", traditional: "High — Advice Unvalidated" },
+];
+
+const SERVICES = [
+  {
+    number: "01",
+    title: "Custom AI Orchestration",
+    subtitle: "RAG Pipelines · Agents · LLM Ops",
+    description:
+      "We architect and ship production-grade AI systems — retrieval-augmented generation pipelines, multi-agent frameworks, and LLM orchestration layers — inside your existing infrastructure. No pilot theater. No vendor lock-in.",
+    bullets: [
+      "Context-aware RAG over proprietary data",
+      "Autonomous agent workflows (LangChain, LlamaIndex)",
+      "LLM evaluation, guardrails & monitoring",
+      "On-premise or cloud-native deployment",
+    ],
+  },
+  {
+    number: "02",
+    title: "Embedded Enterprise Data Engineering",
+    subtitle: "Snowflake · dbt · Airflow · Delta Lake",
+    description:
+      "Modern AI requires trustworthy data. We embed directly into your data org to build the pipelines, semantic layers, and governance structures that make enterprise AI actually work.",
+    bullets: [
+      "Data lakehouse architecture & migration",
+      "Semantic layer and feature store design",
+      "Real-time streaming & batch orchestration",
+      "Data quality, lineage & observability",
+    ],
+  },
+  {
+    number: "03",
+    title: "Post-Acquisition Operational Re-engineering",
+    subtitle: "M&A Integration · Tech Stack Consolidation",
+    description:
+      "When your M&A closes, execution is everything. We accelerate integration by mapping, consolidating, and re-engineering fragmented technical operations — so the deal delivers its projected value.",
+    bullets: [
+      "Legacy system audit & rationalization",
+      "Cross-org data and process integration",
+      "Workflow automation across combined entities",
+      "Executive dashboards & operational KPIs",
+    ],
+  },
+];
+
+// Source for 95% figure: Gartner / various industry analyses on enterprise AI production failure rates
+const STATS = [
+  { value: "95%", label: "Enterprise AI projects fail to reach production" },
+  { value: "0", label: "Strategy decks shipped" },
+  { value: "100%", label: "Production systems, owned by you" },
+];
 
 export default function HomePage() {
   return (
-    <div className="pt-16">
-      {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-        {/* Background Effects */}
-        <div className="absolute inset-0 bg-gradient-hero" />
-        <div className="absolute inset-0 grid-pattern opacity-50" />
-        
-        {/* Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <div className="pt-14">
+      {/* ── Hero ── */}
+      <section className="relative min-h-[92vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0 grid-pattern" />
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 50% at 50% 0%, rgba(250,250,250,0.04) 0%, transparent 70%)",
+          }}
+        />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-28">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7 }}
+            className="max-w-3xl"
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-6">
-              AI • Web • Mobile • Cloud
+            <span className="inline-block text-xs tracking-[0.2em] uppercase text-zinc-500 mb-8 border border-zinc-800 px-3 py-1">
+              Forward Deployed Engineering
             </span>
-            
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-              Build Your MVP in
+
+            <h1
+              className="text-5xl md:text-7xl text-white mb-8 leading-[1.05]"
+              style={{ fontWeight: 300, letterSpacing: "0.03em" }}
+            >
+              Engineering Impact
               <br />
-              <span className="text-gradient">Weeks, Not Months</span>
+              at the Speed of AI.
             </h1>
-            
-            <p className="text-xl text-[#A1A1AA] max-w-2xl mx-auto mb-10">
-              Full-stack development team specializing in AI integration, web apps, mobile, and cloud. 
-              We help startups and small businesses ship products 3x faster at a fraction of agency costs.
+
+            <p className="text-base md:text-lg text-zinc-400 max-w-xl mb-12 leading-relaxed font-light">
+              We are Forward Deployed Engineers. We don&apos;t deliver strategy decks;
+              we ship production systems inside your existing environment.
             </p>
-            
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link href="/pricing">
-                <Button 
-                  size="lg" 
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg glow-blue animate-glow-pulse"
-                >
-                  Start Your Project
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-2 text-sm tracking-[0.1em] uppercase bg-white text-zinc-900 px-6 py-3 hover:bg-zinc-200 transition-colors font-medium"
+              >
+                Start an Engagement
+                <ArrowRight className="w-4 h-4" />
               </Link>
-              <Link href="/services">
-                <Button 
-                  size="lg" 
-                  variant="outline" 
-                  className="border-[#27272A] text-white hover:bg-[#1A1A1A] px-8 py-6 text-lg"
-                >
-                  View Services
-                </Button>
+              <Link
+                href="/services"
+                className="inline-flex items-center justify-center gap-2 text-sm tracking-[0.1em] uppercase border border-zinc-700 text-zinc-300 px-6 py-3 hover:border-zinc-400 hover:text-white transition-all font-light"
+              >
+                Our Capabilities
               </Link>
             </div>
           </motion.div>
 
-          {/* Stats */}
-          <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { value: "2-4", label: "Weeks to MVP" },
-              { value: "40%", label: "Lower Cost vs Agencies" },
-              { value: "100%", label: "Senior Developers" },
-              { value: "24/7", label: "Slack Support" },
-            ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.value}</div>
-                <div className="text-sm text-[#A1A1AA]">{stat.label}</div>
+          {/* Stats row */}
+          <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-px border border-zinc-800 bg-zinc-800">
+            {STATS.map((stat, i) => (
+              <div key={i} className="bg-[#09090b] px-8 py-6">
+                <div
+                  className="text-3xl md:text-4xl text-white mb-1"
+                  style={{ fontWeight: 300, letterSpacing: "0.04em" }}
+                >
+                  {stat.value}
+                </div>
+                <div className="text-xs text-zinc-500 leading-snug">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="py-24 bg-[#0A0A0A]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Services Built for <span className="text-gradient">Growth</span>
+      {/* ── Services ── */}
+      <section className="border-t border-zinc-800 py-24 bg-[#09090b]">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="mb-14">
+            <span className="text-xs tracking-[0.2em] uppercase text-zinc-600">Capabilities</span>
+            <h2
+              className="text-3xl md:text-4xl text-white mt-3"
+              style={{ fontWeight: 300, letterSpacing: "0.05em" }}
+            >
+              The FDE Service Model
             </h2>
-            <p className="text-[#A1A1AA] max-w-2xl mx-auto">
-              End-to-end development solutions tailored for startups and small businesses.
-            </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                icon: Brain,
-                title: "AI Solutions",
-                description: "Machine learning models, LLM integration, and intelligent automation.",
-                color: "from-purple-500 to-pink-500",
-              },
-              {
-                icon: Globe,
-                title: "Web Development",
-                description: "High-performance web apps with modern frameworks and cloud architecture.",
-                color: "from-blue-500 to-cyan-500",
-              },
-              {
-                icon: Smartphone,
-                title: "Mobile Apps",
-                description: "Native and cross-platform mobile experiences that users love.",
-                color: "from-green-500 to-teal-500",
-              },
-              {
-                icon: Cloud,
-                title: "Cloud Services",
-                description: "Scalable infrastructure, DevOps, and cloud migration services.",
-                color: "from-orange-500 to-red-500",
-              },
-            ].map((service, index) => (
-              <div
-                key={index}
-                className="group p-6 rounded-xl bg-[#141414] border border-[#27272A] hover:border-blue-500/50 transition-all hover:shadow-lg hover:shadow-blue-500/10"
+          <div className="space-y-px border border-zinc-800 bg-zinc-800">
+            {SERVICES.map((svc, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="bg-[#09090b] p-8 md:p-10 card-glow border border-transparent"
               >
-                <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${service.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                  <service.icon className="w-6 h-6 text-white" />
+                <div className="flex flex-col md:flex-row md:gap-12">
+                  <div className="flex-none mb-4 md:mb-0">
+                    <span className="font-mono text-xs text-zinc-700">{svc.number}</span>
+                  </div>
+                  <div className="flex-1">
+                    <h3
+                      className="text-xl md:text-2xl text-white mb-1"
+                      style={{ fontWeight: 300, letterSpacing: "0.04em" }}
+                    >
+                      {svc.title}
+                    </h3>
+                    <p className="text-xs tracking-widest text-zinc-600 uppercase mb-4 font-mono">
+                      {svc.subtitle}
+                    </p>
+                    <p className="text-sm text-zinc-400 leading-relaxed mb-6 max-w-2xl">
+                      {svc.description}
+                    </p>
+                    <ul className="grid sm:grid-cols-2 gap-2">
+                      {svc.bullets.map((b, bi) => (
+                        <li key={bi} className="flex items-start gap-2 text-xs text-zinc-500">
+                          <Check className="w-3.5 h-3.5 text-zinc-400 mt-0.5 flex-shrink-0" />
+                          {b}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-2">{service.title}</h3>
-                <p className="text-[#A1A1AA] text-sm">{service.description}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="py-24 bg-[#141414]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                Why Startups Choose <span className="text-gradient">Us</span>
-              </h2>
-              <p className="text-[#A1A1AA] mb-8">
-                We understand the startup mindset. Speed, flexibility, and results matter more than 
-                bureaucratic processes.
-              </p>
-
-              <div className="space-y-6">
-                {[
-                  {
-                    icon: Clock,
-                    title: "Rapid Development",
-                    description: "2-4 week sprints. Get to market before your competition.",
-                  },
-                  {
-                    icon: DollarSign,
-                    title: "Startup-Friendly Pricing",
-                    description: "Big agency quality without the enterprise overhead.",
-                  },
-                  {
-                    icon: Users,
-                    title: "Embedded Partnership",
-                    description: "We work as an extension of your team, not just vendors.",
-                  },
-                  {
-                    icon: Zap,
-                    title: "Full-Stack Expertise",
-                    description: "AI, web, mobile, and cloud—all under one roof.",
-                  },
-                ].map((item, index) => (
-                  <div key={index} className="flex items-start space-x-4">
-                    <div className="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0">
-                      <item.icon className="w-5 h-5 text-blue-500" />
-                    </div>
-                    <div>
-                      <h3 className="text-white font-semibold mb-1">{item.title}</h3>
-                      <p className="text-[#A1A1AA] text-sm">{item.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl blur-3xl" />
-              <div className="relative p-8 rounded-2xl bg-[#1A1A1A] border border-[#27272A]">
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between p-4 rounded-lg bg-[#0A0A0A]">
-                    <span className="text-[#A1A1AA]">Typical Agency</span>
-                    <span className="text-red-400">3-6 months</span>
-                  </div>
-                  <div className="flex items-center justify-between p-4 rounded-lg bg-blue-500/10 border border-blue-500/20">
-                    <span className="text-white font-medium">Our Approach</span>
-                    <span className="text-blue-400 font-bold">2-4 weeks</span>
-                  </div>
-                </div>
-                <p className="mt-6 text-center text-sm text-[#71717A]">
-                  Average time to MVP
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Process Section */}
-      <section className="py-24 bg-[#0A0A0A]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Our <span className="text-gradient">Process</span>
+      {/* ── FDE Difference ── */}
+      <section className="border-t border-zinc-800 py-24 bg-[#18181b]">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="mb-12">
+            <span className="text-xs tracking-[0.2em] uppercase text-zinc-600">Why Vantix</span>
+            <h2
+              className="text-3xl md:text-4xl text-white mt-3"
+              style={{ fontWeight: 300, letterSpacing: "0.05em" }}
+            >
+              The FDE Difference
             </h2>
-            <p className="text-[#A1A1AA] max-w-2xl mx-auto">
-              A streamlined approach designed for speed without sacrificing quality.
-            </p>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              { step: "01", title: "Strategy", description: "Define goals, target audience, and create a roadmap for success." },
-              { step: "02", title: "Design", description: "Create visually appealing and user-friendly interfaces aligned with your brand." },
-              { step: "03", title: "Develop", description: "Build high-quality products using the latest technologies and best practices." },
-              { step: "04", title: "Launch", description: "Deploy your solution and ensure a smooth transition to the live environment." },
-            ].map((item, index) => (
-              <div key={index} className="relative">
-                <div className="text-5xl font-bold text-[#27272A] mb-4">{item.step}</div>
-                <h3 className="text-xl font-semibold text-white mb-2">{item.title}</h3>
-                <p className="text-[#A1A1AA] text-sm">{item.description}</p>
+          <div className="border border-zinc-800 overflow-hidden">
+            <div className="grid grid-cols-3 border-b border-zinc-800 bg-[#09090b]">
+              <div className="px-6 py-4 text-xs tracking-[0.15em] uppercase text-zinc-600">Dimension</div>
+              <div className="px-6 py-4 text-xs tracking-[0.15em] uppercase text-zinc-300 border-l border-zinc-800">
+                Vantix
+              </div>
+              <div className="px-6 py-4 text-xs tracking-[0.15em] uppercase text-zinc-600 border-l border-zinc-800">
+                Traditional Consultancy
+              </div>
+            </div>
+
+            {FDE_COMPARISON.map((row, i) => (
+              <div
+                key={i}
+                className={`grid grid-cols-3 border-b border-zinc-800 last:border-b-0 ${
+                  i % 2 === 0 ? "bg-[#18181b]" : "bg-[#1c1c1f]"
+                }`}
+              >
+                <div className="px-6 py-4 text-xs text-zinc-500 font-mono">{row.dimension}</div>
+                <div className="px-6 py-4 text-sm text-zinc-100 border-l border-zinc-800 font-light">
+                  {row.vantix}
+                </div>
+                <div className="px-6 py-4 text-sm text-zinc-600 border-l border-zinc-800 font-light">
+                  {row.traditional}
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-b from-[#141414] to-[#0A0A0A]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-            Ready to <span className="text-gradient">Build?</span>
+      {/* ── Tech Stack Badge Cloud ── */}
+      <section className="border-t border-zinc-800 py-20 bg-[#09090b]">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="mb-10">
+            <span className="text-xs tracking-[0.2em] uppercase text-zinc-600">Technology</span>
+            <h2
+              className="text-2xl text-white mt-3"
+              style={{ fontWeight: 300, letterSpacing: "0.05em" }}
+            >
+              Our Stack
+            </h2>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {TECH_BADGES.map((tech, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.03 }}
+                className="tech-badge"
+              >
+                {tech}
+              </motion.span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <section className="border-t border-zinc-800 py-28 bg-[#18181b]">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+          <h2
+            className="text-4xl md:text-5xl text-white mb-6"
+            style={{ fontWeight: 300, letterSpacing: "0.05em" }}
+          >
+            Ready to ship?
           </h2>
-          <p className="text-xl text-[#A1A1AA] mb-10">
-            Let's turn your idea into reality. Start with a free consultation.
+          <p className="text-base text-zinc-400 font-light mb-12 max-w-xl mx-auto leading-relaxed">
+            Describe your initiative. We&apos;ll scope an engagement that delivers production results — not a proof of concept.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/pricing">
-              <Button 
-                size="lg" 
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg glow-blue"
-              >
-                Start Your Project
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 text-sm tracking-[0.1em] uppercase bg-white text-zinc-900 px-8 py-3.5 hover:bg-zinc-200 transition-colors font-medium"
+            >
+              Start an Engagement
+              <ArrowRight className="w-4 h-4" />
             </Link>
-            <Link href="/contact">
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-[#27272A] text-white hover:bg-[#1A1A1A] px-8 py-6 text-lg"
-              >
-                Schedule a Call
-              </Button>
+            <Link
+              href="/about"
+              className="inline-flex items-center gap-2 text-sm tracking-[0.1em] uppercase border border-zinc-700 text-zinc-400 px-8 py-3.5 hover:border-zinc-500 hover:text-zinc-200 transition-all font-light"
+            >
+              About Vantix
             </Link>
           </div>
         </div>

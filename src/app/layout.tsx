@@ -16,13 +16,13 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "DevStudio | AI & Software Development for Startups",
-  description: "From idea to production in weeks, not months. Expert AI, web, mobile, and cloud development for startups and small businesses that need to move fast.",
-  keywords: ["AI development", "startup development", "web development", "mobile apps", "cloud services", "MVP development", "quick turnaround"],
-  authors: [{ name: "DevStudio" }],
+  title: "Vantix Strategies | AI Forward Deployed Engineering",
+  description: "We don't deliver strategy decks — we ship production AI systems inside your existing environment. Forward Deployed Engineers specializing in AI Orchestration, Enterprise Data Engineering, and Operational Re-engineering.",
+  keywords: ["forward deployed engineering", "AI consulting", "LangChain", "RAG", "AI agents", "enterprise data engineering", "Snowflake", "operational re-engineering"],
+  authors: [{ name: "Vantix Strategies" }],
   openGraph: {
-    title: "DevStudio | AI & Software Development for Startups",
-    description: "Launch faster. Build smarter. Expert development for ambitious teams.",
+    title: "Vantix Strategies | AI Forward Deployed Engineering",
+    description: "Engineering Impact at the Speed of AI. We ship production systems inside your existing environment.",
     type: "website",
   },
 };
