@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Check } from "lucide-react";
+import DotBackground from "@/components/DotBackground";
 
 const TECH_BADGES = [
   "Python", "TypeScript", "LangChain", "LlamaIndex",
@@ -17,7 +18,7 @@ const FDE_COMPARISON = [
   { dimension: "Output", vantix: "Handoff-Ready Systems", traditional: "Roadmaps & Recommendations" },
   { dimension: "Ownership", vantix: "Client Owns All IP", traditional: "Vendor Retains Leverage" },
   { dimension: "Timeline", vantix: "Weeks to Production", traditional: "Months to POC" },
-  { dimension: "Risk", vantix: "Low — We Ship or Iterate", traditional: "High — Advice Unvalidated" },
+  { dimension: "Risk", vantix: "Low. We ship or iterate.", traditional: "High — Advice Unvalidated" },
 ];
 
 const SERVICES = [
@@ -26,7 +27,7 @@ const SERVICES = [
     title: "Custom AI Orchestration",
     subtitle: "RAG Pipelines · Agents · LLM Ops",
     description:
-      "We architect and ship production-grade AI systems — retrieval-augmented generation pipelines, multi-agent frameworks, and LLM orchestration layers — inside your existing infrastructure. No pilot theater. No vendor lock-in.",
+      "We architect and ship production-grade AI systems: retrieval-augmented generation pipelines, multi-agent frameworks, and LLM orchestration layers, deployed inside your existing infrastructure. No pilot theater. No vendor lock-in.",
     bullets: [
       "Context-aware RAG over proprietary data",
       "Autonomous agent workflows (LangChain, LlamaIndex)",
@@ -52,7 +53,7 @@ const SERVICES = [
     title: "Post-Acquisition Operational Re-engineering",
     subtitle: "M&A Integration · Tech Stack Consolidation",
     description:
-      "When your M&A closes, execution is everything. We accelerate integration by mapping, consolidating, and re-engineering fragmented technical operations — so the deal delivers its projected value.",
+      "When your M&A closes, execution is everything. We accelerate integration by mapping, consolidating, and re-engineering fragmented technical operations so the deal delivers its projected value.",
     bullets: [
       "Legacy system audit & rationalization",
       "Cross-org data and process integration",
@@ -62,10 +63,9 @@ const SERVICES = [
   },
 ];
 
-// Source for 95% figure: Gartner / various industry analyses on enterprise AI production failure rates
 const STATS = [
-  { value: "95%", label: "Enterprise AI projects fail to reach production" },
-  { value: "0", label: "Strategy decks shipped" },
+  { value: "95%", label: "Of AI pilots die in staging — ours don't" },
+  { value: "<6 weeks", label: "From kickoff to production deployment" },
   { value: "100%", label: "Production systems, owned by you" },
 ];
 
@@ -74,7 +74,7 @@ export default function HomePage() {
     <div className="pt-14">
       {/* ── Hero ── */}
       <section className="relative min-h-[92vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0 grid-pattern" />
+        <DotBackground />
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -281,7 +281,7 @@ export default function HomePage() {
             Ready to ship?
           </h2>
           <p className="text-base text-zinc-400 font-light mb-12 max-w-xl mx-auto leading-relaxed">
-            Describe your initiative. We&apos;ll scope an engagement that delivers production results — not a proof of concept.
+            Describe your initiative. We&apos;ll scope an engagement that delivers production results, not a proof of concept.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
