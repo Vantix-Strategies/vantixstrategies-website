@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
@@ -21,15 +22,20 @@ export function Navbar() {
           <div className="flex items-center justify-between h-14">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-2.5 group">
-              <div className="w-6 h-6 border border-zinc-500 group-hover:border-zinc-300 transition-colors flex items-center justify-center">
-                <div className="w-2.5 h-2.5 bg-zinc-300" />
-              </div>
+              <Image
+                src="/logo.svg"
+                alt="Vantix Strategies logo"
+                width={24}
+                height={24}
+                className="w-6 h-6"
+                priority
+              />
               <span className="text-sm font-light tracking-[0.18em] uppercase text-zinc-200 group-hover:text-white transition-colors">
                 Vantix Strategies
               </span>
             </Link>
 
-            {/* Desktop Navigation — right-aligned, SpaceX style */}
+            {/* Desktop Navigation, right aligned SpaceX style */}
             <div className="hidden md:flex items-center space-x-10">
               {navLinks.map((link) => (
                 <Link

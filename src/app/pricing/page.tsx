@@ -6,7 +6,7 @@ const engagements = [
     label: "Discovery Sprint",
     duration: "2 Weeks",
     description:
-      "A focused diagnostic engagement. We map your data architecture, AI readiness, and identify the highest-leverage implementation opportunities. Delivered as a prioritized technical roadmap — backed by code spikes, not slides.",
+      "A focused diagnostic engagement. We map your data architecture, AI readiness, and identify the highest leverage implementation opportunities. Delivered as a prioritized technical roadmap backed by code spikes, not slides.",
     deliverables: [
       "Current-state technical audit",
       "AI/data maturity assessment",
@@ -17,30 +17,30 @@ const engagements = [
   },
   {
     label: "Embedded FDE Engagement",
-    duration: "8–16 Weeks",
+    duration: "8 to 16 Weeks",
     description:
-      "Our core offering. One to three senior FDEs embed directly in your engineering or data organization. We operate inside your tools, your repositories, and your sprint cadence — shipping production systems end-to-end.",
+      "Our core offering. One to three senior FDEs embed directly in your engineering or data organization. We operate inside your tools, your repositories, and your sprint cadence while shipping production systems from start to finish.",
     deliverables: [
       "Production AI or data systems, fully integrated",
       "Internal documentation & runbooks",
       "Knowledge transfer to your team",
-      "Handoff-ready codebase with CI/CD",
+      "Codebase ready for handoff with CI/CD",
     ],
     ideal: "Teams that need to ship AI to production in weeks, not quarters.",
     highlighted: true,
   },
   {
-    label: "Operational Re-engineering",
+    label: "Operational Redesign",
     duration: "Custom",
     description:
-      "Post-acquisition or large-scale operational transformation. We scope, staff, and execute a multi-workstream engagement with defined milestones and executive reporting cadence.",
+      "Post acquisition or large scale operational transformation. We scope, staff, and execute a multi workstream engagement with defined milestones and executive reporting cadence.",
     deliverables: [
-      "Cross-entity system integration",
+      "Cross entity system integration",
       "Process automation implementation",
       "Executive dashboard & KPI instrumentation",
       "Ongoing advisory retainer available",
     ],
-    ideal: "Post-M&A integration or enterprise-wide operational transformation.",
+    ideal: "Post M&A integration or enterprise wide operational transformation.",
   },
 ];
 
@@ -135,10 +135,10 @@ export default function PricingPage() {
             Transparent Pricing
           </h2>
           <p className="text-zinc-400 font-light leading-relaxed mb-4">
-            All engagements are priced on a project or milestone basis following a scoping call. We will never propose more scope than your problem requires. Discovery Sprints typically range from $15,000 – $25,000. Embedded FDE engagements typically range from $75,000 – $250,000 depending on team size and duration.
+            All engagements are priced on a project or milestone basis following a scoping call. We will never propose more scope than your problem requires. Discovery Sprints typically range from $15,000 to $25,000. Embedded FDE engagements typically range from $75,000 to $250,000 depending on team size and duration.
           </p>
           <p className="text-zinc-500 text-sm font-light">
-            We maintain a small active portfolio. Reach out early — availability is limited.
+            We maintain a small active portfolio. Reach out early because availability is limited.
           </p>
         </div>
       </section>

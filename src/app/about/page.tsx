@@ -4,19 +4,19 @@ import Link from "next/link";
 const principles = [
   {
     label: "Code, not decks.",
-    body: "Every engagement ends with production-ready systems checked into your repositories, not a PDF filed away. Our deliverables are measured in uptime and adoption, not page count.",
+    body: "Every engagement ends with production systems checked into your repositories, not a PDF filed away. Our deliverables are measured in uptime and adoption, not page count.",
   },
   {
     label: "Embedded, not external.",
-    body: "We join your Slack, attend your standups, and operate inside your security perimeter. Insights and institutional knowledge stay with you — always.",
+    body: "We join your Slack, attend your standups, and operate inside your security perimeter. Insights and institutional knowledge stay with you always.",
   },
   {
     label: "You own the IP.",
-    body: "Everything we build is yours. No licensing, no lock-in, no dependency on Vantix beyond what you choose. Our goal is to make ourselves redundant by making you self-sufficient.",
+    body: "Everything we build is yours. No licensing, no lock in, no dependency on Vantix beyond what you choose. Our goal is to make ourselves redundant by making you self sufficient.",
   },
   {
     label: "Rigor at speed.",
-    body: "Startup velocity with enterprise-grade engineering standards. We move fast because we have strong opinions on architecture, testing, and documentation — not despite them.",
+    body: "Startup velocity with enterprise level engineering standards. We move fast because we have strong opinions on architecture, testing, and documentation, not despite them.",
   },
 ];
 
@@ -32,15 +32,15 @@ export default function AboutPage() {
               className="text-4xl md:text-5xl text-white mt-3 mb-8"
               style={{ fontWeight: 300, letterSpacing: "0.05em" }}
             >
-              The Rosetta Stone Between
+              The Bridge Between
               <br />
               AI Potential and Enterprise Reality.
             </h1>
             <p className="text-zinc-400 font-light leading-relaxed mb-6">
-              Vantix Strategies is an AI Forward Deployed Engineering consultancy headquartered in Minneapolis, MN. We serve Fortune 500 enterprises and high-growth companies that need more than a strategy — they need engineers who embed inside the business and ship.
+              Vantix Strategies is an AI Forward Deployed Engineering consultancy headquartered in Minneapolis, MN. We serve Fortune 500 enterprises and high growth companies that need more than a strategy. They need engineers who embed inside the business and ship.
             </p>
             <p className="text-zinc-400 font-light leading-relaxed">
-              The FDE model was pioneered at the frontier of enterprise software. We bring that operating model to AI implementation, data infrastructure, and post-acquisition integration — domains where the gap between vision and production reality is widest, and the cost of that gap is highest.
+              The FDE model was pioneered at the frontier of enterprise software. We bring that operating model to AI implementation, data infrastructure, and post acquisition integration. These are domains where the gap between vision and production reality is widest, and the cost of that gap is highest.
             </p>
           </div>
 
@@ -49,7 +49,7 @@ export default function AboutPage() {
               { metric: "95%", label: "Enterprise AI projects fail to reach production" },
               { metric: "Weeks", label: "Average time from kickoff to first production deployment" },
               { metric: "0", label: "Client IP retained by Vantix" },
-              { metric: "100%", label: "Senior engineers — no junior staffing model" },
+              { metric: "100%", label: "Senior engineers only. No junior staffing model." },
             ].map((item, i) => (
               <div key={i} className="px-8 py-6">
                 <div className="text-2xl text-white mb-1" style={{ fontWeight: 300 }}>
@@ -107,10 +107,10 @@ export default function AboutPage() {
           </div>
           <div className="lg:col-span-7">
             <p className="text-zinc-400 font-light leading-relaxed mb-4">
-              Minneapolis is home to a dense concentration of Fortune 500 headquarters — companies that have massive amounts of proprietary data, complex operational footprints, and growing pressure to deploy AI at scale. They are strategic buyers who need partners that can operate inside their environments with rigor.
+              Minneapolis is home to a dense concentration of Fortune 500 headquarters. These companies have massive amounts of proprietary data, complex operational footprints, and growing pressure to deploy AI at scale. They are strategic buyers who need partners that can operate inside their environments with rigor.
             </p>
             <p className="text-zinc-400 font-light leading-relaxed">
-              We combine the speed of a startup with the operational standards required by enterprise compliance, security, and IT governance. That combination is rare — and it&apos;s what Vantix was built to deliver.
+              We combine the speed of a startup with the operational standards required by enterprise compliance, security, and IT governance. That combination is rare, and it is what Vantix was built to deliver.
             </p>
           </div>
         </div>

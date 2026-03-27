@@ -17,9 +17,14 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "Vantix Strategies | AI Forward Deployed Engineering",
-  description: "We don't deliver strategy decks — we ship production AI systems inside your existing environment. Forward Deployed Engineers specializing in AI Orchestration, Enterprise Data Engineering, and Operational Re-engineering.",
-  keywords: ["forward deployed engineering", "AI consulting", "LangChain", "RAG", "AI agents", "enterprise data engineering", "Snowflake", "operational re-engineering"],
+  description: "We do not deliver strategy decks. We ship production AI systems inside your existing environment. Forward Deployed Engineers specializing in AI orchestration, enterprise data engineering, and operational redesign.",
+  keywords: ["forward deployed engineering", "AI consulting", "LangChain", "RAG", "AI agents", "enterprise data engineering", "Snowflake", "operational redesign"],
   authors: [{ name: "Vantix Strategies" }],
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/icon.png",
+  },
   openGraph: {
     title: "Vantix Strategies | AI Forward Deployed Engineering",
     description: "Engineering Impact at the Speed of AI. We ship production systems inside your existing environment.",

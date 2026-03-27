@@ -28,7 +28,7 @@
   --radius: var(--radius);
 }
 
-/* Zinc Grayscale — Primary Palette */
+/* Zinc Grayscale Primary Palette */
 :root {
   --background: #09090b;
   --foreground: #fafafa;

@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { Linkedin } from "lucide-react";
+import Image from "next/image";
 
 const footerLinks = {
   capabilities: [
     { label: "AI Orchestration", href: "/services" },
     { label: "Data Engineering", href: "/services" },
-    { label: "Operational Re-engineering", href: "/services" },
+    { label: "Operational Redesign", href: "/services" },
   ],
   company: [
     { label: "About", href: "/about" },
@@ -21,23 +21,20 @@ export function Footer() {
           {/* Brand */}
           <div className="col-span-1">
             <Link href="/" className="flex items-center space-x-2.5 mb-4 group">
-              <div className="w-5 h-5 border border-zinc-600 flex items-center justify-center">
-                <div className="w-2 h-2 bg-zinc-400" />
-              </div>
+              <Image
+                src="/logo.svg"
+                alt="Vantix Strategies LLC logo"
+                width={20}
+                height={20}
+                className="w-5 h-5"
+              />
               <span className="text-xs font-light tracking-[0.18em] uppercase text-zinc-300 group-hover:text-white transition-colors">
-                Vantix Strategies
+                Vantix Strategies LLC
               </span>
             </Link>
             <p className="text-zinc-500 text-xs leading-relaxed max-w-xs">
-              Forward Deployed Engineers. We don&apos;t deliver strategy decks — we ship production systems inside your environment.
+              Forward Deployed Engineers. We do not deliver strategy decks. We ship production systems inside your environment.
             </p>
-            <a
-              href="#"
-              className="mt-4 inline-flex items-center justify-center w-8 h-8 border border-zinc-800 hover:border-zinc-600 text-zinc-500 hover:text-zinc-300 transition-all"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="w-3.5 h-3.5" />
-            </a>
           </div>
 
           {/* Capabilities */}
@@ -78,7 +75,7 @@ export function Footer() {
         {/* Bottom */}
         <div className="pt-8 border-t border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-zinc-600 text-xs tracking-wide">
-            © {new Date().getFullYear()} Vantix Strategies. All rights reserved.
+            © {new Date().getFullYear()} Vantix Strategies LLC. All rights reserved.
           </p>
           <p className="text-zinc-700 text-xs tracking-widest uppercase">
             Minneapolis, MN

@@ -7,14 +7,14 @@ const services = [
     title: "Custom AI Orchestration",
     subtitle: "RAG · Agents · LLM Ops · Evaluation",
     description:
-      "We design, build, and deploy production-grade AI systems inside your existing infrastructure. From retrieval-augmented generation pipelines over your proprietary data corpus to autonomous multi-agent frameworks — our FDEs operate at the system level, not the slide level.",
+      "We design, build, and deploy production AI systems inside your existing infrastructure. From retrieval augmented generation pipelines over your proprietary data corpus to autonomous multi agent frameworks, our FDEs operate at the system level, not the slide level.",
     features: [
       "RAG architecture over internal knowledge bases",
-      "Multi-agent orchestration (LangChain, LlamaIndex)",
-      "LLM fine-tuning, evaluation & guardrails",
+      "Multi agent orchestration (LangChain, LlamaIndex)",
+      "LLM model tuning, evaluation and guardrails",
       "Embedding pipelines & vector store management",
       "Model serving, scaling & latency optimization",
-      "On-premise, AWS, or Azure deployment",
+      "On premise, AWS, or Azure deployment",
     ],
     stack: ["Python", "LangChain", "LlamaIndex", "Pinecone", "Weaviate", "FastAPI", "AWS Bedrock", "Azure OpenAI"],
   },
@@ -29,24 +29,24 @@ const services = [
       "Snowflake, Databricks & Delta Lake implementation",
       "dbt semantic layer & data model design",
       "Airflow / Prefect orchestration pipelines",
-      "Real-time streaming (Kafka, Kinesis)",
+      "Real time streaming (Kafka, Kinesis)",
       "Data quality, observability & lineage (Great Expectations, Monte Carlo)",
     ],
     stack: ["Snowflake", "dbt", "Airflow", "Spark", "Kafka", "Delta Lake", "Terraform", "AWS / Azure"],
   },
   {
     number: "03",
-    title: "Post-Acquisition Operational Re-engineering",
+    title: "Post Acquisition Operational Redesign",
     subtitle: "M&A Integration · Tech Rationalization · Process Automation",
     description:
-      "M&A creates complexity that consulting decks cannot resolve. Our FDEs embed in the combined entity post-close to map, consolidate, and re-engineer technical operations — compressing multi-year integration timelines and protecting projected deal value.",
+      "M&A creates complexity that consulting decks cannot resolve. Our FDEs embed in the combined entity after close to map, consolidate, and redesign technical operations, compressing multi year integration timelines and protecting projected deal value.",
     features: [
       "Legacy system audit & technology rationalization",
-      "Cross-entity data integration & master data management",
+      "Cross entity data integration & master data management",
       "Process automation across combined business units",
       "ERP and SaaS stack consolidation",
       "Executive operational KPI dashboards",
-      "Change management & documentation handoff",
+      "Change management and documentation handoff",
     ],
     stack: ["Python", "TypeScript", "SQL", "Power BI", "Tableau", "CI/CD", "AWS", "Azure"],
   },
@@ -68,7 +68,7 @@ export default function ServicesPage() {
             Not Recommendations.
           </h1>
           <p className="text-zinc-400 font-light max-w-xl leading-relaxed">
-            Three core service lines. One delivery model: embedded, accountable, production-grade.
+            Three core service lines. One delivery model: embedded, accountable, and production focused.
           </p>
         </div>
       </section>

@@ -15,10 +15,10 @@ const TECH_BADGES = [
 const FDE_COMPARISON = [
   { dimension: "Delivery Format", vantix: "Production Code", traditional: "Strategy Decks" },
   { dimension: "Engagement Model", vantix: "Embedded in Your Org", traditional: "Advisory / External" },
-  { dimension: "Output", vantix: "Handoff-Ready Systems", traditional: "Roadmaps & Recommendations" },
+  { dimension: "Output", vantix: "Systems Ready for Handoff", traditional: "Roadmaps & Recommendations" },
   { dimension: "Ownership", vantix: "Client Owns All IP", traditional: "Vendor Retains Leverage" },
   { dimension: "Timeline", vantix: "Weeks to Production", traditional: "Months to POC" },
-  { dimension: "Risk", vantix: "Low. We ship or iterate.", traditional: "High — Advice Unvalidated" },
+  { dimension: "Risk", vantix: "Low. We ship or iterate.", traditional: "High. Advice is unvalidated." },
 ];
 
 const SERVICES = [
@@ -27,12 +27,12 @@ const SERVICES = [
     title: "Custom AI Orchestration",
     subtitle: "RAG Pipelines · Agents · LLM Ops",
     description:
-      "We architect and ship production-grade AI systems: retrieval-augmented generation pipelines, multi-agent frameworks, and LLM orchestration layers, deployed inside your existing infrastructure. No pilot theater. No vendor lock-in.",
+      "We architect and ship production AI systems: retrieval augmented generation pipelines, multi agent frameworks, and LLM orchestration layers, deployed inside your existing infrastructure. No pilot theater. No vendor lock in.",
     bullets: [
-      "Context-aware RAG over proprietary data",
+      "Context aware RAG over proprietary data",
       "Autonomous agent workflows (LangChain, LlamaIndex)",
       "LLM evaluation, guardrails & monitoring",
-      "On-premise or cloud-native deployment",
+      "On premise or cloud native deployment",
     ],
   },
   {
@@ -40,23 +40,23 @@ const SERVICES = [
     title: "Embedded Enterprise Data Engineering",
     subtitle: "Snowflake · dbt · Airflow · Delta Lake",
     description:
-      "Modern AI requires trustworthy data. We embed directly into your data org to build the pipelines, semantic layers, and governance structures that make enterprise AI actually work.",
+      "Modern AI requires trustworthy data. We embed directly into your data organization to build the pipelines, semantic layers, and governance structures that make enterprise AI actually work.",
     bullets: [
       "Data lakehouse architecture & migration",
       "Semantic layer and feature store design",
-      "Real-time streaming & batch orchestration",
+      "Real time streaming and batch orchestration",
       "Data quality, lineage & observability",
     ],
   },
   {
     number: "03",
-    title: "Post-Acquisition Operational Re-engineering",
+    title: "Post Acquisition Operational Redesign",
     subtitle: "M&A Integration · Tech Stack Consolidation",
     description:
-      "When your M&A closes, execution is everything. We accelerate integration by mapping, consolidating, and re-engineering fragmented technical operations so the deal delivers its projected value.",
+      "When your M&A closes, execution is everything. We accelerate integration by mapping, consolidating, and redesigning fragmented technical operations so the deal delivers its projected value.",
     bullets: [
       "Legacy system audit & rationalization",
-      "Cross-org data and process integration",
+      "Cross organization data and process integration",
       "Workflow automation across combined entities",
       "Executive dashboards & operational KPIs",
     ],
@@ -64,7 +64,7 @@ const SERVICES = [
 ];
 
 const STATS = [
-  { value: "95%", label: "Of AI pilots die in staging — ours don't" },
+  { value: "95%", label: "Of AI pilots die in staging. Ours do not." },
   { value: "<6 weeks", label: "From kickoff to production deployment" },
   { value: "100%", label: "Production systems, owned by you" },
 ];
@@ -104,7 +104,7 @@ export default function HomePage() {
             </h1>
 
             <p className="text-base md:text-lg text-zinc-400 max-w-xl mb-12 leading-relaxed font-light">
-              We are Forward Deployed Engineers. We don&apos;t deliver strategy decks;
+              We are Forward Deployed Engineers. We do not deliver strategy decks;
               we ship production systems inside your existing environment.
             </p>
 
