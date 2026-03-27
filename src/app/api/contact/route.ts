@@ -32,11 +32,31 @@ export async function POST(req: Request) {
     const smtpPort = Number(process.env.SMTP_PORT || 587);
     const smtpUser = process.env.SMTP_USER;
     const smtpPass = process.env.SMTP_PASS;
-    const smtpFrom = process.env.SMTP_FROM || smtpUser;
+    const smtpFrom = process.env.SMTP_FROM?.trim();
 
-    if (!smtpHost || !smtpUser || !smtpPass || !smtpFrom) {
+    if (!smtpHost || !smtpUser || !smtpPass) {
       return NextResponse.json(
         { error: "Email is not configured on the server yet." },
+        { status: 500 }
+      );
+    }
+
+    const recipientEmail = RECIPIENT_EMAIL.trim();
+    let senderEmail = (smtpFrom || smtpUser).trim();
+
+    if (
+      senderEmail.toLowerCase() === recipientEmail.toLowerCase() &&
+      smtpUser.trim().toLowerCase() !== recipientEmail.toLowerCase()
+    ) {
+      senderEmail = smtpUser.trim();
+    }
+
+    if (senderEmail.toLowerCase() === recipientEmail.toLowerCase()) {
+      return NextResponse.json(
+        {
+          error:
+            "Email sender must be different from recipient. Set SMTP_FROM to a different address.",
+        },
         { status: 500 }
       );
     }
@@ -52,8 +72,8 @@ export async function POST(req: Request) {
     });
 
     await transporter.sendMail({
-      from: smtpFrom,
-      to: RECIPIENT_EMAIL,
+      from: `Vantix Website <${senderEmail}>`,
+      to: recipientEmail,
       replyTo: email,
       subject: `New contact form inquiry from ${name}`,
       text: [
