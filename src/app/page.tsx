@@ -23,6 +23,7 @@ const FDE_COMPARISON = [
 
 const SERVICES = [
   {
+    href: "/capabilities/ai-orchestration",
     number: "01",
     title: "Custom AI Orchestration",
     subtitle: "RAG Pipelines · Agents · LLM Ops",
@@ -36,6 +37,7 @@ const SERVICES = [
     ],
   },
   {
+    href: "/capabilities/data-engineering",
     number: "02",
     title: "Embedded Enterprise Data Engineering",
     subtitle: "Snowflake · dbt · Airflow · Delta Lake",
@@ -49,6 +51,7 @@ const SERVICES = [
     ],
   },
   {
+    href: "/capabilities/operational-redesign",
     number: "03",
     title: "Post Acquisition Operational Redesign",
     subtitle: "M&A Integration · Tech Stack Consolidation",
@@ -157,42 +160,47 @@ export default function HomePage() {
 
           <div className="space-y-px border border-zinc-800 bg-zinc-800">
             {SERVICES.map((svc, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="bg-[#09090b] p-8 md:p-10 card-glow border border-transparent"
-              >
-                <div className="flex flex-col md:flex-row md:gap-12">
-                  <div className="flex-none mb-4 md:mb-0">
-                    <span className="font-mono text-xs text-zinc-700">{svc.number}</span>
+              <Link key={i} href={svc.href} className="block group">
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="bg-[#09090b] p-8 md:p-10 card-glow border border-transparent cursor-pointer"
+                >
+                  <div className="flex flex-col md:flex-row md:gap-12">
+                    <div className="flex-none mb-4 md:mb-0">
+                      <span className="font-mono text-xs text-zinc-700">{svc.number}</span>
+                    </div>
+                    <div className="flex-1">
+                      <h3
+                        className="text-xl md:text-2xl text-white mb-1 group-hover:text-zinc-200 transition-colors"
+                        style={{ fontWeight: 300, letterSpacing: "0.04em" }}
+                      >
+                        {svc.title}
+                      </h3>
+                      <p className="text-xs tracking-widest text-zinc-600 uppercase mb-4 font-mono">
+                        {svc.subtitle}
+                      </p>
+                      <p className="text-sm text-zinc-400 leading-relaxed mb-6 max-w-2xl">
+                        {svc.description}
+                      </p>
+                      <ul className="grid sm:grid-cols-2 gap-2 mb-6">
+                        {svc.bullets.map((b, bi) => (
+                          <li key={bi} className="flex items-start gap-2 text-xs text-zinc-500">
+                            <Check className="w-3.5 h-3.5 text-zinc-400 mt-0.5 flex-shrink-0" />
+                            {b}
+                          </li>
+                        ))}
+                      </ul>
+                      <span className="inline-flex items-center gap-2 text-xs tracking-[0.12em] uppercase text-zinc-400 group-hover:text-zinc-100 transition-colors">
+                        View capability
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex-1">
-                    <h3
-                      className="text-xl md:text-2xl text-white mb-1"
-                      style={{ fontWeight: 300, letterSpacing: "0.04em" }}
-                    >
-                      {svc.title}
-                    </h3>
-                    <p className="text-xs tracking-widest text-zinc-600 uppercase mb-4 font-mono">
-                      {svc.subtitle}
-                    </p>
-                    <p className="text-sm text-zinc-400 leading-relaxed mb-6 max-w-2xl">
-                      {svc.description}
-                    </p>
-                    <ul className="grid sm:grid-cols-2 gap-2">
-                      {svc.bullets.map((b, bi) => (
-                        <li key={bi} className="flex items-start gap-2 text-xs text-zinc-500">
-                          <Check className="w-3.5 h-3.5 text-zinc-400 mt-0.5 flex-shrink-0" />
-                          {b}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </motion.div>
+                </motion.div>
+              </Link>
             ))}
           </div>
         </div>

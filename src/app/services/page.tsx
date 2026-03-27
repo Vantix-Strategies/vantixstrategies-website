@@ -3,6 +3,7 @@ import Link from "next/link";
 
 const services = [
   {
+    href: "/capabilities/ai-orchestration",
     number: "01",
     title: "Custom AI Orchestration",
     subtitle: "RAG · Agents · LLM Ops · Evaluation",
@@ -19,6 +20,7 @@ const services = [
     stack: ["Python", "LangChain", "LlamaIndex", "Pinecone", "Weaviate", "FastAPI", "AWS Bedrock", "Azure OpenAI"],
   },
   {
+    href: "/capabilities/data-engineering",
     number: "02",
     title: "Embedded Enterprise Data Engineering",
     subtitle: "Snowflake · dbt · Airflow · Delta Lake · Spark",
@@ -35,6 +37,7 @@ const services = [
     stack: ["Snowflake", "dbt", "Airflow", "Spark", "Kafka", "Delta Lake", "Terraform", "AWS / Azure"],
   },
   {
+    href: "/capabilities/operational-redesign",
     number: "03",
     title: "Post Acquisition Operational Redesign",
     subtitle: "M&A Integration · Tech Rationalization · Process Automation",
@@ -82,16 +85,28 @@ export default function ServicesPage() {
                 {/* Number + title */}
                 <div className="lg:col-span-4">
                   <span className="font-mono text-xs text-zinc-700 block mb-3">{svc.number}</span>
-                  <h2
-                    className="text-2xl md:text-3xl text-white mb-2"
-                    style={{ fontWeight: 300, letterSpacing: "0.04em" }}
+                  <Link
+                    href={svc.href}
+                    className="inline-block group"
                   >
-                    {svc.title}
-                  </h2>
+                    <h2
+                      className="text-2xl md:text-3xl text-white mb-2 group-hover:text-zinc-200 transition-colors"
+                      style={{ fontWeight: 300, letterSpacing: "0.04em" }}
+                    >
+                      {svc.title}
+                    </h2>
+                  </Link>
                   <p className="text-xs tracking-widest text-zinc-600 uppercase font-mono mb-6">
                     {svc.subtitle}
                   </p>
                   <p className="text-sm text-zinc-400 leading-relaxed">{svc.description}</p>
+                  <Link
+                    href={svc.href}
+                    className="inline-flex items-center gap-2 mt-6 text-xs tracking-[0.12em] uppercase text-zinc-300 hover:text-white transition-colors"
+                  >
+                    Explore Capability
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
                 </div>
 
                 {/* Features + Stack */}

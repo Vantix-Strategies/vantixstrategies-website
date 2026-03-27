@@ -3,9 +3,9 @@ import Image from "next/image";
 
 const footerLinks = {
   capabilities: [
-    { label: "AI Orchestration", href: "/capabilities#ai-orchestration" },
-    { label: "Data Engineering", href: "/capabilities#data-engineering" },
-    { label: "Operational Redesign", href: "/capabilities#operational-redesign" },
+    { label: "AI Orchestration", href: "/capabilities/ai-orchestration" },
+    { label: "Data Engineering", href: "/capabilities/data-engineering" },
+    { label: "Operational Redesign", href: "/capabilities/operational-redesign" },
   ],
   company: [
     { label: "About", href: "/about" },
