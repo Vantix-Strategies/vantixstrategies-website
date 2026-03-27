@@ -1,4 +1,4 @@
-import { MapPin, ArrowRight } from "lucide-react";
+import { MapPin, Mail, ArrowRight } from "lucide-react";
 import { ContactForm } from "./ContactForm";
 
 export default function ContactPage() {
@@ -32,6 +32,18 @@ export default function ContactPage() {
                   <p className="text-xs tracking-widest uppercase text-zinc-600 mb-1">Headquarters</p>
                   <p className="text-sm text-zinc-300">Minneapolis, MN</p>
                   <p className="text-xs text-zinc-600 mt-0.5">Deployed anywhere.</p>
+                </div>
+              </div>
+              <div className="px-6 py-5 flex items-start gap-3">
+                <Mail className="w-4 h-4 text-zinc-500 mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="text-xs tracking-widest uppercase text-zinc-600 mb-1">Email</p>
+                  <a
+                    href="mailto:hello@vantixstrategies.com"
+                    className="text-sm text-zinc-300 hover:text-white transition-colors"
+                  >
+                    hello@vantixstrategies.com
+                  </a>
                 </div>
               </div>
               <div className="px-6 py-5">
