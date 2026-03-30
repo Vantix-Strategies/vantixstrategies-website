@@ -32,10 +32,10 @@ interface Results {
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
-const EMPLOYEE_LABELS = ["1 – 10", "11 – 50", "51 – 200", "201 – 500", "501 – 1K", "1K+"];
+const EMPLOYEE_LABELS = ["1 to 10", "11 to 50", "51 to 200", "201 to 500", "501 to 1K", "1K+"];
 const EMPLOYEE_VALUES = ["1-10", "11-50", "51-200", "201-500", "501-1000", "1000+"];
 
-const REVENUE_LABELS = ["< $1M", "$1M – $5M", "$5M – $25M", "$25M – $100M", "$100M – $500M", "$500M+"];
+const REVENUE_LABELS = ["< $1M", "$1M to $5M", "$5M to $25M", "$25M to $100M", "$100M to $500M", "$500M+"];
 const REVENUE_VALUES = ["<$1M", "$1M-$5M", "$5M-$25M", "$25M-$100M", "$100M-$500M", "$500M+"];
 
 const EMP_MID: Record<string, number> = {
@@ -62,11 +62,11 @@ const CAPABILITIES = [
     name: "AI Orchestration",
     subtitle: "RAG · Agents · LLM Ops",
     description:
-      "Automate decisions and workflows by deploying production AI systems across your organization — from RAG pipelines to autonomous multi-agent frameworks.",
+      "Automate decisions and workflows by deploying production AI systems across your organization, from RAG pipelines to autonomous multi-agent frameworks.",
     Icon: Zap,
     helpTitle: "How AI Orchestration saves you money",
     helpPoints: [
-      "McKinsey research shows knowledge workers spend 19% of their time on repetitive, searchable tasks — AI agents recapture that time at scale.",
+      "McKinsey research shows knowledge workers spend 19% of their time on repetitive, searchable tasks. AI agents recapture that time at scale.",
       "We model 65% automation capture of your stated manual hours, applied across all employees. (Industry benchmark: Gartner, 2024 Future of Work report.)",
       "An additional 1.5% revenue uplift is modeled for faster decision cycles enabled by real-time AI-assisted workflows.",
       "Formula: (Employees × Manual hrs/week × 52 × 65%) × Hourly rate + Revenue × 1.5%",
@@ -81,7 +81,7 @@ const CAPABILITIES = [
     Icon: Database,
     helpTitle: "How Data Engineering saves you money",
     helpPoints: [
-      "IDC research shows data workers spend 30–40% of their time hunting for and preparing data before they can use it.",
+      "IDC research shows data workers spend 30 to 40% of their time hunting for and preparing data before they can use it.",
       "We model 3.5 hours/week saved per employee once reliable, governed pipelines replace manual reporting workflows. (Source: Forrester Total Economic Impact studies on modern data stacks.)",
       "An additional 1.8% revenue uplift is modeled from improved data-driven decision quality across the business.",
       "Formula: (Employees × 3.5 hrs/week × 52 × 65%) × Hourly rate + Revenue × 1.8%",
@@ -96,7 +96,7 @@ const CAPABILITIES = [
     Icon: Settings,
     helpTitle: "How Operational Redesign saves you money",
     helpPoints: [
-      "Bain & Company post-M&A research shows acquirers recover only 50–60% of projected deal value due to integration delays and process fragmentation.",
+      "Bain & Company post-M&A research shows acquirers recover only 50 to 60% of projected deal value due to integration delays and process fragmentation.",
       "We model 30% of revenue as flowing through operational processes that are directly subject to redesign and automation.",
       "Lean process improvement benchmarks (McKinsey Ops Practice) indicate 20% efficiency gains are consistently achievable in the first 12 months of systematic redesign.",
       "Formula: Revenue × 30% (operationally-dependent revenue) × 20% (efficiency gain rate)",
@@ -148,7 +148,7 @@ function calculate(data: FormData): Results {
         `Hourly rate: ${fmt(Math.round(hourlyRate))}/hr (Revenue ÷ Employees ÷ 2,000 working hrs/yr)`,
         `Labor value: ${Math.round(saved).toLocaleString()} hrs × ${fmt(Math.round(hourlyRate))}/hr = ${fmt(Math.round(laborValue))}`,
         `Revenue uplift (faster decisions): ${fmt(rev)} × 1.5% = ${fmt(Math.round(revenueUplift))}`,
-        `Base estimate: ${fmt(Math.round(base))} → Conservative–Optimistic range: × 0.85 – × 1.35`,
+        `Base estimate: ${fmt(Math.round(base))} → Conservative to optimistic range: × 0.85 to × 1.35`,
       ],
     });
   }
@@ -174,7 +174,7 @@ function calculate(data: FormData): Results {
         `Hourly rate: ${fmt(Math.round(hourlyRate))}/hr (Revenue ÷ Employees ÷ 2,000 working hrs/yr)`,
         `Labor value: ${Math.round(saved).toLocaleString()} hrs × ${fmt(Math.round(hourlyRate))}/hr = ${fmt(Math.round(laborValue))}`,
         `Revenue uplift (better data quality): ${fmt(rev)} × 1.8% = ${fmt(Math.round(revenueUplift))}`,
-        `Base estimate: ${fmt(Math.round(base))} → Conservative–Optimistic range: × 0.80 – × 1.40`,
+        `Base estimate: ${fmt(Math.round(base))} → Conservative to optimistic range: × 0.80 to × 1.40`,
       ],
     });
   }
@@ -191,11 +191,11 @@ function calculate(data: FormData): Results {
       name: "Operational Redesign",
       low,
       high,
-      metric: "20 – 30% process efficiency gain",
+      metric: "20 to 30% process efficiency gain",
       calcLines: [
         `Ops-dependent revenue: ${fmt(rev)} × 30% = ${fmt(Math.round(opsDependentRevenue))} (Bain & Company M&A benchmark)`,
         `Efficiency gain: ${fmt(Math.round(opsDependentRevenue))} × 20% = ${fmt(Math.round(base))} (McKinsey Lean Ops benchmark)`,
-        `Conservative–Optimistic range: × 0.85 – × 1.50`,
+        `Conservative to optimistic range: × 0.85 to × 1.50`,
       ],
     });
   }
@@ -329,7 +329,7 @@ function StepCompany({
         Tell us about your organization.
       </h1>
       <p className="text-zinc-500 font-light text-sm mb-10 leading-relaxed">
-        A few data points let us model real impact — not guesswork. Skip any field to use an estimate.
+        A few data points let us model real impact with less guesswork. Skip any field to use an estimate.
       </p>
 
       {/* Employees */}
@@ -535,7 +535,7 @@ function ResultBreakdownCard({ item, index }: { item: CapabilityResult; index: n
         <div className="flex items-center gap-3 flex-shrink-0 ml-4">
           <div className="text-right">
             <span className="text-sm text-zinc-300 font-light block">
-              {fmt(item.low)} – {fmt(item.high)}
+              {fmt(item.low)} to {fmt(item.high)}
             </span>
             <span className="text-xs text-zinc-700 font-mono">per year</span>
           </div>
@@ -601,7 +601,7 @@ function StepResults({ results }: { results: Results }) {
           style={{ fontWeight: 300, letterSpacing: "-0.01em" }}
         >
           <Counter to={results.totalLow} duration={1200} />
-          <span className="text-zinc-600 mx-3">–</span>
+          <span className="text-zinc-600 mx-3">to</span>
           <Counter to={results.totalHigh} duration={1500} />
         </div>
         <p className="text-zinc-600 text-xs tracking-[0.1em] uppercase mt-4">
@@ -609,7 +609,7 @@ function StepResults({ results }: { results: Results }) {
         </p>
       </motion.div>
 
-      {/* Capability breakdown — expandable */}
+      {/* Capability breakdown, expandable */}
       <p className="text-xs text-zinc-600 tracking-wider uppercase mb-3">Click any row to see the calculation</p>
       <div className="space-y-2.5 mb-8">
         {results.breakdown.map((item, i) => (
@@ -617,7 +617,7 @@ function StepResults({ results }: { results: Results }) {
         ))}
       </div>
 
-      {/* Hours freed — only key metric */}
+      {/* Hours freed, only key metric */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -626,7 +626,7 @@ function StepResults({ results }: { results: Results }) {
       >
         <div className="text-center">
           <div className="text-2xl text-white font-light">
-            {results.hoursSaved > 0 ? results.hoursSaved.toLocaleString() : "—"}
+            {results.hoursSaved > 0 ? results.hoursSaved.toLocaleString() : "N/A"}
           </div>
           <div className="text-xs text-zinc-600 tracking-wider mt-1 leading-snug">Hours Freed / Year</div>
         </div>
@@ -751,7 +751,7 @@ export default function ValueCalculatorPage() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Navigation buttons — steps 0 and 1 */}
+        {/* Navigation buttons for steps 0 and 1 */}
         {step < 2 && (
           <motion.div
             initial={{ opacity: 0, y: 8 }}
@@ -789,7 +789,7 @@ export default function ValueCalculatorPage() {
           </motion.div>
         )}
 
-        {/* Navigation buttons — results step */}
+        {/* Navigation buttons for results step */}
         {step === 2 && (
           <motion.div
             initial={{ opacity: 0 }}

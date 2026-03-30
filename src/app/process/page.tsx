@@ -5,10 +5,10 @@ const phases = [
   {
     number: "01",
     name: "Discovery Sprint",
-    duration: "Weeks 1\u20132",
+    duration: "Weeks 1 to 2",
     tagline: "Understand before building.",
     description:
-      "We spend the first two weeks embedded in your environment \u2014 attending standups, reviewing existing infrastructure, interviewing stakeholders, and mapping data flows. No slide decks. Just working sessions.",
+      "We spend the first two weeks embedded in your environment by attending standups, reviewing existing infrastructure, interviewing stakeholders, and mapping data flows. No slide decks. Just working sessions.",
     deliverables: [
       "Technical audit of existing stack and data architecture",
       "AI / automation readiness assessment",
@@ -17,20 +17,20 @@ const phases = [
       "Defined success metrics and measurement framework",
     ],
     capabilities: {
-      ai: "Identify highest-ROI automation candidates across existing workflows",
+      ai: "Identify the highest ROI automation candidates across existing workflows",
       data: "Map data sources, quality gaps, and pipeline dependencies",
-      ops: "Document current-state processes and integration bottlenecks",
+      ops: "Document current state processes and integration bottlenecks",
     },
   },
   {
     number: "02",
     name: "Architecture & Build",
-    duration: "Weeks 3\u20138",
+    duration: "Weeks 3 to 8",
     tagline: "Ship working software, not prototypes.",
     description:
-      "We build in production from day one. Every sprint produces functional, tested, and documented code checked into your repositories. You maintain full visibility through shared tooling \u2014 no black-box development.",
+      "We build in production from day one. Every sprint produces functional, tested, and documented code checked into your repositories. You maintain full visibility through shared tooling with no black box development.",
     deliverables: [
-      "Production-grade implementation in your existing environment",
+      "Production ready implementation in your existing environment",
       "Automated tests and CI/CD pipelines",
       "Inline documentation and architecture diagrams",
       "Weekly sprint reviews with your team",
@@ -45,14 +45,14 @@ const phases = [
   {
     number: "03",
     name: "Deploy to Production",
-    duration: "Weeks 8\u201312",
+    duration: "Weeks 8 to 12",
     tagline: "Real usage. Real feedback. Real iteration.",
     description:
-      "Production deployment is not the end \u2014 it is the beginning of the value curve. We support live rollout, monitor system behavior, and iterate based on real usage patterns. Adoption is part of the deliverable.",
+      "Production deployment is not the end. It is the beginning of the value curve. We support live rollout, monitor system behavior, and iterate based on real usage patterns. Adoption is part of the deliverable.",
     deliverables: [
       "Monitored production deployment with alerting and observability",
       "User onboarding and internal adoption sessions",
-      "Performance benchmarking against pre-engagement baseline",
+      "Performance benchmarking against the baseline from before the engagement",
       "Issue triage and rapid iteration cycles",
       "Updated runbooks and operating procedures",
     ],
@@ -64,16 +64,16 @@ const phases = [
   },
   {
     number: "04",
-    name: "Handoff & Self-Sufficiency",
-    duration: "Weeks 12\u201316",
+    name: "Handoff & Team Ownership",
+    duration: "Weeks 12 to 16",
     tagline: "Our goal is to make ourselves redundant.",
     description:
       "The engagement ends when your team can own, extend, and operate everything we built without us. We transfer full IP, train your engineers, document everything, and leave no dependencies on Vantix.",
     deliverables: [
-      "Full IP transfer \u2014 all code, configs, and credentials",
+      "Full IP transfer: all code, configs, and credentials",
       "Internal team training and knowledge transfer sessions",
       "Comprehensive system documentation in your preferred format",
-      "30-day post-handoff support window (async)",
+      "Thirty day support window after handoff (async)",
       "Optional retainer for ongoing iteration (scoped separately)",
     ],
     capabilities: {
@@ -104,7 +104,7 @@ export default function ProcessPage() {
             >
               From Kickoff
               <br />
-              to Self-Sufficiency.
+              to Team Ownership.
             </h1>
             <p className="text-zinc-400 font-light leading-relaxed mb-4">
               Every Vantix engagement follows the same four-phase structure regardless of which capabilities are in
@@ -112,14 +112,14 @@ export default function ProcessPage() {
               your team by the end.
             </p>
             <p className="text-zinc-400 font-light leading-relaxed">
-              Below you will find exactly what happens in each phase and how the work differs depending on whether
-              you are deploying AI Orchestration, Data Engineering, or Operational Redesign \u2014 or all three.
+              Below is a clear breakdown of what happens in each phase and how the work changes based on whether
+              your focus is AI Orchestration, Data Engineering, Operational Redesign, or a combination of all three.
             </p>
           </div>
           <div className="border border-zinc-800 divide-y divide-zinc-800">
             {[
               { metric: "2 weeks", label: "From kickoff to first production insight" },
-              { metric: "< 6 weeks", label: "Typical time from kickoff to first production deployment" },
+              { metric: "< 6 weeks", label: "Typical time from kickoff to first working build" },
               { metric: "90 days", label: "Target window for positive ROI on engagement investment" },
               { metric: "0", label: "IP retained by Vantix. Everything we build is yours." },
             ].map((item, i) => (

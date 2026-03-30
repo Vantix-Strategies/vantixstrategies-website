@@ -13,7 +13,7 @@ const CAPABILITIES = [
     subtitle: "RAG · Agents · LLM Ops · Evaluation",
     tagline: "Production AI systems. Not proofs of concept.",
     description:
-      "Most AI pilots fail at the boundary between experimentation and production. Our Forward Deployed Engineers live in that boundary. We design, build, and ship AI orchestration layers — retrieval augmented generation pipelines, multi-agent frameworks, and LLM evaluation infrastructure — directly inside your existing environment.",
+      "Most AI pilots fail at the boundary between experimentation and production. Our Forward Deployed Engineers live in that boundary. We design, build, and ship AI orchestration layers, including retrieval augmented generation pipelines, multi-agent frameworks, and LLM evaluation infrastructure, directly inside your existing environment.",
     problems: [
       "AI pilots that cannot cross the staging-to-production gap",
       "RAG systems returning hallucinated or stale results",
@@ -62,7 +62,7 @@ const CAPABILITIES = [
     ],
     outcomes: [
       { metric: "Days", label: "To production-quality pipelines, not sprints" },
-      { metric: "Zero", label: "Vendor lock-in — you own every asset" },
+      { metric: "Zero", label: "Vendor lock-in is eliminated because you own every asset" },
       { metric: "Full", label: "Handoff with documentation and team enablement" },
     ],
     stack: ["Snowflake", "dbt", "Airflow", "Spark", "Kafka", "Delta Lake", "Terraform", "AWS / Azure"],
@@ -75,7 +75,7 @@ const CAPABILITIES = [
     subtitle: "M&A Integration · Tech Rationalization · Process Automation",
     tagline: "Compress multi-year integration timelines.",
     description:
-      "M&A deals are won in the boardroom and lost in the server room. After close, fragmented technical operations, redundant systems, and misaligned data definitions erode projected deal value at speed. Our FDEs embed in the combined entity to map, consolidate, and redesign technical operations — compressing multi-year integration timelines to a fraction of the expected duration.",
+      "M&A deals are won in the boardroom and lost in the server room. After close, fragmented technical operations, redundant systems, and misaligned data definitions erode projected deal value at speed. Our FDEs embed in the combined entity to map, consolidate, and redesign technical operations, which compresses multi-year integration timelines to a fraction of the expected duration.",
     problems: [
       "Redundant SaaS stacks and overlapping tooling with no rationalization plan",
       "Incompatible data models between acquired and acquiring entities",
@@ -121,8 +121,8 @@ export default function CapabilitiesPage() {
               How We Deliver.
             </h1>
             <p className="text-zinc-400 font-light max-w-xl leading-relaxed mb-10">
-              Three focused capability lines. Each delivered by senior engineers embedded inside your organization — not
-              managed from a distance.
+              Three focused capability lines. Each is delivered by senior engineers embedded inside your organization,
+              not managed from a distance.
             </p>
 
             {/* Capability anchors */}
