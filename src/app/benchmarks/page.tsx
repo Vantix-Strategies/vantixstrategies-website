@@ -70,16 +70,16 @@ const capabilityBenchmarks = [
     number: "02",
     assumptions: [
       {
-        label: “9.3 hours/week lost per employee to data friction”,
+        label: "9.3 hours/week lost per employee to data friction",
         explanation:
-          “McKinsey research indicates knowledge workers spend an average of 9.3 hours per week searching and gathering information — what McKinsey calls the \”Fifth Employee\” effect. This reflects the total information burden across reporting, data preparation, and search tasks, not a single sub-task. Earlier models used 3.5 hours (a sub-task floor from IDC), but 9.3 hours better captures the full scope of data-related overhead that modern data infrastructure can address.”,
-        source: “McKinsey Global Institute, various surveys on information worker productivity; cottrillresearch.com/various-survey-statistics-workers-spend-too-much-time-searching-for-information/”,
+          "McKinsey research indicates knowledge workers spend an average of 9.3 hours per week searching and gathering information — what McKinsey calls the \"Fifth Employee\" effect. This reflects the total information burden across reporting, data preparation, and search tasks, not a single sub-task. Earlier models used 3.5 hours (a sub-task floor from IDC), but 9.3 hours better captures the full scope of data-related overhead that modern data infrastructure can address.",
+        source: "McKinsey Global Institute, various surveys on information worker productivity; cottrillresearch.com/various-survey-statistics-workers-spend-too-much-time-searching-for-information/",
       },
       {
-        label: “20% efficiency capture rate”,
+        label: "20% efficiency capture rate",
         explanation:
-          “Of the 9.3 hours modeled as lost per employee, we apply a conservative 20% capture rate — the midpoint of McKinsey’s 15% to 25% optimization potential benchmark for indirect functions such as reporting and data engineering. This is more conservative than our prior 65% figure, which applied to targeted sub-tasks rather than the broader information burden. The remaining 80% reflects irreducible research, analyst judgment, and stakeholder communication that cannot be automated away.”,
-        source: “McKinsey Industry 4.0 and Lean Management research; McKinsey, “Generative AI and the future of work” (2023–2024)”,
+          "Of the 9.3 hours modeled as lost per employee, we apply a conservative 20% capture rate — the midpoint of McKinsey’s 15% to 25% optimization potential benchmark for indirect functions such as reporting and data engineering. This is more conservative than our prior 65% figure, which applied to targeted sub-tasks rather than the broader information burden. The remaining 80% reflects irreducible research, analyst judgment, and stakeholder communication that cannot be automated away.",
+        source: "McKinsey Industry 4.0 and Lean Management research; McKinsey, “Generative AI and the future of work” (2023–2024)",
       },
       {
         label: "1.8% revenue uplift from improved decision quality",
