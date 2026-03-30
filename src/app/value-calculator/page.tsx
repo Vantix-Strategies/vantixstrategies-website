@@ -68,7 +68,7 @@ const CAPABILITIES = [
     helpPoints: [
       "McKinsey research shows knowledge workers spend 19% of their time on repetitive, searchable tasks. AI agents recapture that time at scale.",
       "We model 65% automation capture of your stated manual hours, applied across all employees. (Industry benchmark: Gartner, 2024 Future of Work report.)",
-      "An additional 1.5% revenue uplift is modeled for faster decision cycles enabled by real-time AI-assisted workflows.",
+      "An additional 1.5% revenue uplift is modeled for faster decision cycles enabled by real-time AI-assisted workflows. Orgvue research suggests organizations with real-time data access see up to 16% higher profit growth opportunity — 1.5% is the conservative floor.",
       "Formula: (Employees × Manual hrs/week × 52 × 65%) × Hourly rate + Revenue × 1.5%",
     ],
   },
@@ -81,10 +81,10 @@ const CAPABILITIES = [
     Icon: Database,
     helpTitle: "How Data Engineering saves you money",
     helpPoints: [
-      "IDC research shows data workers spend 30 to 40% of their time hunting for and preparing data before they can use it.",
-      "We model 3.5 hours/week saved per employee once reliable, governed pipelines replace manual reporting workflows. (Source: Forrester Total Economic Impact studies on modern data stacks.)",
+      "McKinsey research shows knowledge workers spend an average of 9.3 hours/week searching and gathering information — the full information burden, not just a single sub-task.",
+      "We model 9.3 hours/week as the total data labor burden per employee, with a 20% conservative capture rate (McKinsey Industry 4.0 benchmark for indirect function optimization).",
       "An additional 1.8% revenue uplift is modeled from improved data-driven decision quality across the business.",
-      "Formula: (Employees × 3.5 hrs/week × 52 × 65%) × Hourly rate + Revenue × 1.8%",
+      "Formula: (Employees × 9.3 hrs/week × 52 × 20%) × Hourly rate + Revenue × 1.8%",
     ],
   },
   {
@@ -154,7 +154,7 @@ function calculate(data: FormData): Results {
   }
 
   if (caps.includes("data")) {
-    const saved = emp * 3.5 * 52 * 0.65;
+    const saved = emp * 9.3 * 52 * 0.20;
     hoursSaved += saved;
     const laborValue = saved * hourlyRate;
     const revenueUplift = rev * 0.018;
@@ -168,9 +168,9 @@ function calculate(data: FormData): Results {
       name: "Data Engineering",
       low,
       high,
-      metric: `${Math.round(saved).toLocaleString()} reporting hrs/yr reclaimed`,
+      metric: `${Math.round(saved).toLocaleString()} information hrs/yr reclaimed`,
       calcLines: [
-        `${emp.toLocaleString()} employees × 3.5 hrs/week (IDC benchmark) × 52 weeks × 65% capture = ${Math.round(saved).toLocaleString()} hrs/yr`,
+        `${emp.toLocaleString()} employees × 9.3 hrs/week (McKinsey benchmark) × 52 weeks × 20% capture = ${Math.round(saved).toLocaleString()} hrs/yr`,
         `Hourly rate: ${fmt(Math.round(hourlyRate))}/hr (Revenue ÷ Employees ÷ 2,000 working hrs/yr)`,
         `Labor value: ${Math.round(saved).toLocaleString()} hrs × ${fmt(Math.round(hourlyRate))}/hr = ${fmt(Math.round(laborValue))}`,
         `Revenue uplift (better data quality): ${fmt(rev)} × 1.8% = ${fmt(Math.round(revenueUplift))}`,

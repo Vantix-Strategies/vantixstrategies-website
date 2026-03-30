@@ -36,12 +36,19 @@ const capabilityBenchmarks = [
         explanation:
           "The model applies a 65% automation capture rate to your stated manual hours. This reflects Gartner’s 2024 Future of Work analysis, which found that AI-assisted workflows reliably automate 60 to 70% of targeted repetitive tasks once pipelines are in production. The remaining 35% accounts for task variability, exception handling, and human-in-the-loop requirements.",
         source: "Gartner, “Future of Work Trends” (2024); McKinsey Global Institute, “Generative AI and the future of work in America” (2023)",
+        sourceLinks: [
+          { label: "BizTech / McKinsey — GenAI Productivity (2024)", url: "https://biztechmagazine.com/article/2024/11/5-tech-essentials-boost-efficiency-financial-services" },
+        ],
       },
       {
-        label: "1.5% revenue uplift from accelerated decision cycles",
+        label: "1.5% to 16% revenue uplift from accelerated decision cycles",
         explanation:
-          "Organizations that deploy AI-assisted decision support consistently report 1 to 2% revenue impact from faster cycle times, better lead scoring, dynamic pricing, and reduced churn. We model 1.5% as a conservative midpoint. This uplift is independent of labor savings and compounds with scale.",
-        source: "McKinsey, “The economic potential of generative AI” (2023); Forrester, “The AI-Powered Enterprise” (2024)",
+          "Organizations that deploy AI-assisted decision support consistently report 1 to 2% revenue impact from faster cycle times, better lead scoring, dynamic pricing, and reduced churn. We model 1.5% as the conservative floor. Orgvue research finds that organizations with access to real-time data see up to 16% higher profit growth opportunity — reflecting a wide range depending on decision maturity and data latency. The calculator uses 1.5% to remain grounded and auditable.",
+        source: "McKinsey, “The economic potential of generative AI” (2023); Forrester, “The AI-Powered Enterprise” (2024); Orgvue, “New research finds link between faster decision-making and a greater share of profit” (2024)",
+        sourceLinks: [
+          { label: "Orgvue — Faster Decisions & Profit Growth", url: "https://www.orgvue.com/news/new-research-finds-link-between-faster-decision-making-and-a-greater-share-of-profit/" },
+          { label: "C.H. Robinson Q1 2025 — AI Profit Impact (1.5% floor)", url: "https://www.truckingdive.com/news/chrobinson-q12025-ai-technology-productivity-profit/747329/" },
+        ],
       },
       {
         label: "Hourly rate derived from revenue per employee",
@@ -63,22 +70,25 @@ const capabilityBenchmarks = [
     number: "02",
     assumptions: [
       {
-        label: "3.5 hours/week lost per employee to data friction",
+        label: “9.3 hours/week lost per employee to data friction”,
         explanation:
-          "IDC’s Data and Analytics research consistently finds that knowledge workers spend 30 to 40% of their time searching for, cleaning, or waiting on data. We apply a conservative floor of 3.5 hours per week per employee, which is below the IDC mean, to represent the portion attributable specifically to brittle reporting workflows and not general research time.",
-        source: "IDC, “Data Literacy as a Business Strategy” (2023); Forrester, “Total Economic Impact of Modern Data Stack” studies",
+          “McKinsey research indicates knowledge workers spend an average of 9.3 hours per week searching and gathering information — what McKinsey calls the \”Fifth Employee\” effect. This reflects the total information burden across reporting, data preparation, and search tasks, not a single sub-task. Earlier models used 3.5 hours (a sub-task floor from IDC), but 9.3 hours better captures the full scope of data-related overhead that modern data infrastructure can address.”,
+        source: “McKinsey Global Institute, various surveys on information worker productivity; cottrillresearch.com/various-survey-statistics-workers-spend-too-much-time-searching-for-information/”,
       },
       {
-        label: "65% efficiency capture rate",
+        label: “20% efficiency capture rate”,
         explanation:
-          "Of the 3.5 hours modeled as lost per employee, we assume 65% is recoverable through reliable, governed pipelines and self-serve analytics. The remaining 35% reflects irreducible data exploration, analyst judgment, and stakeholder communication time that cannot be automated away.",
-        source: "Forrester TEI methodology; Snowflake customer outcome studies (2022 to 2024)",
+          “Of the 9.3 hours modeled as lost per employee, we apply a conservative 20% capture rate — the midpoint of McKinsey’s 15% to 25% optimization potential benchmark for indirect functions such as reporting and data engineering. This is more conservative than our prior 65% figure, which applied to targeted sub-tasks rather than the broader information burden. The remaining 80% reflects irreducible research, analyst judgment, and stakeholder communication that cannot be automated away.”,
+        source: “McKinsey Industry 4.0 and Lean Management research; McKinsey, “Generative AI and the future of work” (2023–2024)”,
       },
       {
         label: "1.8% revenue uplift from improved decision quality",
         explanation:
           "Organizations with mature data infrastructure report higher revenue per decision-maker due to reduced data latency, fewer errors, and faster board-level reporting. We model 1.8% as a slightly higher uplift than AI Orchestration because data quality improvements affect the entire decision-making chain.",
         source: "McKinsey, “The data-driven enterprise of 2025”; Gartner, “Business Value of Data Quality” (2023)",
+        sourceLinks: [
+          { label: "Blend Commerce / IRP — eCommerce Conversion Benchmarks (2026)", url: "https://blendcommerce.com/blogs/shopify/ecommerce-conversion-rate-benchmarks-2026" },
+        ],
       },
       {
         label: "Conservative to optimistic range multiplier: ×0.80 to ×1.40",
@@ -98,6 +108,9 @@ const capabilityBenchmarks = [
         explanation:
           "Not all revenue-generating activity is subject to operational redesign. We model 30% of total revenue as flowing through operational processes directly impacted by M&A integration, workflow automation, or process standardization. This figure is drawn from Bain & Company’s post-acquisition analysis, which identifies operations-adjacent cost centers as the primary lever for deal value capture.",
         source: "Bain & Company, “M&A Report 2023”; BCG, “Capturing Value in M&A” (2022)",
+        sourceLinks: [
+          { label: "Bain & Company — 30% Revenue Risk Press Release", url: "https://www.bain.com/about/media-center/press-releases/20252/business-as-usual-could-erase-30-of-revenue-for-tech-services-firms-bain--co-finds/" },
+        ],
       },
       {
         label: "20% efficiency gain from systematic process redesign",
@@ -221,9 +234,26 @@ export default function BenchmarksPage() {
                       <p className="text-xs text-zinc-500 font-light leading-relaxed mb-3">
                         {assumption.explanation}
                       </p>
-                      <p className="text-xs text-zinc-700 font-mono leading-relaxed">
-                        Source: {assumption.source}
-                      </p>
+                      <div className="text-xs text-zinc-700 font-mono leading-relaxed">
+                        Source:{" "}
+                        {assumption.sourceLinks ? (
+                          <span className="inline-flex flex-wrap gap-x-3 gap-y-1">
+                            {assumption.sourceLinks.map((link, li) => (
+                              <a
+                                key={li}
+                                href={link.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="underline underline-offset-2 hover:text-zinc-400 transition-colors"
+                              >
+                                {link.label}
+                              </a>
+                            ))}
+                          </span>
+                        ) : (
+                          assumption.source
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
