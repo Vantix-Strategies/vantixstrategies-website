@@ -272,7 +272,7 @@ function CapabilityHelpModal({
           </ul>
           <div className="mt-6 pt-5 border-t border-zinc-800">
             <Link
-              href="/benchmarks"
+              href="/blog/industry-metrics-we-evaluated"
               className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors tracking-wide underline underline-offset-2"
             >
               View full benchmark methodology →
@@ -639,7 +639,7 @@ function StepResults({ results }: { results: Results }) {
         className="text-xs text-zinc-700 font-light leading-relaxed"
       >
         Estimates are modeled from{" "}
-        <Link href="/benchmarks" className="text-zinc-500 hover:text-zinc-300 transition-colors underline underline-offset-2">
+        <Link href="/blog/industry-metrics-we-evaluated" className="text-zinc-500 hover:text-zinc-300 transition-colors underline underline-offset-2">
           industry benchmarks
         </Link>{" "}
         and your inputs. Actual results vary by engagement scope, existing infrastructure, and organizational readiness. Contact us for a tailored assessment.

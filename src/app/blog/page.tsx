@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { redirect } from "next/navigation";
+import { blogPosts } from "./posts";
 
 const generalAssumptions = [
   {
@@ -115,27 +115,30 @@ const capabilityBenchmarks = [
   },
 ];
 
-export default function BenchmarksPage() {
-  redirect("/blog/industry-metrics-we-evaluated");
-
+export function BenchmarkPostContent() {
   return (
     <div className="pt-14">
       {/* Hero */}
       <section className="border-b border-zinc-800 py-24 bg-[#09090b]">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <span className="text-xs tracking-[0.2em] uppercase text-zinc-600">Methodology</span>
+          <span className="text-xs tracking-[0.2em] uppercase text-zinc-600">Blog</span>
           <h1
             className="text-4xl md:text-5xl text-white mt-3 mb-6 max-w-3xl"
             style={{ fontWeight: 300, letterSpacing: "0.05em" }}
           >
-            Industry Benchmark
+            Industry Metrics
             <br />
-            Methodology
+            We Evaluated
           </h1>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs tracking-[0.08em] uppercase text-zinc-600 mb-6">
+            <span>By Connor Holm</span>
+            <span className="text-zinc-700">•</span>
+            <span>March 5, 2026</span>
+          </div>
           <p className="text-zinc-400 font-light max-w-2xl leading-relaxed mb-6">
-            Every number in the Value Calculator is grounded in published research. This page explains exactly which
-            benchmarks we use, why we chose them, and how we apply them to your inputs. If you disagree with an
-            assumption, use that as the starting point for a conversation with us.
+            We pulled these assumptions from public analyst reports, operations studies, and data platform benchmarks,
+            then translated them into plain-language notes. Think of this as a research digest first. We reference the
+            same standards in our delivery work, but this post stands on its own as an industry snapshot.
           </p>
           <Link
             href="/value-calculator"
@@ -240,26 +243,83 @@ export default function BenchmarksPage() {
             className="text-3xl text-white mb-5"
             style={{ fontWeight: 300, letterSpacing: "0.05em" }}
           >
-            Disagree with an assumption?
+            Have better source data?
           </h2>
           <p className="text-zinc-400 font-light mb-10 max-w-xl mx-auto leading-relaxed">
-            Good. That means you have context we don&apos;t. Bring your own numbers and we&apos;ll build a model
-            calibrated to your actual environment.
+            Great. Benchmarks should be challenged. If your team tracks stronger internal baselines than these
+            industry numbers, use them. And if you want help turning those baselines into production systems,
+            that&apos;s where our services come in.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href="/about#contact"
+              href="/services"
               className="inline-flex items-center gap-2 text-sm tracking-[0.1em] uppercase bg-white text-zinc-900 px-8 py-3.5 hover:bg-zinc-200 transition-colors font-medium"
             >
-              Discuss a Custom Model
+              Explore Services
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
-              href="/value-calculator"
+              href="/blog"
               className="inline-flex items-center gap-2 text-sm tracking-[0.1em] uppercase border border-zinc-700 text-zinc-300 px-8 py-3.5 hover:border-zinc-400 hover:text-white transition-all"
             >
-              Back to Calculator
+              Back to Blog
             </Link>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+export default function BlogPage() {
+  return (
+    <div className="pt-14">
+      <section className="border-b border-zinc-800 py-24 bg-[#09090b]">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <span className="text-xs tracking-[0.2em] uppercase text-zinc-600">Journal</span>
+          <h1
+            className="text-4xl md:text-5xl text-white mt-3 mb-6"
+            style={{ fontWeight: 300, letterSpacing: "0.05em" }}
+          >
+            Blog Posts
+          </h1>
+          <p className="text-zinc-400 font-light max-w-2xl leading-relaxed">
+            Research, methods, and operating notes from client work.
+          </p>
+        </div>
+      </section>
+
+      <section className="py-20 bg-[#18181b] border-b border-zinc-800">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="space-y-4">
+            {blogPosts.map((post) => (
+              <article key={post.slug} className="border border-zinc-800 p-7 bg-[#09090b] card-glow">
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs tracking-[0.08em] uppercase text-zinc-600 mb-3">
+                  <span>{post.category}</span>
+                  <span className="text-zinc-700">•</span>
+                  <span>{post.date}</span>
+                  <span className="text-zinc-700">•</span>
+                  <span>{post.readTime}</span>
+                </div>
+                <h2
+                  className="text-2xl text-white mb-3"
+                  style={{ fontWeight: 300, letterSpacing: "0.04em" }}
+                >
+                  {post.title}
+                </h2>
+                <p className="text-zinc-400 font-light leading-relaxed mb-5 max-w-3xl">{post.excerpt}</p>
+                <div className="flex items-center justify-between gap-4">
+                  <p className="text-xs tracking-[0.08em] uppercase text-zinc-600">By {post.author}</p>
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="inline-flex items-center gap-2 text-xs tracking-[0.12em] uppercase text-zinc-300 hover:text-white transition-colors"
+                  >
+                    Read Post
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>

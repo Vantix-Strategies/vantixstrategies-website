@@ -8,9 +8,10 @@ import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { href: "/services", label: "Services" },
-  { href: "/about", label: "About" },
   { href: "/value-calculator", label: "Value" },
   { href: "/process", label: "Process" },
+  { href: "/blog", label: "Blog" },
+  { href: "/about", label: "About" },
 ];
 
 export function Navbar() {
