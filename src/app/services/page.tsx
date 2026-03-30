@@ -148,7 +148,7 @@ export default function ServicesPage() {
             Tell us what you&apos;re building. We&apos;ll tell you how we can be embedded in it within weeks.
           </p>
           <Link
-            href="/contact"
+            href="/about#contact"
             className="inline-flex items-center gap-2 text-sm tracking-[0.1em] uppercase bg-white text-zinc-900 px-8 py-3.5 hover:bg-zinc-200 transition-colors font-medium"
           >
             Contact Us

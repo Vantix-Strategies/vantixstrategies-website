@@ -10,7 +10,7 @@ const navLinks = [
   { href: "/services", label: "Services" },
   { href: "/about", label: "About" },
   { href: "/value-calculator", label: "Value" },
-  { href: "/contact", label: "Contact" },
+  { href: "/process", label: "Process" },
 ];
 
 export function Navbar() {
@@ -48,7 +48,7 @@ export function Navbar() {
                 </Link>
               ))}
               <Link
-                href="/contact"
+                href="/about#contact"
                 className="text-xs font-light tracking-[0.12em] uppercase border border-zinc-700 hover:border-zinc-400 text-zinc-300 hover:text-white px-4 py-1.5 transition-all"
               >
                 Engage Us
@@ -88,7 +88,7 @@ export function Navbar() {
                 </Link>
               ))}
               <Link
-                href="/contact"
+                href="/about#contact"
                 className="block text-xs tracking-[0.12em] uppercase border border-zinc-700 text-zinc-300 px-4 py-2 text-center transition-all hover:border-zinc-400 hover:text-white"
                 onClick={() => setIsOpen(false)}
               >

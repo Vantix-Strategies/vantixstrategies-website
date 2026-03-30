@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ArrowLeft, Zap, Database, Settings, Check } from "lucide-react";
+import { ArrowRight, ArrowLeft, Zap, Database, Settings, Check, HelpCircle, ChevronDown, ChevronUp, X } from "lucide-react";
 import Link from "next/link";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -20,6 +20,7 @@ interface CapabilityResult {
   low: number;
   high: number;
   metric: string;
+  calcLines: string[];
 }
 
 interface Results {
@@ -63,6 +64,13 @@ const CAPABILITIES = [
     description:
       "Automate decisions and workflows by deploying production AI systems across your organization — from RAG pipelines to autonomous multi-agent frameworks.",
     Icon: Zap,
+    helpTitle: "How AI Orchestration saves you money",
+    helpPoints: [
+      "McKinsey research shows knowledge workers spend 19% of their time on repetitive, searchable tasks — AI agents recapture that time at scale.",
+      "We model 65% automation capture of your stated manual hours, applied across all employees. (Industry benchmark: Gartner, 2024 Future of Work report.)",
+      "An additional 1.5% revenue uplift is modeled for faster decision cycles enabled by real-time AI-assisted workflows.",
+      "Formula: (Employees × Manual hrs/week × 52 × 65%) × Hourly rate + Revenue × 1.5%",
+    ],
   },
   {
     id: "data",
@@ -71,6 +79,13 @@ const CAPABILITIES = [
     description:
       "Transform raw enterprise data into reliable, AI-ready pipelines with governance, quality observability, and semantic layers built in.",
     Icon: Database,
+    helpTitle: "How Data Engineering saves you money",
+    helpPoints: [
+      "IDC research shows data workers spend 30–40% of their time hunting for and preparing data before they can use it.",
+      "We model 3.5 hours/week saved per employee once reliable, governed pipelines replace manual reporting workflows. (Source: Forrester Total Economic Impact studies on modern data stacks.)",
+      "An additional 1.8% revenue uplift is modeled from improved data-driven decision quality across the business.",
+      "Formula: (Employees × 3.5 hrs/week × 52 × 65%) × Hourly rate + Revenue × 1.8%",
+    ],
   },
   {
     id: "ops",
@@ -79,12 +94,17 @@ const CAPABILITIES = [
     description:
       "Compress multi-year integration timelines and redesign technical operations post-acquisition to protect projected deal value.",
     Icon: Settings,
+    helpTitle: "How Operational Redesign saves you money",
+    helpPoints: [
+      "Bain & Company post-M&A research shows acquirers recover only 50–60% of projected deal value due to integration delays and process fragmentation.",
+      "We model 30% of revenue as flowing through operational processes that are directly subject to redesign and automation.",
+      "Lean process improvement benchmarks (McKinsey Ops Practice) indicate 20% efficiency gains are consistently achievable in the first 12 months of systematic redesign.",
+      "Formula: Revenue × 30% (operationally-dependent revenue) × 20% (efficiency gain rate)",
+    ],
   },
 ];
 
 const TOTAL_STEPS = 3;
-const WEEKS_TO_PRODUCTION = "< 6";
-const DAYS_TO_ROI = 90;
 
 // ─── Utilities ────────────────────────────────────────────────────────────────
 
@@ -110,7 +130,9 @@ function calculate(data: FormData): Results {
   if (caps.includes("ai")) {
     const saved = emp * manHrs * 52 * 0.65;
     hoursSaved += saved;
-    const base = saved * hourlyRate + rev * 0.015;
+    const laborValue = saved * hourlyRate;
+    const revenueUplift = rev * 0.015;
+    const base = laborValue + revenueUplift;
     const low = Math.round(base * 0.85);
     const high = Math.round(base * 1.35);
     totalLow += low;
@@ -121,13 +143,22 @@ function calculate(data: FormData): Results {
       low,
       high,
       metric: `${Math.round(saved).toLocaleString()} hrs/yr automated`,
+      calcLines: [
+        `${emp.toLocaleString()} employees × ${manHrs} hrs/week × 52 weeks × 65% automation = ${Math.round(saved).toLocaleString()} hrs/yr`,
+        `Hourly rate: ${fmt(Math.round(hourlyRate))}/hr (Revenue ÷ Employees ÷ 2,000 working hrs/yr)`,
+        `Labor value: ${Math.round(saved).toLocaleString()} hrs × ${fmt(Math.round(hourlyRate))}/hr = ${fmt(Math.round(laborValue))}`,
+        `Revenue uplift (faster decisions): ${fmt(rev)} × 1.5% = ${fmt(Math.round(revenueUplift))}`,
+        `Base estimate: ${fmt(Math.round(base))} → Conservative–Optimistic range: × 0.85 – × 1.35`,
+      ],
     });
   }
 
   if (caps.includes("data")) {
     const saved = emp * 3.5 * 52 * 0.65;
     hoursSaved += saved;
-    const base = saved * hourlyRate + rev * 0.018;
+    const laborValue = saved * hourlyRate;
+    const revenueUplift = rev * 0.018;
+    const base = laborValue + revenueUplift;
     const low = Math.round(base * 0.8);
     const high = Math.round(base * 1.4);
     totalLow += low;
@@ -138,11 +169,19 @@ function calculate(data: FormData): Results {
       low,
       high,
       metric: `${Math.round(saved).toLocaleString()} reporting hrs/yr reclaimed`,
+      calcLines: [
+        `${emp.toLocaleString()} employees × 3.5 hrs/week (IDC benchmark) × 52 weeks × 65% capture = ${Math.round(saved).toLocaleString()} hrs/yr`,
+        `Hourly rate: ${fmt(Math.round(hourlyRate))}/hr (Revenue ÷ Employees ÷ 2,000 working hrs/yr)`,
+        `Labor value: ${Math.round(saved).toLocaleString()} hrs × ${fmt(Math.round(hourlyRate))}/hr = ${fmt(Math.round(laborValue))}`,
+        `Revenue uplift (better data quality): ${fmt(rev)} × 1.8% = ${fmt(Math.round(revenueUplift))}`,
+        `Base estimate: ${fmt(Math.round(base))} → Conservative–Optimistic range: × 0.80 – × 1.40`,
+      ],
     });
   }
 
   if (caps.includes("ops")) {
-    const base = rev * 0.3 * 0.2;
+    const opsDependentRevenue = rev * 0.3;
+    const base = opsDependentRevenue * 0.2;
     const low = Math.round(base * 0.85);
     const high = Math.round(base * 1.5);
     totalLow += low;
@@ -153,10 +192,96 @@ function calculate(data: FormData): Results {
       low,
       high,
       metric: "20 – 30% process efficiency gain",
+      calcLines: [
+        `Ops-dependent revenue: ${fmt(rev)} × 30% = ${fmt(Math.round(opsDependentRevenue))} (Bain & Company M&A benchmark)`,
+        `Efficiency gain: ${fmt(Math.round(opsDependentRevenue))} × 20% = ${fmt(Math.round(base))} (McKinsey Lean Ops benchmark)`,
+        `Conservative–Optimistic range: × 0.85 – × 1.50`,
+      ],
     });
   }
 
   return { totalLow, totalHigh, breakdown, hoursSaved: Math.round(hoursSaved) };
+}
+
+// ─── Capability Help Modal ────────────────────────────────────────────────────
+
+function CapabilityHelpModal({
+  cap,
+  onClose,
+}: {
+  cap: (typeof CAPABILITIES)[number];
+  onClose: () => void;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === "Escape") onClose();
+    }
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [onClose]);
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-50 flex items-center justify-center px-4"
+        onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+      >
+        <div className="absolute inset-0 bg-black/70" />
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0, y: 16, scale: 0.97 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 16, scale: 0.97 }}
+          transition={{ duration: 0.22, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="relative z-10 bg-[#18181b] border border-zinc-700 max-w-lg w-full p-7"
+        >
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 text-zinc-600 hover:text-zinc-300 transition-colors"
+            aria-label="Close"
+          >
+            <X className="w-4 h-4" />
+          </button>
+          <div className="flex items-center gap-3 mb-5">
+            <div className="p-2 border border-zinc-700 text-zinc-400">
+              <cap.Icon className="w-4 h-4" />
+            </div>
+            <div>
+              <h3 className="text-sm text-white font-light tracking-wide">{cap.name}</h3>
+              <span className="text-xs font-mono text-zinc-600 tracking-wider">{cap.subtitle}</span>
+            </div>
+          </div>
+          <h4
+            className="text-base text-white mb-4"
+            style={{ fontWeight: 300, letterSpacing: "0.04em" }}
+          >
+            {cap.helpTitle}
+          </h4>
+          <ul className="space-y-3">
+            {cap.helpPoints.map((point, i) => (
+              <li key={i} className="flex items-start gap-3 text-xs text-zinc-400 leading-relaxed">
+                <span className="text-zinc-700 font-mono mt-0.5 flex-shrink-0">{String(i + 1).padStart(2, "0")}.</span>
+                <span>{point}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-6 pt-5 border-t border-zinc-800">
+            <Link
+              href="/benchmarks"
+              className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors tracking-wide underline underline-offset-2"
+            >
+              View full benchmark methodology →
+            </Link>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
 }
 
 // ─── Animated Number Counter ──────────────────────────────────────────────────
@@ -297,6 +422,8 @@ function StepCapabilities({
   form: FormData;
   toggleCap: (id: string) => void;
 }) {
+  const [helpCap, setHelpCap] = useState<(typeof CAPABILITIES)[number] | null>(null);
+
   return (
     <div>
       <span className="text-xs tracking-[0.2em] uppercase text-zinc-600 font-mono">02 / Capabilities</span>
@@ -307,59 +434,139 @@ function StepCapabilities({
         Where can we create the most impact?
       </h2>
       <p className="text-zinc-500 font-light text-sm mb-10 leading-relaxed">
-        Select the capabilities relevant to your organization. Skip to include all three in your estimate.
+        Select the capabilities relevant to your organization. Click the <HelpCircle className="inline w-3.5 h-3.5 mb-0.5" /> icon to understand how each saves you money. Skip to include all three in your estimate.
       </p>
 
       <div className="space-y-3">
         {CAPABILITIES.map((cap, i) => {
           const selected = form.capabilities.includes(cap.id);
           return (
-            <motion.button
+            <motion.div
               key={cap.id}
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, delay: i * 0.1 }}
-              whileHover={{ scale: 1.005 }}
-              whileTap={{ scale: 0.995 }}
-              onClick={() => toggleCap(cap.id)}
-              className={`w-full text-left p-5 border transition-all duration-200 group ${
-                selected
-                  ? "border-zinc-400 bg-zinc-900"
-                  : "border-zinc-800 hover:border-zinc-700"
-              }`}
             >
-              <div className="flex items-start gap-4">
-                <div
-                  className={`p-2 border flex-shrink-0 transition-colors duration-200 ${
-                    selected
-                      ? "border-zinc-400 text-zinc-200"
-                      : "border-zinc-800 text-zinc-600 group-hover:border-zinc-700 group-hover:text-zinc-400"
-                  }`}
-                >
-                  <cap.Icon className="w-4 h-4" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between gap-3">
-                    <span className="text-sm font-light text-zinc-200 tracking-wide">{cap.name}</span>
-                    <motion.div
-                      animate={{ scale: selected ? 1 : 0, opacity: selected ? 1 : 0 }}
-                      transition={{ duration: 0.18, ease: "easeOut" }}
-                      className="w-4 h-4 bg-zinc-300 flex items-center justify-center flex-shrink-0"
-                    >
-                      <Check className="w-2.5 h-2.5 text-zinc-900" />
-                    </motion.div>
+              <div
+                className={`w-full text-left p-5 border transition-all duration-200 group relative ${
+                  selected
+                    ? "border-zinc-400 bg-zinc-900"
+                    : "border-zinc-800 hover:border-zinc-700"
+                }`}
+              >
+                <div className="flex items-start gap-4">
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => toggleCap(cap.id)}
+                    className={`p-2 border flex-shrink-0 transition-colors duration-200 ${
+                      selected
+                        ? "border-zinc-400 text-zinc-200"
+                        : "border-zinc-800 text-zinc-600 group-hover:border-zinc-700 group-hover:text-zinc-400"
+                    }`}
+                  >
+                    <cap.Icon className="w-4 h-4" />
+                  </motion.button>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-3">
+                      <button
+                        onClick={() => toggleCap(cap.id)}
+                        className="flex items-center gap-2 flex-1 text-left"
+                      >
+                        <span className="text-sm font-light text-zinc-200 tracking-wide">{cap.name}</span>
+                      </button>
+                      <div className="flex items-center gap-2 flex-shrink-0">
+                        <button
+                          onClick={(e) => { e.stopPropagation(); setHelpCap(cap); }}
+                          className="text-zinc-600 hover:text-zinc-300 transition-colors"
+                          aria-label={`How ${cap.name} saves you money`}
+                          title={`How ${cap.name} saves you money`}
+                        >
+                          <HelpCircle className="w-4 h-4" />
+                        </button>
+                        <motion.div
+                          animate={{ scale: selected ? 1 : 0, opacity: selected ? 1 : 0 }}
+                          transition={{ duration: 0.18, ease: "easeOut" }}
+                          className="w-4 h-4 bg-zinc-300 flex items-center justify-center"
+                        >
+                          <Check className="w-2.5 h-2.5 text-zinc-900" />
+                        </motion.div>
+                      </div>
+                    </div>
+                    <span className="text-xs font-mono text-zinc-600 tracking-wider block mt-0.5">
+                      {cap.subtitle}
+                    </span>
+                    <button onClick={() => toggleCap(cap.id)} className="w-full text-left">
+                      <p className="text-xs text-zinc-500 font-light mt-2 leading-relaxed">{cap.description}</p>
+                    </button>
                   </div>
-                  <span className="text-xs font-mono text-zinc-600 tracking-wider block mt-0.5">
-                    {cap.subtitle}
-                  </span>
-                  <p className="text-xs text-zinc-500 font-light mt-2 leading-relaxed">{cap.description}</p>
                 </div>
               </div>
-            </motion.button>
+            </motion.div>
           );
         })}
       </div>
+
+      {helpCap && <CapabilityHelpModal cap={helpCap} onClose={() => setHelpCap(null)} />}
     </div>
+  );
+}
+
+// ─── Result Breakdown Card ────────────────────────────────────────────────────
+
+function ResultBreakdownCard({ item, index }: { item: CapabilityResult; index: number }) {
+  const [expanded, setExpanded] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: -12 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.4, delay: 0.3 + index * 0.12 }}
+      className="border border-zinc-800 bg-zinc-900/40"
+    >
+      <button
+        onClick={() => setExpanded((v) => !v)}
+        className="w-full flex items-center justify-between p-4 text-left hover:bg-zinc-900/60 transition-colors"
+      >
+        <div>
+          <span className="text-sm text-zinc-200 font-light block tracking-wide">{item.name}</span>
+          <span className="text-xs font-mono text-zinc-600 mt-0.5 block">{item.metric}</span>
+        </div>
+        <div className="flex items-center gap-3 flex-shrink-0 ml-4">
+          <div className="text-right">
+            <span className="text-sm text-zinc-300 font-light block">
+              {fmt(item.low)} – {fmt(item.high)}
+            </span>
+            <span className="text-xs text-zinc-700 font-mono">per year</span>
+          </div>
+          <div className="text-zinc-600">
+            {expanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+          </div>
+        </div>
+      </button>
+
+      <AnimatePresence>
+        {expanded && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.22, ease: "easeInOut" }}
+            className="overflow-hidden"
+          >
+            <div className="px-4 pb-4 pt-1 border-t border-zinc-800 space-y-2">
+              <p className="text-xs text-zinc-600 tracking-wider uppercase mb-3">How this was calculated</p>
+              {item.calcLines.map((line, i) => (
+                <div key={i} className="flex items-start gap-2.5 text-xs text-zinc-500 leading-relaxed">
+                  <span className="text-zinc-700 font-mono flex-shrink-0">{String(i + 1).padStart(2, "0")}.</span>
+                  <span className="font-mono">{line}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 }
 
@@ -402,50 +609,26 @@ function StepResults({ results }: { results: Results }) {
         </p>
       </motion.div>
 
-      {/* Capability breakdown */}
+      {/* Capability breakdown — expandable */}
+      <p className="text-xs text-zinc-600 tracking-wider uppercase mb-3">Click any row to see the calculation</p>
       <div className="space-y-2.5 mb-8">
         {results.breakdown.map((item, i) => (
-          <motion.div
-            key={item.id}
-            initial={{ opacity: 0, x: -12 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.4, delay: 0.3 + i * 0.12 }}
-            className="flex items-center justify-between p-4 border border-zinc-800 bg-zinc-900/40"
-          >
-            <div>
-              <span className="text-sm text-zinc-200 font-light block tracking-wide">{item.name}</span>
-              <span className="text-xs font-mono text-zinc-600 mt-0.5 block">{item.metric}</span>
-            </div>
-            <div className="text-right flex-shrink-0 ml-4">
-              <span className="text-sm text-zinc-300 font-light block">
-                {fmt(item.low)} – {fmt(item.high)}
-              </span>
-              <span className="text-xs text-zinc-700 font-mono">per year</span>
-            </div>
-          </motion.div>
+          <ResultBreakdownCard key={item.id} item={item} index={i} />
         ))}
       </div>
 
-      {/* Key metrics strip */}
+      {/* Hours freed — only key metric */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.65 }}
-        className="border border-zinc-800 p-5 grid grid-cols-3 gap-4 mb-5"
+        className="border border-zinc-800 p-5 mb-5"
       >
-        <div className="text-center border-r border-zinc-800">
+        <div className="text-center">
           <div className="text-2xl text-white font-light">
             {results.hoursSaved > 0 ? results.hoursSaved.toLocaleString() : "—"}
           </div>
-          <div className="text-xs text-zinc-600 tracking-wider mt-1 leading-snug">Hrs Freed / Yr</div>
-        </div>
-        <div className="text-center border-r border-zinc-800">
-          <div className="text-2xl text-white font-light">{WEEKS_TO_PRODUCTION}</div>
-          <div className="text-xs text-zinc-600 tracking-wider mt-1 leading-snug">Wks to Production</div>
-        </div>
-        <div className="text-center">
-          <div className="text-2xl text-white font-light">{DAYS_TO_ROI}</div>
-          <div className="text-xs text-zinc-600 tracking-wider mt-1 leading-snug">Days to Positive ROI</div>
+          <div className="text-xs text-zinc-600 tracking-wider mt-1 leading-snug">Hours Freed / Year</div>
         </div>
       </motion.div>
 
@@ -455,8 +638,11 @@ function StepResults({ results }: { results: Results }) {
         transition={{ delay: 0.85 }}
         className="text-xs text-zinc-700 font-light leading-relaxed"
       >
-        Estimates are modeled from industry benchmarks and your inputs. Actual results vary by engagement scope,
-        existing infrastructure, and organizational readiness. Contact us for a tailored assessment.
+        Estimates are modeled from{" "}
+        <Link href="/benchmarks" className="text-zinc-500 hover:text-zinc-300 transition-colors underline underline-offset-2">
+          industry benchmarks
+        </Link>{" "}
+        and your inputs. Actual results vary by engagement scope, existing infrastructure, and organizational readiness. Contact us for a tailored assessment.
       </motion.p>
     </div>
   );
@@ -620,7 +806,7 @@ export default function ValueCalculatorPage() {
             </button>
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Link
-                href="/contact"
+                href="/about#contact"
                 className="flex items-center gap-2 text-xs tracking-[0.12em] uppercase bg-white text-zinc-900 px-6 py-2.5 hover:bg-zinc-200 transition-colors font-medium"
               >
                 Discuss Your Estimate
