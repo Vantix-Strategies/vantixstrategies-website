@@ -113,7 +113,7 @@ export default function PricingPage() {
                 </div>
 
                 <Link
-                  href="/contact"
+                  href="/about#contact"
                   className="mt-8 inline-flex items-center justify-center gap-2 text-xs tracking-[0.1em] uppercase border border-zinc-700 text-zinc-300 px-4 py-2.5 hover:border-zinc-400 hover:text-white transition-all"
                 >
                   Discuss This Engagement
