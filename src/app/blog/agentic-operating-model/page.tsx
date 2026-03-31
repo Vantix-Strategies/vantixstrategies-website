@@ -8,9 +8,9 @@ const sections = [
     title: "Systems of Action",
     subtitle: "From record-keeping to autonomous execution",
     body: [
-      "For thirty years, the ERP and CRM were the enterprise's memory — passive repositories that told you what happened after it happened. That era is ending. The defining infrastructure shift of 2026 is the emergence of what Redwood and Gartner call \"systems of action\": platforms that don't wait for human instruction but instead execute tasks, resolve exceptions, and trigger downstream workflows on their own.",
-      "By the end of 2026, Gartner projects that 40% of enterprise applications will feature task-specific AI agents embedded directly in their workflows — up from less than 5% in 2025. That is not incremental adoption. That is a category redefinition happening inside a single fiscal year.",
-      "The implication for enterprise leaders is structural, not cosmetic. When your ERP can autonomously reconcile vendor invoices, flag anomalies, and initiate purchase orders — without a queue, a ticket, or a human checkpoint — the value of a disconnected orchestration layer becomes the single largest drag on operational throughput.",
+      "For thirty years, the ERP and CRM were the enterprise's memory: passive repositories that told you what happened after it happened. That era is ending. The defining infrastructure shift of 2026 is the emergence of what Redwood and Gartner call \"systems of action\": platforms that don't wait for human instruction but instead execute tasks, resolve exceptions, and trigger downstream workflows on their own.",
+      "By the end of 2026, Gartner projects that 40% of enterprise applications will feature task-specific AI agents embedded directly in their workflows, up from less than 5% in 2025. That is not incremental adoption. That is a category redefinition happening inside a single fiscal year.",
+      "The implication for enterprise leaders is structural, not cosmetic. When your ERP can autonomously reconcile vendor invoices, flag anomalies, and initiate purchase orders without a queue, a ticket, or a human checkpoint, the value of a disconnected orchestration layer becomes the single largest drag on operational throughput.",
     ],
     callout: {
       stat: "40%",
@@ -21,7 +21,7 @@ const sections = [
     capability: {
       label: "Custom AI Orchestration",
       description:
-        "This is the market validation for cross-system orchestration as the connective tissue of the modern enterprise. The value is not in any single agent — it is in the coordination layer that makes agents work together.",
+        "This is the market validation for cross-system orchestration as the connective tissue of the modern enterprise. The value is not in any single agent. It is in the coordination layer that makes agents work together.",
     },
   },
   {
@@ -30,20 +30,20 @@ const sections = [
     title: "The 97% Data Barrier",
     subtitle: "Why most AI investments are built on sand",
     body: [
-      "Here is the number that deserves more attention than it gets: only 3% of organizations have data that meets basic quality standards for AI deployment. Not sophisticated standards — basic ones. Gartner's research is explicit: 85% of AI projects fail, and the primary cause is not model quality, not compute, and not talent. It is data integration and data quality.",
-      "Meanwhile, 65% of companies report using AI in some form. The gap between \"using AI\" and \"having data that supports AI\" is where most enterprise transformation budgets quietly disappear. You can purchase the best large language model available, deploy it across your stack, and still generate outputs that are confidently wrong — because the underlying data is inconsistent, siloed, or stale.",
-      "The \"zero-copy\" data foundation — a single, governed data layer that AI systems can trust — is not a nice-to-have. It is the precondition for any ROI calculation that survives contact with production.",
+      "Here is the number that deserves more attention than it gets: only 3% of organizations have data that meets basic quality standards for AI deployment. Not sophisticated standards. Basic ones. Gartner's research is explicit: 85% of AI projects fail, and the primary cause is not model quality, not compute, and not talent. It is data integration and data quality.",
+      "Meanwhile, 65% of companies report using AI in some form. The gap between \"using AI\" and \"having data that supports AI\" is where most enterprise transformation budgets quietly disappear. You can purchase the best large language model available, deploy it across your stack, and still generate outputs that are confidently wrong, because the underlying data is inconsistent, siloed, or stale.",
+      "The \"zero-copy\" data foundation is a single, governed data layer that AI systems can trust. It is not a nice-to-have. It is the precondition for any ROI calculation that survives contact with production.",
     ],
     callout: {
       stat: "85%",
-      label: "of AI projects fail due to data integration and quality challenges — while only 3% of organizations meet basic data quality standards",
+      label: "of AI projects fail due to data integration and quality challenges, while only 3% of organizations meet basic data quality standards",
       source: "Gartner via Rapidio / Integrate.io",
       url: "https://www.integrate.io/blog/data-quality-improvement-stats-from-etl/",
     },
     capability: {
       label: "Embedded Data Engineering",
       description:
-        "Data engineering is not a dependency of AI strategy — it is the prerequisite. Without a reliable data layer, AI orchestration produces faster wrong answers. The conversation about ROI starts here.",
+        "Data engineering is not a dependency of AI strategy. It is the prerequisite. Without a reliable data layer, AI orchestration produces faster wrong answers. The conversation about ROI starts here.",
     },
   },
   {
@@ -52,20 +52,20 @@ const sections = [
     title: "Alpha Generation",
     subtitle: "Why the deal math has permanently changed",
     body: [
-      "Bain & Company's 2026 Global Private Equity Report introduced a figure that reframes the entire post-acquisition playbook: \"12 is the new 5.\" Under the old Golden Decade model, a deal generating 5% annual EBITDA growth was a success. In the current environment — higher carry costs, compressed multiples, longer hold periods — that threshold has moved to 12% annual EBITDA growth for a deal to clear its return hurdle.",
+      "Bain & Company's 2026 Global Private Equity Report introduced a figure that reframes the entire post-acquisition playbook: \"12 is the new 5.\" Under the old Golden Decade model, a deal generating 5% annual EBITDA growth was a success. In the current environment, with higher carry costs, compressed multiples, and longer hold periods, that threshold has moved to 12% annual EBITDA growth for a deal to clear its return hurdle.",
       "That gap does not close through revenue synergies alone. It closes through operational efficiency at a pace and precision that manual integration programs cannot deliver. High-performing firms are already responding: AI-powered labor synergy modeling is allowing acquirers to forecast integration outcomes with 90% accuracy before close, replacing the traditional 90-day post-merger scramble with pre-signed operational redesign playbooks.",
-      "For private equity and corporate development teams, the question is no longer whether to operationalize AI in the integration process. The question is whether your current integration capability can generate 12% EBITDA growth on the next deal — and what happens to fund returns if it cannot.",
+      "For private equity and corporate development teams, the question is no longer whether to operationalize AI in the integration process. The question is whether your current integration capability can generate 12% EBITDA growth on the next deal, and what happens to fund returns if it cannot.",
     ],
     callout: {
       stat: "12%",
-      label: "annual EBITDA growth now required for deal success — up from 5% under the prior decade's model, per Bain & Company's 2026 PE Report",
-      source: "Bain & Company — Global PE Report 2026",
+      label: "annual EBITDA growth now required for deal success, up from 5% under the prior decade's model, per Bain & Company's 2026 PE Report",
+      source: "Bain & Company, Global PE Report 2026",
       url: "https://www.bain.com/about/media-center/press-releases/2026/private-equity-resurgence-gathers-steam-as-new-era-challenges-firms-to-enhance-value-creationbain--company-global-pe-report/",
     },
     capability: {
       label: "Post-Acquisition Operational Redesign",
       description:
-        "The integration window is shorter than it has ever been. Firms that enter a deal with a pre-built operational redesign framework — one informed by AI-modeled synergy maps — are the firms closing the gap between deal thesis and realized value.",
+        "The integration window is shorter than it has ever been. Firms that enter a deal with a pre-built operational redesign framework, one informed by AI-modeled synergy maps, are the firms closing the gap between deal thesis and realized value.",
     },
   },
   {
@@ -74,9 +74,9 @@ const sections = [
     title: "The Fifth Employee",
     subtitle: "Recovering the capacity you are already paying for",
     body: [
-      "McKinsey's research on knowledge worker productivity surfaces a concept that should be in every operating review: the \"Fifth Employee\" effect. The finding is straightforward — if you hire five employees, you effectively have four. The fifth is occupied searching for information: hunting across systems, reformatting data, chasing approvals, and reconstructing context that already exists somewhere in your stack.",
+      "McKinsey's research on knowledge worker productivity surfaces a concept that should be in every operating review: the \"Fifth Employee\" effect. The finding is straightforward. If you hire five employees, you effectively have four. The fifth is occupied searching for information, hunting across systems, reformatting data, chasing approvals, and reconstructing context that already exists somewhere in your stack.",
       "The average knowledge worker loses 9.3 hours per week to information search and retrieval alone. Across a 100-person organization, that is the equivalent of 23 full-time employees whose output is absorbed entirely by administrative overhead before a single high-value task begins.",
-      "AI-orchestrated research and prospecting workflows can reduce this burden by up to 90%, according to Outreach.io's 2026 sales trends analysis. The recovered capacity does not disappear — it shifts. Teams that previously spent 40% of their week on information work begin spending that time on the strategic decisions that actually move the business.",
+      "AI-orchestrated research and prospecting workflows can reduce this burden by up to 90%, according to Outreach.io's 2026 sales trends analysis. The recovered capacity does not disappear. It shifts. Teams that previously spent 40% of their week on information work begin spending that time on the strategic decisions that actually move the business.",
     ],
     callout: {
       stat: "90%",
@@ -94,27 +94,27 @@ const sections = [
 
 const sources = [
   {
-    label: "Bain & Company — Private Equity Resurgence / Alpha Generation (2026)",
+    label: "Bain & Company: Private Equity Resurgence / Alpha Generation (2026)",
     url: "https://www.bain.com/about/media-center/press-releases/2026/private-equity-resurgence-gathers-steam-as-new-era-challenges-firms-to-enhance-value-creationbain--company-global-pe-report/",
   },
   {
-    label: "Gartner via Rapidio — 40% Agent Integration & 85% Failure Rates",
+    label: "Gartner via Rapidio: 40% Agent Integration and 85% Failure Rates",
     url: "https://www.rapidionline.com/blog/data-integration-trends-markets",
   },
   {
-    label: "Integrate.io — The 97% Data Quality Crisis",
+    label: "Integrate.io: The 97% Data Quality Crisis",
     url: "https://www.integrate.io/blog/data-quality-improvement-stats-from-etl/",
   },
   {
-    label: "Outreach.io — 90% Research Time Reduction",
+    label: "Outreach.io: 90% Research Time Reduction",
     url: "https://www.outreach.io/resources/blog/sales-trends",
   },
   {
-    label: "McKinsey via Cottrill Research — The Fifth Employee Effect",
+    label: "McKinsey via Cottrill Research: The Fifth Employee Effect",
     url: "https://cottrillresearch.com/various-survey-statistics-workers-spend-too-much-time-searching-for-information/",
   },
   {
-    label: "Redwood — Systems of Record to Systems of Action",
+    label: "Redwood: Systems of Record to Systems of Action",
     url: "https://www.redwood.com/article/ai-automation-trends/",
   },
 ];
@@ -144,7 +144,7 @@ export default function AgenticOperatingModelPage() {
             <span>9 min read</span>
           </div>
           <p className="text-zinc-400 font-light max-w-2xl leading-relaxed mb-8">
-            In 2026, the enterprise is moving away from standalone chatbots toward agentic orchestration — autonomous
+            In 2026, the enterprise is moving away from standalone chatbots toward agentic orchestration: autonomous
             systems that execute complex workflows across departments, not just assist the humans running them. This
             shift requires a fundamental redesign of operational models and a data foundation capable of supporting it.
             Without one, the 85% AI project failure rate is not a cautionary statistic. It is your forecast.
@@ -168,7 +168,7 @@ export default function AgenticOperatingModelPage() {
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <div className="mb-10">
               <span className="text-xs tracking-[0.2em] uppercase text-zinc-600">
-                {section.number} — {section.label}
+                {section.number} · {section.label}
               </span>
               <h2
                 className="text-3xl text-white mt-3 mb-1"

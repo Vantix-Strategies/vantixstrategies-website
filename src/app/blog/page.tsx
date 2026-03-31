@@ -240,9 +240,9 @@ export function BenchmarkPostContent() {
                       <p className="text-xs text-zinc-500 font-light leading-relaxed mb-3">
                         {assumption.explanation}
                       </p>
-                      <div className="text-xs text-zinc-700 font-mono leading-relaxed">
-                        Source:{" "}
-                        {assumption.sourceLinks ? (
+                      {assumption.sourceLinks?.length ? (
+                        <div className="text-xs text-zinc-700 font-mono leading-relaxed">
+                          Source:{" "}
                           <span className="inline-flex flex-wrap gap-x-3 gap-y-1">
                             {assumption.sourceLinks.map((link, li) => (
                               <a
@@ -256,10 +256,8 @@ export function BenchmarkPostContent() {
                               </a>
                             ))}
                           </span>
-                        ) : (
-                          assumption.source
-                        )}
-                      </div>
+                        </div>
+                      ) : null}
                     </div>
                   </div>
                 </div>
