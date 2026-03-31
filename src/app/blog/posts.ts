@@ -25,7 +25,7 @@ export interface BlogPost {
   date: string;
   category: string;
   readTime: string;
-  kind: "benchmark";
+  kind: "benchmark" | "article";
 }
 
 export const generalAssumptions = [
@@ -158,6 +158,17 @@ export const capabilityBenchmarks: BenchmarkSection[] = [
 ];
 
 export const blogPosts: BlogPost[] = [
+  {
+    slug: "agentic-operating-model",
+    title: "The Agentic Operating Model: Orchestrating the 2026 Digital Workforce",
+    excerpt:
+      "The enterprise is moving away from standalone chatbots toward agentic orchestration — autonomous systems that execute complex workflows across departments. This shift requires a redesigned operating model and a data foundation built to support it. Without one, the 85% AI project failure rate is not a cautionary statistic. It is your forecast.",
+    author: "Connor Holm",
+    date: "March 30, 2026",
+    category: "Strategy",
+    readTime: "9 min read",
+    kind: "article",
+  },
   {
     slug: "industry-metrics-we-evaluated",
     title: "Industry Metrics We Evaluated (AI, Data, and Operations)",
