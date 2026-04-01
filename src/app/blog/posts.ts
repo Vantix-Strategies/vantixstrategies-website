@@ -159,6 +159,17 @@ export const capabilityBenchmarks: BenchmarkSection[] = [
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "ai-orchestration-in-practice",
+    title: "AI Orchestration in Practice: RAG, Agents, Evaluation, and Production Infrastructure",
+    excerpt:
+      "Most AI orchestration conversations stop at the architecture diagram. This post covers the specific retrieval strategies, agent coordination patterns, evaluation frameworks, and production infrastructure decisions that determine whether an AI system survives its first week in production.",
+    author: "Connor Holm",
+    date: "April 1, 2026",
+    category: "Technical",
+    readTime: "11 min read",
+    kind: "article",
+  },
+  {
     slug: "agentic-operating-model",
     title: "The Agentic Operating Model: Orchestrating the 2026 Digital Workforce",
     excerpt:
