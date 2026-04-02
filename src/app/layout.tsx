@@ -20,11 +20,6 @@ export const metadata: Metadata = {
   description: "We do not deliver strategy decks. We ship production AI systems inside your existing environment. Forward Deployed Engineers specializing in AI orchestration, enterprise data engineering, and operational redesign.",
   keywords: ["forward deployed engineering", "AI consulting", "LangChain", "RAG", "AI agents", "enterprise data engineering", "Snowflake", "operational redesign"],
   authors: [{ name: "Vantix Strategies" }],
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/icon.png",
-  },
   openGraph: {
     title: "Vantix Strategies | AI Forward Deployed Engineering",
     description: "Engineering Impact at the Speed of AI. We ship production systems inside your existing environment.",
