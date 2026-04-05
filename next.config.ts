@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Image optimization settings - Vercel handles this automatically
+  // Required for Docker multi-stage build on Cloud Run
+  output: "standalone",
+
+  // Image optimization settings
   images: {
     remotePatterns: [],
   },
