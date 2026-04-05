@@ -210,7 +210,7 @@ export default function ProcessPage() {
             className="text-3xl text-white mb-5"
             style={{ fontWeight: 300, letterSpacing: "0.05em" }}
           >
-            Ready to start the clock?
+            Ready to start your 90-day clock?
           </h2>
           <p className="text-zinc-400 font-light mb-10 max-w-xl mx-auto leading-relaxed">
             Most engagements begin within two weeks of an initial conversation. Reach out to discuss scope,
