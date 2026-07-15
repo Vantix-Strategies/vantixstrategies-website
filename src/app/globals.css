@@ -97,11 +97,11 @@
     background-image: linear-gradient(135deg, #e4e4e7 0%, #ffffff 100%);
   }
 
-  /* Glassmorphism nav/header */
+  /* Glassmorphism nav/header background; pair with Tailwind's backdrop-blur-md
+     utility class since a hand-written backdrop-filter here gets stripped by
+     the build's CSS optimizer */
   .glass {
     background: rgba(9, 9, 11, 0.8);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid #27272a;
   }
 
