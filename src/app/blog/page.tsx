@@ -320,11 +320,11 @@ export default function BlogPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-[#18181b] border-b border-zinc-800">
+      <section className="py-20 bg-[#09090b] border-b border-zinc-800">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="space-y-4">
+          <div className="space-y-5">
             {blogPosts.map((post) => (
-              <article key={post.slug} className="border border-zinc-800 p-7 bg-[#09090b] card-glow">
+              <article key={post.slug} className="border border-zinc-700 p-7 bg-[#18181b] card-glow">
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs tracking-[0.08em] uppercase text-zinc-600 mb-3">
                   <span>{post.category}</span>
                   <span className="text-zinc-700">•</span>
