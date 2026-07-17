@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 
@@ -28,6 +29,20 @@ const engagementPhases = [
     details: "Deliver runbooks, documentation, and internal team training for full ownership.",
   },
 ];
+
+export const metadata: Metadata = {
+  title: "Enterprise Data Engineering",
+  description:
+    "AI is only as good as the data beneath it. Embedded data engineering on Snowflake, dbt, Airflow, Delta Lake, and Spark — built for production, not dashboards.",
+  alternates: { canonical: "/capabilities/data-engineering" },
+  openGraph: {
+    title: "Enterprise Data Engineering | Vantix Strategies",
+    description:
+      "Snowflake, dbt, Airflow, Delta Lake, and Spark pipelines engineered for production AI.",
+    url: "/capabilities/data-engineering",
+    images: ["/opengraph-image.png"],
+  },
+};
 
 export default function DataEngineeringPage() {
   return (

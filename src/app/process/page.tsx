@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
@@ -88,6 +89,20 @@ const capabilityLabels: Record<string, string> = {
   ai: "AI Orchestration",
   data: "Data Engineering",
   ops: "Operational Redesign",
+};
+
+export const metadata: Metadata = {
+  title: "Our Process",
+  description:
+    "How we work: understand before building, ship working software instead of prototypes, iterate on real usage, and aim to make ourselves redundant.",
+  alternates: { canonical: "/process" },
+  openGraph: {
+    title: "Our Process | Vantix Strategies",
+    description:
+      "A four-phase engagement model built to ship production software, not slide decks.",
+    url: "/process",
+    images: ["/opengraph-image.png"],
+  },
 };
 
 export default function ProcessPage() {

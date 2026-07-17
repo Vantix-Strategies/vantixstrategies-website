@@ -14,6 +14,10 @@ const nextConfig: NextConfig = {
 
   async redirects() {
     return [
+      // NOTE: host canonicalization (root <-> www) is handled by Vercel's
+      // primary-domain setting (www is primary; root 307s to www). Do NOT add a
+      // host redirect here — it fights Vercel's redirect and causes an infinite
+      // loop (ERR_TOO_MANY_REDIRECTS).
       {
         source: "/benchmarks",
         destination: "/blog/industry-metrics-we-evaluated",
