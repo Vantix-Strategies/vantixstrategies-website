@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 
@@ -28,6 +29,20 @@ const engagementPhases = [
     details: "Provide handoff plans, training, and ongoing operating procedures for internal teams.",
   },
 ];
+
+export const metadata: Metadata = {
+  title: "Operational Redesign",
+  description:
+    "Post-acquisition operational redesign: M&A integration, technology rationalization, and process automation that turns deal theses into captured value.",
+  alternates: { canonical: "/capabilities/operational-redesign" },
+  openGraph: {
+    title: "Operational Redesign | Vantix Strategies",
+    description:
+      "M&A integration, tech rationalization, and process automation that captures deal value.",
+    url: "/capabilities/operational-redesign",
+    images: ["/opengraph-image.png"],
+  },
+};
 
 export default function OperationalRedesignPage() {
   return (

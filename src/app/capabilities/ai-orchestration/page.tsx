@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 
@@ -28,6 +29,20 @@ const engagementPhases = [
     details: "Transfer complete code ownership, architecture docs, and team enablement sessions.",
   },
 ];
+
+export const metadata: Metadata = {
+  title: "AI Orchestration",
+  description:
+    "Production AI systems, not proofs of concept. We build RAG pipelines, autonomous agents, LLM operations, evaluation harnesses, and guardrails inside your environment.",
+  alternates: { canonical: "/capabilities/ai-orchestration" },
+  openGraph: {
+    title: "AI Orchestration | Vantix Strategies",
+    description:
+      "RAG, agents, LLM Ops, and evaluation — production AI systems built inside your environment.",
+    url: "/capabilities/ai-orchestration",
+    images: ["/opengraph-image.png"],
+  },
+};
 
 export default function AIOrchestrationPage() {
   return (

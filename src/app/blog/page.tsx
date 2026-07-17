@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { blogPosts } from "./posts";
@@ -301,6 +302,20 @@ export function BenchmarkPostContent() {
     </div>
   );
 }
+
+export const metadata: Metadata = {
+  title: "Blog & Benchmarks",
+  description:
+    "Field notes on agentic operating models, enterprise data foundations, and the benchmark methodology behind our AI ROI estimates.",
+  alternates: { canonical: "/blog" },
+  openGraph: {
+    title: "Blog & Benchmarks | Vantix Strategies",
+    description:
+      "Field notes on agentic operating models, data foundations, and AI ROI benchmark methodology.",
+    url: "/blog",
+    images: ["/opengraph-image.png"],
+  },
+};
 
 export default function BlogPage() {
   return (

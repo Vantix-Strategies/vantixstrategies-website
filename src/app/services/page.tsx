@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Check, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
@@ -54,6 +55,20 @@ const services = [
     stack: ["Python", "TypeScript", "SQL", "Power BI", "Tableau", "CI/CD", "AWS", "Azure"],
   },
 ];
+
+export const metadata: Metadata = {
+  title: "Services",
+  description:
+    "AI orchestration, enterprise data engineering, and post-acquisition operational redesign — delivered by Forward Deployed Engineers embedded in your team.",
+  alternates: { canonical: "/services" },
+  openGraph: {
+    title: "Services | Vantix Strategies",
+    description:
+      "AI orchestration, data engineering, and operational redesign, delivered by embedded Forward Deployed Engineers.",
+    url: "/services",
+    images: ["/opengraph-image.png"],
+  },
+};
 
 export default function ServicesPage() {
   return (

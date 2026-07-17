@@ -14,6 +14,13 @@ const nextConfig: NextConfig = {
 
   async redirects() {
     return [
+      // Canonicalize to the root (non-www) host so ranking signal isn't split.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.vantixstrategies.com" }],
+        destination: "https://vantixstrategies.com/:path*",
+        permanent: true,
+      },
       {
         source: "/benchmarks",
         destination: "/blog/industry-metrics-we-evaluated",
