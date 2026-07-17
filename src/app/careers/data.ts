@@ -32,6 +32,8 @@ export interface Step {
   eyebrow: string;
   title: string;
   body: string[];
+  /** Optional concept diagram key, rendered by PhaseDiagram. */
+  diagram?: string;
   prompts?: AskClaudePrompt[];
   code?: CodeBlock[];
   callouts?: Callout[];
@@ -197,6 +199,14 @@ export const phases: Phase[] = [
             note: "Under the hood: gcloud auth login, gcloud config set project, and gcloud auth application-default login.",
           },
         ],
+        code: [
+          {
+            filename: "Terminal — authenticate",
+            code: `gcloud auth login                       # your personal login
+gcloud config set project PROJECT_ID    # target this project
+gcloud auth application-default login    # creds for local code`,
+          },
+        ],
       },
       {
         id: "foundations/guardrails",
@@ -211,6 +221,18 @@ export const phases: Phase[] = [
             prompt:
               "Help me create a GCP billing budget of $50 on PROJECT_ID with email alerts at 50, 90, and 100 percent.",
             note: "It can use the gcloud billing budgets commands — review what it proposes before running it.",
+          },
+        ],
+        code: [
+          {
+            filename: "Terminal — budget with alerts",
+            code: `gcloud billing budgets create \\
+  --billing-account=BILLING_ACCOUNT_ID \\
+  --display-name="portfolio budget" \\
+  --budget-amount=50USD \\
+  --threshold-rule=percent=0.5 \\
+  --threshold-rule=percent=0.9 \\
+  --threshold-rule=percent=1.0`,
           },
         ],
         callouts: [
@@ -234,11 +256,24 @@ export const phases: Phase[] = [
             note: "These cover hosting (Cloud Run), image storage, building, and the identity pieces Workload Identity Federation needs in Step 5.",
           },
         ],
+        code: [
+          {
+            filename: "Terminal — enable core APIs",
+            code: `gcloud services enable \\
+  run.googleapis.com \\
+  artifactregistry.googleapis.com \\
+  cloudbuild.googleapis.com \\
+  iam.googleapis.com \\
+  iamcredentials.googleapis.com \\
+  sts.googleapis.com`,
+          },
+        ],
       },
       {
         id: "foundations/wif",
         eyebrow: "Step 5 · Keyless CI/CD Auth",
         title: "Set up Workload Identity Federation",
+        diagram: "wif",
         body: [
           "In Phase 1, GitHub Actions will deploy your site to GCP. The old way was to create a service-account JSON key and paste it into GitHub — a long-lived credential that can leak. The modern best practice is Workload Identity Federation (WIF): GitHub proves its identity with a short-lived token, GCP trusts it directly, and no key is stored anywhere.",
           "What gets created: a workload identity pool and provider that trust GitHub's OIDC issuer; a deploy service account with least-privilege roles; and a binding that lets only your specific repo impersonate that service account.",
@@ -340,6 +375,15 @@ export const phases: Phase[] = [
             note: "Push it to feel like YOU. Get it running locally (npm run dev → localhost:3000) before moving on.",
           },
         ],
+        code: [
+          {
+            filename: "Terminal — create the repo & run locally",
+            code: `gh repo create your-repo --public --clone   # use your WIF repo name
+cd your-repo
+# …AI scaffolds the Next.js site…
+npm run dev                                 # open http://localhost:3000`,
+          },
+        ],
       },
       {
         id: "ship-it/containerize",
@@ -352,6 +396,13 @@ export const phases: Phase[] = [
         prompts: [
           { prompt: "Write a production Dockerfile for this Next.js app, optimized for Cloud Run (small final image, listens on the PORT env var). Then explain what each stage does and how a container works, like I've never used Docker." },
           { prompt: "Build and run my Dockerfile locally and give me the URL to check it in my browser.", note: "Under the hood: docker build then docker run -p 8080:8080. Confirm the site loads at localhost:8080." },
+        ],
+        code: [
+          {
+            filename: "Terminal — build & run the container",
+            code: `docker build -t portfolio .
+docker run -p 8080:8080 portfolio   # open http://localhost:8080`,
+          },
         ],
       },
       {
@@ -390,12 +441,19 @@ export const phases: Phase[] = [
   }
 }`,
           },
+          {
+            filename: "Terminal — preview before applying",
+            code: `cd terraform
+terraform init
+terraform plan     # shows what WILL change — changes nothing`,
+          },
         ],
       },
       {
         id: "ship-it/git-workflow",
         eyebrow: "Step 5 · The Git Workflow",
         title: "Branches, pull requests, and merging",
+        diagram: "pr-flow",
         body: [
           "Here's the single most important habit in team-based coding: nothing reaches main without going through a pull request. main is the official version of your project — the one that gets deployed — so it should always be trustworthy. You never edit it directly. You work on a branch, then propose merging it back via a pull request (PR).",
           "The flow: branch off main, commit your work in small labeled snapshots, push and open a PR, review the diff (yourself, on a solo project — the discipline still matters), then merge. The merge is the moment your changes join main — and the moment deployment kicks off.",
@@ -403,6 +461,17 @@ export const phases: Phase[] = [
         prompts: [
           { prompt: "Create a branch called feature/initial-site, commit all my work with clear messages, push it, and open a pull request into main with a description of what changed and how I tested it.", note: "Review the diff it shows before you approve." },
           { prompt: "Review this pull request: summarize what it changes, and flag anything risky or unclear before I merge it.", note: "A great habit even solo. On real teams, AI reviewers now comment on PRs automatically alongside humans." },
+        ],
+        code: [
+          {
+            filename: "Terminal — the branch → PR → merge loop",
+            code: `git checkout -b feature/initial-site
+git add -A && git commit -m "Initial portfolio site"
+git push -u origin feature/initial-site
+gh pr create --fill --base main
+# …review the diff…
+gh pr merge --squash --delete-branch   # merge = deploy`,
+          },
         ],
       },
       {
@@ -417,6 +486,11 @@ export const phases: Phase[] = [
           { prompt: "Add my WIF_PROVIDER and DEPLOY_SA values as GitHub repo secrets, then write a GitHub Actions workflow at .github/workflows/deploy.yml that runs on push to main. It should authenticate to GCP with Workload Identity Federation (no keys), build and push my Docker image to Artifact Registry tagged with the commit SHA, and run terraform apply in /terraform with that image. Explain the workflow to me.", note: "Merging a PR into main IS a push to main — so this fires exactly on merge." },
         ],
         code: [
+          {
+            filename: "Terminal — store the two Phase 0 values as secrets",
+            code: `gh secret set WIF_PROVIDER --body "projects/…/providers/github-provider"
+gh secret set DEPLOY_SA   --body "deploy@PROJECT_ID.iam.gserviceaccount.com"`,
+          },
           {
             filename: ".github/workflows/deploy.yml (shape)",
             code: `on: { push: { branches: [main] } }        # fires on PR merge
@@ -436,6 +510,13 @@ permissions: { contents: read, id-token: write }  # id-token = WIF
         ],
         prompts: [
           { prompt: "Get the public URL of my deployed Cloud Run service and open it.", note: "That's your site, live on the internet, deployed by merging a pull request." },
+        ],
+        code: [
+          {
+            filename: "Terminal — get your live URL",
+            code: `gcloud run services describe portfolio \\
+  --region YOUR_REGION --format 'value(status.url)'`,
+          },
         ],
       },
       {
@@ -533,6 +614,7 @@ permissions: { contents: read, id-token: write }  # id-token = WIF
         id: "make-it-smart/how-it-works",
         eyebrow: "Concept",
         title: "How an LLM feature actually works",
+        diagram: "llm-flow",
         body: [
           "Three moving parts: a frontend (a box where the user types something and sees a response); a backend endpoint (a route like /api/ask that receives the text, builds a prompt, and calls the model — this must live on the server); and Vertex AI (you send messages, you get a generated response).",
           "The one security rule: keep model calls server-side. Never call the model directly from browser JavaScript, and never ship credentials to the client. The browser talks to your backend; your backend talks to Vertex AI.",
@@ -545,6 +627,12 @@ permissions: { contents: read, id-token: write }  # id-token = WIF
         body: ["Add Vertex AI to the services you enabled in Phase 0."],
         prompts: [
           { prompt: "Enable the Vertex AI API (aiplatform.googleapis.com) on PROJECT_ID and tell me in plain terms what Vertex AI is.", note: "Gemini models are served through Vertex AI. For a chat feature, a fast, inexpensive Gemini Flash model is the right default." },
+        ],
+        code: [
+          {
+            filename: "Terminal — enable Vertex AI",
+            code: `gcloud services enable aiplatform.googleapis.com`,
+          },
         ],
       },
       {
@@ -587,6 +675,10 @@ resource "google_project_iam_member" "vertex" {
           { prompt: "Add a server-side API route to my site (e.g. /api/ask) that takes a question, calls Gemini on Vertex AI with the Google Gen AI SDK, and returns the answer. Keep it strictly server-side. Walk me through how the model call works." },
         ],
         code: [
+          {
+            filename: "Terminal — install the SDK",
+            code: `npm install @google/genai`,
+          },
           {
             filename: "app/api/ask/route.ts (server-side only)",
             code: `import { GoogleGenAI } from '@google/genai';
@@ -724,6 +816,11 @@ export async function POST(req: Request) {
         ],
         code: [
           {
+            filename: "Terminal — enable & provision",
+            code: `gcloud services enable sqladmin.googleapis.com
+cd terraform && terraform init && terraform apply`,
+          },
+          {
             filename: "terraform/db.tf",
             code: `resource "google_sql_database_instance" "pg" {
   name             = "portfolio-pg"
@@ -760,6 +857,11 @@ resource "google_sql_database" "app" {
           { prompt: "Help me connect to my Cloud SQL Postgres instance securely with the Cloud SQL Auth Proxy, enable the vector and google_ml_integration extensions, and create a doc_chunks table with an embedding column and an index. Explain what each extension does." },
         ],
         code: [
+          {
+            filename: "Terminal — connect securely via the Auth Proxy",
+            code: `./cloud-sql-proxy PROJECT_ID:YOUR_REGION:portfolio-pg &
+psql "host=127.0.0.1 dbname=portfolio user=postgres"`,
+          },
           {
             filename: "psql — run once per database",
             code: `CREATE EXTENSION IF NOT EXISTS vector;               -- pgvector
@@ -806,6 +908,7 @@ VALUES (
         id: "ground-it/retrieve-generate",
         eyebrow: "Step 4 · Retrieve + Generate",
         title: "Upgrade your endpoint to use RAG",
+        diagram: "rag-flow",
         body: [
           "Now change the /api/ask endpoint from Phase 2. Instead of pasting your whole resume, you embed the question, pull the top matching chunks from Postgres, and give only those to Gemini — with their sources, so it can cite where each answer came from.",
         ],
@@ -948,6 +1051,10 @@ const answer  = await gemini(\`
         ],
         code: [
           {
+            filename: "Terminal — install the MCP SDK",
+            code: `npm install @modelcontextprotocol/sdk zod`,
+          },
+          {
             filename: "server.ts (TypeScript SDK)",
             code: `server.tool(
   'list_projects',
@@ -973,6 +1080,7 @@ server.tool(
         id: "open-it-up/protect",
         eyebrow: "Step 2 · Protect It",
         title: "Add OAuth in front of the tools",
+        diagram: "mcp-oauth",
         body: [
           "Wrap the server so every tool call must carry a valid access token. The flow: Claude hits your server unauthenticated and gets a 401 that advertises your auth server; Claude registers as a client (DCR) and redirects you to sign in; you approve in the provider's own screen; Claude receives a short-lived token (with PKCE) and calls your tools, which validate it on every request.",
         ],
@@ -995,6 +1103,12 @@ server.tool(
         ],
         prompts: [
           { prompt: "Containerize my MCP server, add it to /terraform as a second Cloud Run service, and wire it into the deploy pipeline. Branch, PR, and merge so it deploys. Give me its public URL." },
+        ],
+        code: [
+          {
+            filename: "Terminal — debug the OAuth flow locally first",
+            code: `npx @modelcontextprotocol/inspector   # walks auth + calls your tools`,
+          },
         ],
         callouts: [
           {
