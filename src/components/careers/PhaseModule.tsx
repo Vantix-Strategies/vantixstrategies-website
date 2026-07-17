@@ -9,6 +9,7 @@ import { useCareersProgress } from "./useCareersProgress";
 import { AskClaudePrompt } from "./AskClaudePrompt";
 import { CodeBlock } from "./CodeBlock";
 import { KnowledgeCheck } from "./KnowledgeCheck";
+import { PhaseDiagram } from "./diagrams";
 
 export function PhaseModule({ phase }: { phase: Phase }) {
   const {
@@ -95,6 +96,29 @@ export function PhaseModule({ phase }: { phase: Phase }) {
               {phase.industry.example}
             </p>
           </div>
+
+          {/* Reference links for this phase, surfaced up front */}
+          {phase.resources.length > 0 && (
+            <div className="mt-10 border border-zinc-800 bg-[#0d0d0f] p-5">
+              <p className="text-[10px] font-mono tracking-[0.18em] uppercase text-zinc-600 mb-3">
+                Reference for this phase
+              </p>
+              <div className="flex flex-wrap gap-x-5 gap-y-2.5">
+                {phase.resources.map((r) => (
+                  <a
+                    key={r.url}
+                    href={r.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-white transition-colors"
+                  >
+                    <ExternalLink className="w-3 h-3 text-zinc-600" />
+                    {r.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
@@ -167,6 +191,8 @@ export function PhaseModule({ phase }: { phase: Phase }) {
                   </p>
                 ))}
               </div>
+
+              {step.diagram && <PhaseDiagram name={step.diagram} />}
 
               {step.prompts && step.prompts.length > 0 && (
                 <div className="space-y-3 mb-6">
@@ -246,32 +272,6 @@ export function PhaseModule({ phase }: { phase: Phase }) {
           </div>
         </section>
       )}
-
-      {/* Resources */}
-      <section className="py-16 border-b border-zinc-800 bg-[#09090b]">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8">
-          <h2 className="text-xs tracking-[0.2em] uppercase text-zinc-600 font-mono mb-6">
-            Resources for this phase
-          </h2>
-          <div className="grid sm:grid-cols-2 gap-3">
-            {phase.resources.map((r) => (
-              <a
-                key={r.url}
-                href={r.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group border border-zinc-800 p-4 hover:border-zinc-600 transition-colors"
-              >
-                <span className="inline-flex items-center gap-2 text-sm text-zinc-300 group-hover:text-white transition-colors">
-                  <ExternalLink className="w-3.5 h-3.5 text-zinc-600 group-hover:text-zinc-400" />
-                  {r.label}
-                </span>
-                {r.note && <p className="text-xs text-zinc-600 font-light mt-1.5">{r.note}</p>}
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Prev / next navigation */}
       <section className="py-16 bg-[#18181b]">
