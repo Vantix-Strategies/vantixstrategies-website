@@ -2,19 +2,37 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import DotBackground from "@/components/DotBackground";
+import { JsonLd } from "@/components/JsonLd";
 import { AskClaudePrompt } from "@/components/careers/AskClaudePrompt";
 import { OverallProgress, PhaseRoadmap } from "@/components/careers/PhaseRoadmap";
 import { introContent, phases } from "./data";
+import { breadcrumbSchema, trackCourseSchema } from "./schema";
+
+const description =
+  "An interactive, hands-on track that takes you from “I can write code” to “I've built and deployed a full AI system on cloud infrastructure I own.” See what it takes to engineer with us — and start building.";
 
 export const metadata: Metadata = {
-  title: "Careers — The Vantix AI Engineering Track",
-  description:
-    "An interactive, hands-on track that takes you from “I can write code” to “I've built and deployed a full AI system on cloud infrastructure I own.” See what it takes to engineer with us — and start building.",
+  title: "Careers — AI Engineering Track",
+  description,
+  alternates: { canonical: "/careers" },
+  openGraph: {
+    title: "Careers — AI Engineering Track | Vantix Strategies",
+    description,
+    url: "/careers",
+    images: ["/opengraph-image.png"],
+  },
 };
 
 export default function CareersPage() {
   return (
     <div className="pt-14">
+      <JsonLd data={trackCourseSchema(phases)} />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Careers", path: "/careers" },
+        ])}
+      />
       {/* ── Hero ── */}
       <section className="relative min-h-[80vh] flex items-center overflow-hidden border-b border-zinc-800">
         <DotBackground />
