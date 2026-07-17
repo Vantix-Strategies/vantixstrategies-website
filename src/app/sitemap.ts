@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
 import { blogPosts } from "@/app/blog/posts";
+import { PHASE_SLUGS } from "@/app/careers/data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -20,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/process", priority: 0.7, changeFrequency: "monthly" },
     { path: "/pricing", priority: 0.8, changeFrequency: "monthly" },
     { path: "/value-calculator", priority: 0.7, changeFrequency: "monthly" },
+    { path: "/careers", priority: 0.8, changeFrequency: "monthly" },
     { path: "/blog", priority: 0.7, changeFrequency: "weekly" },
   ];
 
@@ -28,6 +30,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: now,
     changeFrequency: r.changeFrequency,
     priority: r.priority,
+  }));
+
+  const careersEntries: MetadataRoute.Sitemap = PHASE_SLUGS.map((slug) => ({
+    url: `${SITE_URL}/careers/${slug}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.6,
   }));
 
   const blogEntries: MetadataRoute.Sitemap = blogPosts.map((post) => {
@@ -40,5 +49,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     };
   });
 
-  return [...staticEntries, ...blogEntries];
+  return [...staticEntries, ...careersEntries, ...blogEntries];
 }
