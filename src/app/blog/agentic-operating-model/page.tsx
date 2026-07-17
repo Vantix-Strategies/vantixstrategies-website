@@ -1,5 +1,9 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { blogPosts } from "../posts";
+import { blogPostingSchema } from "../schema";
+import { JsonLd } from "@/components/JsonLd";
 
 const sections = [
   {
@@ -119,9 +123,27 @@ const sources = [
   },
 ];
 
+const post = blogPosts.find((p) => p.slug === "agentic-operating-model")!;
+
+export const metadata: Metadata = {
+  title: post.title,
+  description: post.excerpt,
+  alternates: { canonical: `/blog/${post.slug}` },
+  openGraph: {
+    title: post.title,
+    description: post.excerpt,
+    type: "article",
+    url: `/blog/${post.slug}`,
+    images: ["/opengraph-image.png"],
+    publishedTime: new Date(post.date).toISOString(),
+    authors: [post.author],
+  },
+};
+
 export default function AgenticOperatingModelPage() {
   return (
     <div className="pt-14">
+      <JsonLd data={blogPostingSchema(post)} />
       {/* Hero */}
       <section className="border-b border-zinc-800 py-24 bg-[#09090b]">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">

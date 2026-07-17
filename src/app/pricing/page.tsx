@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Check, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
@@ -43,6 +44,20 @@ const engagements = [
     ideal: "Post M&A integration or enterprise wide operational transformation.",
   },
 ];
+
+export const metadata: Metadata = {
+  title: "Pricing",
+  description:
+    "Engagement models for Forward Deployed AI engineering — from a two-week Discovery Sprint to embedded build teams. Priced for production outcomes, not slide decks.",
+  alternates: { canonical: "/pricing" },
+  openGraph: {
+    title: "Pricing | Vantix Strategies",
+    description:
+      "Transparent engagement models for production AI, data engineering, and operational work.",
+    url: "/pricing",
+    images: ["/opengraph-image.png"],
+  },
+};
 
 export default function PricingPage() {
   return (
