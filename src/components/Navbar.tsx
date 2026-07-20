@@ -19,7 +19,7 @@ export function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
-      <nav className="glass">
+      <nav className="glass backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-14">
             {/* Logo */}
@@ -75,7 +75,7 @@ export function Navbar() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden glass border-t border-zinc-800"
+            className="md:hidden glass backdrop-blur-md border-t border-zinc-800"
           >
             <div className="px-6 py-6 space-y-5">
               {navLinks.map((link) => (
