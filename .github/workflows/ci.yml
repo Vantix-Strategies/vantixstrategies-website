@@ -1,0 +1,122 @@
+name: CI
+
+# PR gate. Three independent checks — types, unit tests, and Terraform — run in
+# parallel so a red one is obvious at a glance.
+#
+# Pushes to main are NOT handled here: deploy.yml re-runs the same checks as a
+# gate before it builds, so running them twice would only burn minutes.
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  id-token: write # Workload Identity Federation (terraform plan)
+  pull-requests: write # post the plan comment
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  TF_WORKING_DIR: infra/terraform
+  # Match the Dockerfile's runtime so CI can't pass on a Node version that
+  # production never runs.
+  NODE_VERSION: "24"
+
+jobs:
+  typecheck:
+    name: Types
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+
+  test:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npm test
+
+  terraform:
+    name: Terraform
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.TF_WORKING_DIR }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+
+      # Formatting and validation need no cloud credentials, so they run even
+      # before bootstrap.sh has been executed against a real project.
+      - name: Format check
+        run: terraform fmt -check -recursive
+
+      - name: Validate
+        run: |
+          terraform init -backend=false -input=false
+          terraform validate -no-color
+
+      # `plan` needs to read live state. It authenticates as the READ-ONLY
+      # planner service account — PR branches cannot reach the deployer SA
+      # (its WIF binding is pinned to refs/heads/main). See infra/terraform/cicd.tf.
+      - name: Authenticate to Google Cloud (WIF)
+        if: vars.GCP_PROJECT_ID != ''
+        uses: google-github-actions/auth@v2
+        with:
+          project_id: ${{ vars.GCP_PROJECT_ID }}
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_PLANNER_SA }}
+
+      - name: Plan
+        id: plan
+        if: vars.GCP_PROJECT_ID != ''
+        # Preview the image this PR would deploy once merged.
+        run: |
+          rm -rf .terraform
+          terraform init -input=false
+          terraform plan -no-color -input=false \
+            -var="image_tag=${{ github.event.pull_request.head.sha }}"
+        continue-on-error: true
+
+      - name: Comment plan on PR
+        if: vars.GCP_PROJECT_ID != ''
+        uses: actions/github-script@v7
+        env:
+          PLAN_STDOUT: ${{ steps.plan.outputs.stdout }}
+          PLAN_OUTCOME: ${{ steps.plan.outcome }}
+        with:
+          script: |
+            const plan = (process.env.PLAN_STDOUT || '').slice(-60000);
+            const body = `#### Terraform Plan 📖 \`${process.env.PLAN_OUTCOME}\`
+            <details><summary>Show plan</summary>
+
+            \`\`\`terraform
+            ${plan}
+            \`\`\`
+            </details>
+
+            *Working dir: \`${{ env.TF_WORKING_DIR }}\` · commit ${{ github.event.pull_request.head.sha }}*`;
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body,
+            });
+
+      - name: Fail if plan errored
+        if: vars.GCP_PROJECT_ID != '' && steps.plan.outcome == 'failure'
+        run: exit 1

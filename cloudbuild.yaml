@@ -1,31 +1,47 @@
+# Builds and pushes the website image. Nothing else.
+#
+# This file deliberately does NOT run `gcloud run deploy` — Terraform owns the
+# Cloud Run service (infra/terraform/cloud_run.tf) and a deploy from here would
+# create a revision Terraform doesn't know about, then silently roll it back on
+# the next apply.
+#
+# Invoked by .github/workflows/deploy.yml as:
+#   gcloud builds submit --config cloudbuild.yaml --substitutions=_TAG=$GITHUB_SHA .
+
+substitutions:
+  _TAG: latest
+  _REGION: us-central1
+  _REPO: containers
+  # NEXT_PUBLIC_* is inlined at build time (see Dockerfile). Keep this pointing
+  # at the canonical origin — during the migration that is still the Vercel-served
+  # www domain, so SEO metadata does not churn while both stacks are up.
+  _SITE_URL: https://www.vantixstrategies.com
+
+# Projects created after mid-2024 no longer fall back to the legacy Cloud Build
+# service account, so the build must name the account it runs as.
+serviceAccount: 'projects/$PROJECT_ID/serviceAccounts/cloudbuild-runner@$PROJECT_ID.iam.gserviceaccount.com'
+
+options:
+  # Required whenever a user-specified service account is used: that account has
+  # no access to the default build-log bucket.
+  logging: CLOUD_LOGGING_ONLY
+
+timeout: 1200s
+
 steps:
   - name: 'gcr.io/cloud-builders/docker'
+    id: build
     args:
       - 'build'
+      - '--build-arg'
+      - 'NEXT_PUBLIC_SITE_URL=${_SITE_URL}'
       - '-t'
-      - 'us-central1-docker.pkg.dev/${PROJECT_ID}/vantix-services/website:${COMMIT_SHA}'
+      - '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/website:${_TAG}'
       - '-t'
-      - 'us-central1-docker.pkg.dev/${PROJECT_ID}/vantix-services/website:latest'
+      - '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/website:latest'
       - '.'
 
-  - name: 'gcr.io/cloud-builders/docker'
-    args:
-      - 'push'
-      - '--all-tags'
-      - 'us-central1-docker.pkg.dev/${PROJECT_ID}/vantix-services/website'
-
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: gcloud
-    args:
-      - 'run'
-      - 'deploy'
-      - 'vantix-website'
-      - '--image'
-      - 'us-central1-docker.pkg.dev/${PROJECT_ID}/vantix-services/website:${COMMIT_SHA}'
-      - '--region'
-      - 'us-central1'
-      - '--platform'
-      - 'managed'
-
+# Cloud Build pushes these after the steps succeed.
 images:
-  - 'us-central1-docker.pkg.dev/${PROJECT_ID}/vantix-services/website'
+  - '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/website:${_TAG}'
+  - '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/website:latest'
