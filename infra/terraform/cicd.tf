@@ -55,13 +55,16 @@ resource "google_project_iam_member" "planner_viewer" {
   member  = "serviceAccount:${google_service_account.planner.email}"
 }
 
-# `terraform plan` writes a lock object, so read-only on the bucket is not
-# enough. Scoped to the state bucket — the planner gets no other storage access.
-resource "google_storage_bucket_iam_member" "planner_state" {
-  bucket = var.tf_state_bucket
-  role   = "roles/storage.objectAdmin"
-  member = "serviceAccount:${google_service_account.planner.email}"
-}
+# NOTE: the planner's access to the state bucket (roles/storage.objectAdmin —
+# `terraform plan` writes a lock object, so read-only is not enough) is granted
+# by bootstrap.sh, NOT here.
+#
+# It cannot be managed here: reading a google_storage_bucket_iam_member requires
+# storage.buckets.getIamPolicy, which roles/viewer does not grant for GCS. So
+# the planner would need the very permission it is being granted in order to
+# refresh the resource that grants it. Terraform cannot own the credentials
+# Terraform needs to run — the same reason the state bucket itself is not
+# managed here (see backend.tf).
 
 resource "google_service_account_iam_member" "planner_wif" {
   service_account_id = google_service_account.planner.name

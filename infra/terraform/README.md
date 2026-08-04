@@ -11,15 +11,12 @@ separate billing line. No resource is shared between the two.
 
 ## Status
 
-The project, state, and service are **live**. Terraform state lives at
-`gs://vantixstrategies-website-tf-state/website/default.tfstate`.
-
-One thing is **not** done: the service is not publicly reachable. See
-[Public access](#public-access-org-policy) below — it is blocked by an
-organization policy, not by anything in this configuration.
+The project, state, and service are **live and publicly serving**. Terraform
+state lives at `gs://vantixstrategies-website-tf-state/website/default.tfstate`.
 
 The domain has **not** been cut over. `www.vantixstrategies.com` is still served
-by Vercel, so the migration currently carries no user-facing risk.
+by Vercel, so the migration currently carries no user-facing risk. The GCP copy
+runs alongside on its `*.run.app` URL.
 
 ## The deploy pipeline
 
@@ -55,25 +52,32 @@ Merging to main deploys. The compensating controls are:
 
 ## Public access (org policy)
 
-The org policy `constraints/iam.allowedPolicyMemberDomains` is set at the
-organization level to allow only members of customer ID `C036mgkl6`
-(vantixstrategies.com). That policy blocks granting `roles/run.invoker` to
-`allUsers`, which is what makes a Cloud Run service public — so
+**Resolved — recorded here because it is not obvious and will recur.**
+
+The org policy `constraints/iam.allowedPolicyMemberDomains` (domain-restricted
+sharing) is set at the organization level to allow only members of customer ID
+`C036mgkl6`. It arrived as part of Google's secure-by-default bundle applied to
+new organizations on 2026-04-05 — it was not a deliberate choice.
+
+That policy blocks granting `roles/run.invoker` to `allUsers`, which is exactly
+what makes a Cloud Run service public. So
 `google_cloud_run_v2_service_iam_member.public` in [`cloud_run.tf`](cloud_run.tf)
-fails to apply with:
+failed with:
 
 ```
 Error 400: One or more users named in the policy do not belong to a permitted
 customer, perhaps due to an organization policy.
 ```
 
+**This silently stalled an earlier migration attempt** — the service sat
+returning 403 to everyone, with nothing in the Terraform to explain it.
+
 Org policy is hierarchical (org → folder → project) and a project-level policy
-overrides its parent, so the exception can be scoped to this project alone.
-**The sibling `vantix-strategies` project already does exactly this** — it carries
-a project-level `iam.allowedPolicyMemberDomains` policy with `reset: true`, set
+overrides its parent, so the exception is scoped to this project alone. The
+sibling `vantix-strategies` project already carries the identical override, set
 2026-04-06, which is why Sendscape's Cloud Run can hold an `allUsers` binding.
 
-The matching fix here:
+What was run here:
 
 ```bash
 gcloud services enable orgpolicy.googleapis.com --project=vantixstrategies-website
@@ -81,7 +85,14 @@ gcloud org-policies reset constraints/iam.allowedPolicyMemberDomains \
   --project=vantixstrategies-website
 ```
 
-Then re-run `terraform apply` and the binding lands.
+Two gotchas if you ever redo this:
+
+- Writing an org policy needs `roles/orgpolicy.policyAdmin`, which is **only
+  grantable at the organization level** — a project accepts just `policyViewer`.
+  Neither `roles/owner` nor `resourcemanager.organizationAdmin` includes it.
+- IAM enforcement lags the policy write by a minute or two, *even after* the
+  effective policy already resolves to `allowAll`. Retry rather than assume the
+  policy is wrong.
 
 The tradeoff: within this project, any IAM binding may name any principal, not
 just `allUsers`. Scoped to a project that hosts only a public marketing site
@@ -135,6 +146,10 @@ export GOOGLE_OAUTH_ACCESS_TOKEN="$(gcloud auth print-access-token)"
   inlines `NEXT_PUBLIC_*` into the client bundle at build time, so setting it
   here would be a silent no-op in the browser. Change it via `_SITE_URL` in
   [`cloudbuild.yaml`](../../cloudbuild.yaml) — which requires a rebuild.
+- **The state bucket and its IAM are not Terraform-managed.** Both are owned by
+  `bootstrap.sh`. Terraform cannot manage the credentials it needs in order to
+  run — reading the planner's bucket grant requires the very permission being
+  granted. See the note in [`cicd.tf`](cicd.tf).
 - **The GCP project is not Terraform-managed.** It is created once by
   `bootstrap.sh` and deliberately kept outside Terraform's blast radius, so no
   plan can ever propose deleting it. See [`removed.tf`](removed.tf) for the

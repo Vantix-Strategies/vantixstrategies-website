@@ -77,8 +77,8 @@ imp google_service_account_iam_member.deployer_act_as_cloudbuild \
 echo "== Planner IAM =="
 imp google_project_iam_member.planner_viewer \
   "${PROJECT} roles/viewer serviceAccount:${PLANNER_SA}"
-imp google_storage_bucket_iam_member.planner_state \
-  "b/${STATE_BUCKET} roles/storage.objectAdmin serviceAccount:${PLANNER_SA}"
+# NOTE: the planner's state-bucket grant is owned by bootstrap.sh, not Terraform
+# (see the note in cicd.tf) — nothing to import here.
 
 echo "== Workload Identity Federation =="
 imp google_iam_workload_identity_pool.github \
