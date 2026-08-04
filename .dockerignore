@@ -1,0 +1,28 @@
+# Keep the build context small and secret-free. Without this, `gcloud builds
+# submit` uploads node_modules, .next and .git on every deploy.
+node_modules
+.next
+dist
+build
+out
+coverage
+
+.git
+.github
+.gitignore
+.vercel
+.claude
+infra
+scripts
+
+.env
+.env.*
+*.pem
+
+*.tsbuildinfo
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+README.md
+vercel.json

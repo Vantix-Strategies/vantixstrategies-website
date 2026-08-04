@@ -12,6 +12,12 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Generated build output that is not in git. Without these, `npm run lint`
+    // reports ~20k problems from compiled bundles and drowns out real findings.
+    "**/.next/**",
+    "dist/**",
+    ".claude/**",
+    "coverage/**",
   ]),
 ]);
 
