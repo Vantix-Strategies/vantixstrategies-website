@@ -30,6 +30,26 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+
+  async rewrites() {
+    // Serve campaign prototypes from public/prototypes/<slug>.html at a clean
+    // /prototypes/<slug> URL. Default (afterFiles) placement means real
+    // routes — including the /prototypes index page — still win.
+    return [{ source: "/prototypes/:slug", destination: "/prototypes/:slug.html" }];
+  },
+
+  async headers() {
+    // Campaign prototypes are for email recipients, not search engines. We
+    // deliberately do NOT disallow /prototypes/ in robots.ts: a blocked
+    // crawler never fetches the page, never sees this header, and can still
+    // index the URL from an inbound link. Allow the crawl, refuse the index.
+    return [
+      {
+        source: "/prototypes/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
