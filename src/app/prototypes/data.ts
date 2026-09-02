@@ -25,4 +25,14 @@ export const prototypes: Prototype[] = [
     added: "2026-08-08",
     status: "live",
   },
+  {
+    slug: "advisory-firm",
+    title: "Cedar Lake Advisory Group",
+    campaign: "Accounting & Advisory",
+    industry: "Accounting & Advisory Firms",
+    summary:
+      "An AI operations console for an accounting and advisory firm — document intake that turns a photo or forwarded email into a structured ledger entry, reconciliation with flagged exceptions, deadline-risk alerts by client, and a client-facing status portal.",
+    added: "2026-09-02",
+    status: "live",
+  },
 ];
