@@ -159,6 +159,17 @@ export const capabilityBenchmarks: BenchmarkSection[] = [
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "workforce-transformation-with-ai",
+    title: "Workforce Transformation with AI: Forward Deployed Engineers and the Scrum Team of the Future",
+    excerpt:
+      "AI collapses the cost of building software. That changes two things at once: how many people a product team needs, and where engineering can afford to go. Two transformations, one enabler, and the operating model that makes them work together.",
+    author: "Connor Holm",
+    date: "September 21, 2026",
+    category: "Strategy",
+    readTime: "7 min read",
+    kind: "article",
+  },
+  {
     slug: "agentic-operating-model",
     title: "The Agentic Operating Model: Orchestrating the 2026 Digital Workforce",
     excerpt:
