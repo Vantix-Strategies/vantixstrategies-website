@@ -35,4 +35,14 @@ export const prototypes: Prototype[] = [
     added: "2026-09-02",
     status: "live",
   },
+  {
+    slug: "it-staffing",
+    title: "Crosstown Technical Partners",
+    campaign: "IT Staffing & Consulting",
+    industry: "IT Staffing & Consulting Firms",
+    summary:
+      "An AI operations console for an IT staffing and consulting firm — intake notes and emailed reqs turned into structured requisitions, bench-first candidate matching, consultant roll-off warnings, timesheet follow-ups, and a client-facing portal.",
+    added: "2026-10-05",
+    status: "live",
+  },
 ];
