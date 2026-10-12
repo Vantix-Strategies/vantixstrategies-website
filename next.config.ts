@@ -73,6 +73,10 @@ const nextConfig: NextConfig = {
         source: "/decks/allianz-workforce-ai",
         headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
       },
+      {
+        source: "/decks/allianz-workforce-modernization",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
     ];
   },
 };
