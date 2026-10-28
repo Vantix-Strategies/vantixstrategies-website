@@ -1,37 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Vantix Strategies website
 
-## Getting Started
+Marketing site for Vantix Strategies, plus industry proof-of-concept prototypes. The app is a [Next.js](https://nextjs.org) project (`consulting-site` in `package.json`). Prototypes are self-contained static HTML demos registered for the `/prototypes` listing.
 
-First, run the development server:
+## Local setup
+
+This repo uses npm (`package-lock.json`).
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.local.template .env.local
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`.env.local` is gitignored. Fill it in from the template; do not commit it or paste real values into the repo.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Variable | Role |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | Canonical site URL for metadata, sitemap, robots, and JSON-LD |
+| `NEXT_PUBLIC_SITE_NAME` | Public site name |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | Public contact email |
+| `NEXT_PUBLIC_CONTACT_PHONE` | Public contact phone |
+| `NEXT_PUBLIC_GA_ID` | Optional analytics id (commented out in the template) |
+| `FORM_ENDPOINT` | Optional form endpoint (commented out in the template) |
+| `OPENAI_API_KEY` | Optional server-side key (commented out in the template) |
+| `CONTACT_TO_EMAIL` | Server-side inbox for the contact form |
+| `SMTP_HOST` | Server-side SMTP host |
+| `SMTP_PORT` | Server-side SMTP port |
+| `SMTP_USER` | Server-side SMTP user |
+| `SMTP_PASS` | Server-side SMTP password |
+| `SMTP_FROM` | Server-side From address. The template requires this to differ from `CONTACT_TO_EMAIL` |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Scripts
 
-## Learn More
+| Script | What it runs |
+| --- | --- |
+| `npm run dev` | `next dev` — local development server (Next.js defaults to http://localhost:3000) |
+| `npm run lint` | `eslint` |
+| `npm run typecheck` | `tsc --noEmit` |
+| `npm run test` | `vitest run` |
+| `npm run test:watch` | `vitest` |
+| `npm run build` | `next build` |
+| `npm start` | `next start` — serves the output of `npm run build` locally |
 
-To learn more about Next.js, take a look at the following resources:
+## Adding a prototype
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Each prototype is a static file plus a registry entry. `src/app/prototypes/data.ts` is the registry, and `public/prototypes/` holds the HTML. The listing and its pages are excluded from the sitemap.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Add `public/prototypes/<slug>.html`.
+2. Set the document `<title>`.
+3. In the document head, add `<meta name="robots" content="noindex, nofollow">` and Open Graph tags: `og:title`, `og:description`, `og:image`, and `og:type`.
+4. Append an entry to the `prototypes` array in `src/app/prototypes/data.ts`. The `slug` must match the HTML filename without `.html`.
 
-## Deploy on Vercel
+```ts
+{
+  slug: "<slug>",
+  title: "",
+  campaign: "",
+  industry: "",
+  summary: "",
+  added: "YYYY-MM-DD",
+  status: "live", // or "draft"
+}
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+`status` is `"live"` or `"draft"`. The `/prototypes` page lists these entries and links to `/prototypes/<slug>`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-_Last workflow test: Oct 28, 2026 (WEB-3)._
+## Changes
+
+Track work in the [WEB Jira project](https://vantixstrategies.atlassian.net/browse/WEB). Delivery and engineering practice lives in the [VX Delivery and engineering playbook](https://vantixstrategies.atlassian.net/wiki/spaces/VX/pages/3506184).
+
+Every change carries a WEB ticket key in the branch name, the commit message, and the pull request title.
